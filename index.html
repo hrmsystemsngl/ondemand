@@ -124,15 +124,21 @@
       margin-bottom: 0; /* Remove default input margin */
   }
 
-  /* Candidate Dashboard specific styling for nav buttons */
-  #dashboard-candidate .dashboard-nav-buttons {
+  /* Dashboard specific styling for nav buttons */
+  #dashboard-candidate .dashboard-nav-buttons,
+  #dashboard-admin .dashboard-nav-buttons,
+  #dashboard-sales .dashboard-nav-buttons,
+  #dashboard-finance .dashboard-nav-buttons {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     gap: 1rem;
     margin-bottom: 1.5rem;
     justify-content: center; /* Center the buttons */
   }
-  #dashboard-candidate .dashboard-nav-buttons button {
+  #dashboard-candidate .dashboard-nav-buttons button,
+  #dashboard-admin .dashboard-nav-buttons button,
+  #dashboard-sales .dashboard-nav-buttons button,
+  #dashboard-finance .dashboard-nav-buttons button {
     width: auto;
     flex-grow: 1;
     min-width: 150px; /* Ensure buttons don't get too small */
@@ -140,19 +146,28 @@
     color: #004aad;
     border: 2px solid #004aad;
   }
-  #dashboard-candidate .dashboard-nav-buttons button:hover {
+  #dashboard-candidate .dashboard-nav-buttons button:hover,
+  #dashboard-admin .dashboard-nav-buttons button:hover,
+  #dashboard-sales .dashboard-nav-buttons button:hover,
+  #dashboard-finance .dashboard-nav-buttons button:hover {
     background: #004aad;
     color: white;
   }
-  /* Candidate Dashboard currently displayed tab */
-  #dashboard-candidate .dashboard-nav-buttons button.active {
+  /* Dashboard currently displayed tab */
+  #dashboard-candidate .dashboard-nav-buttons button.active,
+  #dashboard-admin .dashboard-nav-buttons button.active,
+  #dashboard-sales .dashboard-nav-buttons button.active,
+  #dashboard-finance .dashboard-nav-buttons button.active {
       background: #00337f;
       color: white;
       border-color: #001f4d;
   }
 
   /* Ensure main table in candidate dashboard gets proper styling */
-  #dashboard-candidate table {
+  #dashboard-candidate table,
+  #dashboard-admin table,
+  #dashboard-sales table,
+  #dashboard-finance table {
     margin-top: 1rem; /* Adjust spacing below main nav buttons */
   }
   #candidate-attendance-form-container {
@@ -552,10 +567,7 @@
             </tr>
         </thead>
         <tbody id="candidate-payment-history-body">
-            <tr><td>WKID-DE-001</td><td>JOB-DE-001</td><td>Data Entry</td><td>2025-07-21</td><td>800</td><td>Paid</td></tr>
-            <tr><td>WKID-CS-002</td><td>JOB-CS-002</td><td>Customer Support</td><td>2025-07-21</td><td>1000</td><td>Paid</td></tr>
-            <tr><td>WKID-DE-003</td><td>JOB-DE-003</td><td>Delivery Executive</td><td>2025-07-22</td><td>Pending Calc.</td><td>Pending</td></tr>
-        </tbody>
+            </tbody>
     </table>
     <button id="back-to-candidate-dashboard-from-payment-history" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
   </section>
@@ -563,34 +575,172 @@
 
   <section id="dashboard-admin" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</h2>
-    <button onclick="alert('Manage Users & Roles')"><i class="fa-solid fa-users-cog"></i> Manage Users</button>
-    <button onclick="alert('Audit Logs')"><i class="fa-solid fa-file-alt"></i> Audit Logs</button>
+    <div class="dashboard-nav-buttons">
+        <button id="admin-manage-users-btn"><i class="fa-solid fa-users-cog"></i> Manage Users</button>
+        <button id="admin-audit-logs-btn"><i class="fa-solid fa-file-alt"></i> Audit Logs</button>
+        <button id="admin-hr-overview-btn"><i class="fa-solid fa-user-tie"></i> HR Overview</button>
+        <button id="admin-candidate-overview-btn"><i class="fa-solid fa-user"></i> Candidate Overview</button>
+        <button id="admin-sales-overview-btn"><i class="fa-solid fa-handshake"></i> Sales Overview</button>
+        <button id="admin-finance-overview-btn"><i class="fa-solid fa-coins"></i> Finance Overview</button>
+    </div>
 
     <h3>System Activity Log</h3>
+    <table id="admin-system-activity-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+  <section id="admin-manage-users" class="hidden">
+    <h2><i class="fa-solid fa-users-cog"></i> Manage Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Last Login</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="admin-users-body">
+            </tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-users" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="admin-audit-logs" class="hidden">
+    <h2><i class="fa-solid fa-file-alt"></i> Audit Logs</h2>
     <table>
         <thead>
             <tr>
                 <th>Timestamp</th>
                 <th>User</th>
                 <th>Action</th>
+                <th>Details</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="admin-audit-logs-body">
+            </tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-audit-logs" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="admin-hr-overview" class="hidden">
+    <h2><i class="fa-solid fa-user-tie"></i> HR Overview</h2>
+    <h3>Job Posting Summary</h3>
+    <table>
+        <thead>
             <tr>
-                <td>2025-07-22 14:30</td>
-                <td>admin@example.com</td>
-                <td>User 'Jane Doe' created</td>
+                <th>Category</th>
+                <th>Count</th>
             </tr>
-            <tr>
-                <td>2025-07-22 14:20</td>
-                <td>hr@example.com</td>
-                <td>New job 'Data Scientist' posted</td>
-            </tr>
-        </tbody>
+        </thead>
+        <tbody id="admin-hr-jobs-summary-body"></tbody>
     </table>
 
-    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <h3>Applicant Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody id="admin-hr-applicants-summary-body"></tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-hr-overview" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
   </section>
+
+  <section id="admin-candidate-overview" class="hidden">
+    <h2><i class="fa-solid fa-user"></i> Candidate Overview</h2>
+    <h3>Candidate Status Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody id="admin-candidate-status-body"></tbody>
+    </table>
+
+    <h3>Application Status Breakdown</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody id="admin-candidate-applications-body"></tbody>
+    </table>
+
+    <h3>Attendance & Work Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Count / Hours</th>
+            </tr>
+        </thead>
+        <tbody id="admin-candidate-attendance-body"></tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-candidate-overview" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="admin-sales-overview" class="hidden">
+    <h2><i class="fa-solid fa-handshake"></i> Sales Overview</h2>
+    <h3>Client & Contract Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Value / Count</th>
+            </tr>
+        </thead>
+        <tbody id="admin-sales-summary-body"></tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-sales-overview" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="admin-finance-overview" class="hidden">
+    <h2><i class="fa-solid fa-coins"></i> Finance Overview</h2>
+    <h3>Invoicing & Payments Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody id="admin-finance-summary-body"></tbody>
+    </table>
+
+    <h3>Payroll & Payouts Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody id="admin-finance-payroll-body"></tbody>
+    </table>
+    <button id="back-to-admin-dashboard-from-finance-overview" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
 
   <section id="dashboard-sales" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-handshake"></i> Sales Dashboard</h2>
@@ -662,14 +812,14 @@
 <script>
   // --- Global Unique ID Counter (for demo purposes) ---
   let jobIdCounter = 3; // Starting after initial sample jobs
-  let candidateIdCounter = 1; // Assuming 'Candidate User' is CAND-001
+  let userIdCounter = 3; // For Admin's user management, assuming admin, HR, candidate are 1,2,3
 
   // --- Sample Data ---
   // Store jobs with their generated IDs
   const postedJobs = {
-      "JOB-QSE-001": { jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, salary: 95000, postedOn: "2025-07-10", status: "Active", applicants: 15 },
-      "JOB-AIML-002": { jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22 },
-      "JOB-FDR-003": { jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30 },
+      "JOB-QSE-001": { jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, salary: 95000, postedOn: "2025-07-10", status: "Active", applicants: 15 },
+      "JOB-AIML-002": { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22 },
+      "JOB-FDR-003": { jobId: "JOB-FDR-003", jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30 },
   };
 
   const allJobApplicants = {
@@ -693,10 +843,10 @@
   ];
 
   const hrInvoicesData = [
-    { invoiceId: "INV-HR-001", clientWorker: "Tech Solutions Inc.", amount: "50,000", date: "2025-07-15", dueDate: "2025-07-15", status: "Paid", action: "N/A" },
-    { invoiceId: "INV-HR-002", clientWorker: "Innovate Corp", amount: "25,000", date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", action: "Send Reminder" },
-    { invoiceId: "INV-HR-003", clientWorker: "Global Ventures", amount: "75,000", date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", action: "N/A" },
-    { invoiceId: "INV-HR-004", clientWorker: "CAND-001 (Candidate User)", amount: "10,000", date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", action: "Approve Payment" },
+    { invoiceId: "INV-HR-001", clientWorker: "Tech Solutions Inc.", amount: 50000, date: "2025-07-15", dueDate: "2025-07-15", status: "Paid", type: "Client", action: "N/A" },
+    { invoiceId: "INV-HR-002", clientWorker: "Innovate Corp", amount: 25000, date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", type: "Client", action: "Send Reminder" },
+    { invoiceId: "INV-HR-003", clientWorker: "Global Ventures", amount: 75000, date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", type: "Client", action: "N/A" },
+    { invoiceId: "INV-HR-004", clientWorker: "CAND-001 (Candidate User)", amount: 10000, date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", type: "Worker Payout", action: "Approve Payment" },
   ];
 
   const hrAttendanceData = [ // HR's view of all attendance, now includes Candidate ID and Job ID
@@ -715,9 +865,9 @@
 
   // Candidate - My Applications data with more details, now linked to Job ID
   const candidateMyApplicationsData = [
-      { jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
-      { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
-      { jobId: "JOB-EP-005", jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
+      { candidateId: "CAND-001", jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
+      { candidateId: "CAND-001", jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
+      { candidateId: "CAND-001", jobId: "JOB-EP-005", jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
   ];
 
   // Candidate - My Attendance Data (Candidate's perspective), linked to Job ID and Candidate ID
@@ -734,8 +884,42 @@
       { candidateId: "CAND-001", workId: "WKID-DE-003", jobId: "JOB-DE-003", jobRole: "Delivery Executive", date: "2025-07-22", amount: "Pending Calc.", status: "Pending" }
   ];
 
+  // Admin Users Data (extended)
+  const adminUsersData = [
+      { userId: "ADM-001", username: "admin@example.com", role: "Admin", lastLogin: "2025-07-22 21:00", status: "Active" },
+      { userId: "HR-001", username: "hr@example.com", role: "HR", lastLogin: "2025-07-22 20:30", status: "Active" },
+      { userId: "CAND-001", username: "9876543210", role: "Candidate", lastLogin: "2025-07-22 21:15", status: "Active" },
+      { userId: "SAL-001", username: "sales@example.com", role: "Sales", lastLogin: "2025-07-21 14:00", status: "Active" },
+      { userId: "FIN-001", username: "finance@example.com", role: "Finance", lastLogin: "2025-07-20 11:00", status: "Active" },
+      { userId: "CAND-002", username: "priya_s", role: "Candidate", lastLogin: "2025-07-22 09:00", status: "Active" },
+      { userId: "CAND-003", username: "suresh_g", role: "Candidate", lastLogin: "2025-07-22 09:30", status: "Active" },
+      { userId: "INACT-001", username: "old_user", role: "Candidate", lastLogin: "2025-06-01 10:00", status: "Inactive" },
+  ];
 
-  // For demo, assume candidate logs in as this user
+  // Admin Audit Log Data (original, will be populated dynamically)
+  const adminAuditLogData = [
+      { timestamp: "2025-07-22 21:10:05", user: "HR-001", action: "Post New Job", details: "JOB-ND-004 (New Driver)" },
+      { timestamp: "2025-07-22 21:05:20", user: "CAND-001", action: "Check-in", details: "Work ID: WKID-DE-003" },
+      { timestamp: "2025-07-22 20:45:10", user: "ADM-001", action: "Changed User Status", details: "User: HR-001, Status: Active" },
+      { timestamp: "2025-07-21 17:00:00", user: "HR-001", action: "Manual Check-out", details: "Worker: Ramesh Kumar, Work ID: WKID-DE-001" },
+      { timestamp: "2025-07-21 09:00:00", user: "CAND-001", action: "Check-in", details: "Work ID: WKID-DE-001" },
+  ];
+
+  // NEW: Sales Clients Data for Admin Overview
+  const salesClientsData = [
+      { clientId: "CLI-001", clientName: "Tech Solutions Inc.", totalContracts: 3, activeContracts: 2, lastEngagement: "2025-07-15" },
+      { clientId: "CLI-002", clientName: "Innovate Corp", totalContracts: 1, activeContracts: 1, lastEngagement: "2025-07-20" },
+      { clientId: "CLI-003", clientName: "Global Ventures", totalContracts: 2, activeContracts: 0, lastEngagement: "2025-06-25" },
+  ];
+
+  // NEW: Sales Contracts Data for Admin Overview (can be linked to Client Data via Client ID)
+  const salesContractsData = [
+      { contractId: "CON-001", clientId: "CLI-001", value: 50000, status: "Active", startDate: "2025-01-01", endDate: "2026-01-01" },
+      { contractId: "CON-002", clientId: "CLI-001", value: 20000, status: "Completed", startDate: "2024-06-01", endDate: "2025-06-01" },
+      { contractId: "CON-003", clientId: "CLI-002", value: 25000, status: "Active", startDate: "2025-07-01", endDate: "2026-07-01" },
+  ];
+
+
   const loggedInCandidate = { id: "CAND-001", name: "Candidate User" }; // Fixed for demo
 
   let currentWorkingWorker = null; // To track a worker who has checked in but not out
@@ -756,6 +940,19 @@
       const minutes = String(now.getMinutes()).padStart(2, '0');
       return `${hours}:${minutes}`;
   }
+
+  // Helper to get current formatted timestamp (YYYY-MM-DD HH:MM:SS) for audit logs
+  function getCurrentTimestampFormatted() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
 
   // Helper to calculate hours between two time strings (HH:MM)
   function calculateHours(startTime, endTime) {
@@ -803,15 +1000,34 @@
         showSection('dashboard-' + role);
         populateCandidateAttendanceForm(); // Pre-fill attendance form on candidate login
         populateCandidateAttendanceTable(); // Directly load attendance for candidate on login
-        setCandidateDashboardActiveTab(null); // No button active initially for primary view
-    } else {
+        setDashboardActiveTab('dashboard-candidate', null); // No button active initially for primary view
+    } else if (role === 'admin') { // New: Admin login
+        showSection('dashboard-' + role);
+        populateAdminAuditLogsTable(); // Show audit logs as default for admin
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn'); // Activate audit logs button
+    }
+    else {
         showSection('dashboard-' + role);
     }
+    // Record login in audit log
+    adminAuditLogData.push({
+        timestamp: getCurrentTimestampFormatted(),
+        user: `${role}@example.com`, // Using email as user identifier for demo
+        action: "Login",
+        details: `User logged in as ${role}`
+    });
   }
 
   function logout() {
     alert('Logged out!');
     showSection('login-hr');
+    // Record logout in audit log
+    adminAuditLogData.push({
+        timestamp: getCurrentTimestampFormatted(),
+        user: "Logged Out User", // Cannot get specific user easily after logout
+        action: "Logout",
+        details: `User logged out`
+    });
   }
 
   // Function to show the job post form (HR)
@@ -910,6 +1126,14 @@
 
     // After submission, return to HR Dashboard
     showSection('dashboard-hr');
+
+    // Record action in audit log
+    adminAuditLogData.push({
+        timestamp: getCurrentTimestampFormatted(),
+        user: "hr@example.com", // Assuming HR user for this action
+        action: "Post New Job",
+        details: `ID: ${jobId}, Title: ${jobTitle}`
+    });
   }
 
   // Function to display applicants for a specific job (HR)
@@ -1088,9 +1312,19 @@
 
       // Simulate finding candidate ID based on worker name (for HR's manual entry)
       let candidateIdForHR = null;
-      if (workerName === "Ramesh Kumar") candidateIdForHR = "CAND-001";
-      else if (workerName === "Priya Sharma") candidateIdForHR = "CAND-002";
-      else if (workerName === "Suresh Gupta") candidateIdForHR = "CAND-003"; // Add more as needed
+      const matchingUser = adminUsersData.find(user => user.username === workerName || (user.role === 'Candidate' && user.username === '9876543210' && workerName === loggedInCandidate.name));
+      if (matchingUser) {
+          candidateIdForHR = matchingUser.userId;
+      } else {
+        // If not found in demo users, assign a generic one or generate new
+        // For simplicity, let's assume if it's the demo candidate name, use CAND-001
+        if (workerName === loggedInCandidate.name) {
+            candidateIdForHR = loggedInCandidate.id;
+        } else {
+             candidateIdForHR = `CAND-${String(userIdCounter++).padStart(3,'0')}`; // Assign new ID for new workers
+             adminUsersData.push({userId: candidateIdForHR, username: workerName, role: 'Candidate', lastLogin: getCurrentTimestampFormatted(), status: 'Active'});
+        }
+      }
 
 
       const newRecord = {
@@ -1131,6 +1365,13 @@
       currentWorkingWorker = newRecord; // Keep track of the active worker for potential auto-fill on checkout
 
       alert(`Checked in ${workerName} for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nWork ID: ${workId}`);
+       // Record action in audit log
+      adminAuditLogData.push({
+          timestamp: getCurrentTimestampFormatted(),
+          user: "hr@example.com", // Assuming HR user for this action
+          action: "Manual Check-in",
+          details: `Worker: ${workerName}, Job ID: ${jobId}, Work ID: ${workId}`
+      });
   }
 
   // Function to handle Check-out (HR)
@@ -1205,6 +1446,13 @@
           document.getElementById('form-mark-attendance').reset();
           currentWorkingWorker = null;
           alert(`Checked out ${workerName} for Job ID ${jobId} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+          // Record action in audit log
+          adminAuditLogData.push({
+              timestamp: getCurrentTimestampFormatted(),
+              user: "hr@example.com", // Assuming HR user for this action
+              action: "Manual Check-out",
+              details: `Worker: ${workerName}, Job ID: ${jobId}, Work ID: ${recordToUpdate.workId}`
+          });
       } else {
           alert(`No active check-in found for ${workerName} for Job ID ${jobId} on ${attendanceDate}. Please check in first.`);
       }
@@ -1262,6 +1510,13 @@
 
       showInvoicesPayments(); // Go to invoices section to show the new invoice
       alert(`${invoiceDetails}\nTotal Invoice Amount: Rs. ${totalInvoiceAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments. Status updated in attendance records.`);
+      // Record action in audit log
+      adminAuditLogData.push({
+          timestamp: getCurrentTimestampFormatted(),
+          user: "hr@example.com", // Assuming HR user for this action
+          action: "Generate Invoice",
+          details: `Invoice ID: ${invoiceId}, Total Amount: Rs. ${totalInvoiceAmount.toFixed(2)}`
+      });
   }
 
 
@@ -1314,7 +1569,7 @@
 
       // Filter applications for the logged-in candidate
       const filteredApplications = candidateMyApplicationsData.filter(
-          app => app.candidateId === loggedInCandidate.id // Assuming applications eventually have candidateId
+          app => app.candidateId === loggedInCandidate.id // Filter by candidate ID
       ).sort((a, b) => new Date(b.appliedOn) - new Date(a.appliedOn)); // Sort by applied date
 
       if (filteredApplications.length > 0) {
@@ -1390,11 +1645,16 @@
       document.getElementById('candidate-check-out-time').value = ""; // Clear check-out time
   }
 
-  // NEW: Candidate Check-in logic
+  // Candidate Check-in logic
   function handleCandidateCheckIn() {
       const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
       let checkInTime = document.getElementById('candidate-check-in-time').value;
+
+      if (!checkInTime) {
+          checkInTime = getCurrentTimeFormatted();
+          document.getElementById('candidate-check-in-time').value = checkInTime;
+      }
 
       if (!jobId || !attendanceDate || !checkInTime) {
           alert("Please fill in Job ID, Date, and Check-in Time.");
@@ -1439,9 +1699,16 @@
       populateCandidateAttendanceTable(); // Refresh candidate's table
       populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
       alert(`Checked in for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nYour Work ID: ${workId}`);
+      // Record action in audit log
+      adminAuditLogData.push({
+          timestamp: getCurrentTimestampFormatted(),
+          user: `${loggedInCandidate.id} (${loggedInCandidate.name})`,
+          action: "Check-in",
+          details: `Job ID: ${jobId}, Work ID: ${workId}`
+      });
   }
 
-  // NEW: Candidate Check-out logic
+  // Candidate Check-out logic
   function handleCandidateCheckOut() {
       const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
@@ -1508,6 +1775,13 @@
           populateCandidateAttendanceTable(); // Refresh candidate's table
           populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
           alert(`Checked out for Job ID ${jobId} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+          // Record action in audit log
+          adminAuditLogData.push({
+              timestamp: getCurrentTimestampFormatted(),
+              user: `${loggedInCandidate.id} (${loggedInCandidate.name})`,
+              action: "Check-out",
+              details: `Job ID: ${jobId}, Work ID: ${recordToUpdate.workId}`
+          });
       } else {
           alert(`No active check-in found for Job ID ${jobId} on ${attendanceDate}. Please check in first.`);
       }
@@ -1543,7 +1817,7 @@
       } else {
           const row = paymentHistoryBody.insertRow();
           const cell = row.insertCell(0);
-          cell.colSpan = 6;
+          cell.colSpan = 6; // Adjusted colspan
           cell.textContent = "No payment history found.";
           cell.style.textAlign = "center";
           cell.style.fontStyle = "italic";
@@ -1553,21 +1827,283 @@
   }
 
 
-  // Helper function to manage active state of Candidate Dashboard sub-nav buttons
-  function setCandidateDashboardActiveTab(activeButtonId) {
-    const buttons = document.querySelectorAll('#dashboard-candidate .dashboard-nav-buttons button');
+  // Helper function to manage active state of Dashboard sub-nav buttons
+  // Works for Candidate and Admin Dashboards
+  function setDashboardActiveTab(dashboardId, activeButtonId) {
+    // Clear active class from all buttons in the specific dashboard's nav
+    const buttons = document.querySelectorAll(`#${dashboardId} .dashboard-nav-buttons button`);
     buttons.forEach(btn => {
         btn.classList.remove('active');
     });
+
+    // Set active class on the clicked button if provided
     if (activeButtonId) {
         document.getElementById(activeButtonId).classList.add('active');
     }
 
-    // Toggle visibility of default attendance form/table based on active tab
-    const isAttendanceView = !activeButtonId; // If no specific button is active, it's the default attendance view
-    document.getElementById('candidate-attendance-form-container').classList.toggle('hidden', !isAttendanceView);
-    document.getElementById('dashboard-candidate').querySelector('h3').classList.toggle('hidden', !isAttendanceView); // "My Attendance & Work IDs" heading
-    document.getElementById('candidate-attendance-body').parentNode.classList.toggle('hidden', !isAttendanceView); // The attendance table itself
+    // Manage visibility of content areas based on the active tab
+    // For Candidate Dashboard
+    if (dashboardId === 'dashboard-candidate') {
+        const isAttendanceView = !activeButtonId; // If no specific button is active, it's the default attendance view
+        document.getElementById('candidate-attendance-form-container').classList.toggle('hidden', !isAttendanceView);
+        document.getElementById('dashboard-candidate').querySelector('h3').classList.toggle('hidden', !isAttendanceView); // "My Attendance & Work IDs" heading
+        document.getElementById('candidate-attendance-body').parentNode.classList.toggle('hidden', !isAttendanceView); // The attendance table itself
+    }
+    // For Admin Dashboard
+    else if (dashboardId === 'dashboard-admin') {
+        // Hide all admin overview sub-sections first
+        document.getElementById('admin-manage-users').classList.add('hidden');
+        document.getElementById('admin-audit-logs').classList.add('hidden');
+        document.getElementById('admin-hr-overview').classList.add('hidden');
+        document.getElementById('admin-candidate-overview').classList.add('hidden');
+        document.getElementById('admin-sales-overview').classList.add('hidden');
+        document.getElementById('admin-finance-overview').classList.add('hidden');
+
+        // Show the appropriate section based on activeButtonId or default to audit logs
+        if (activeButtonId === 'admin-manage-users-btn') {
+            document.getElementById('admin-manage-users').classList.remove('hidden');
+        } else if (activeButtonId === 'admin-hr-overview-btn') {
+            document.getElementById('admin-hr-overview').classList.remove('hidden');
+        } else if (activeButtonId === 'admin-candidate-overview-btn') {
+            document.getElementById('admin-candidate-overview').classList.remove('hidden');
+        } else if (activeButtonId === 'admin-sales-overview-btn') {
+            document.getElementById('admin-sales-overview').classList.remove('hidden');
+        } else if (activeButtonId === 'admin-finance-overview-btn') {
+            document.getElementById('admin-finance-overview').classList.remove('hidden');
+        } else { // Default to audit logs if no specific button is active
+            document.getElementById('admin-audit-logs').classList.remove('hidden');
+            document.getElementById('admin-audit-logs-btn').classList.add('active'); // Ensure audit logs button is active by default
+        }
+    }
+  }
+
+
+  // NEW: Admin Dashboard Functions
+
+  // Function to populate Admin Users Table
+  function populateAdminUsersTable() {
+    const usersBody = document.getElementById('admin-users-body');
+    usersBody.innerHTML = ''; // Clear previous data
+
+    if (adminUsersData.length > 0) {
+      adminUsersData.forEach(user => {
+        const row = usersBody.insertRow();
+        row.insertCell(0).textContent = user.userId;
+        row.insertCell(1).textContent = user.username;
+        row.insertCell(2).textContent = user.role;
+        row.insertCell(3).textContent = user.lastLogin;
+        row.insertCell(4).textContent = user.status;
+        const actionCell = row.insertCell(5);
+        const toggleStatusBtn = document.createElement('button');
+        toggleStatusBtn.textContent = user.status === 'Active' ? 'Deactivate' : 'Activate';
+        toggleStatusBtn.className = user.status === 'Active' ? 'logout-btn' : ''; // Use logout-btn class for deactivate
+        toggleStatusBtn.style.padding = '5px 10px';
+        toggleStatusBtn.style.marginBottom = '0';
+        toggleStatusBtn.style.width = 'fit-content';
+        toggleStatusBtn.onclick = () => {
+            const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+            user.status = newStatus; // Update data
+            populateAdminUsersTable(); // Refresh table
+            adminAuditLogData.push({
+                timestamp: getCurrentTimestampFormatted(),
+                user: "admin@example.com", // Assuming Admin user
+                action: "User Status Change",
+                details: `User: ${user.username}, New Status: ${newStatus}`
+            });
+            alert(`User ${user.username} status toggled to ${newStatus}.`);
+        };
+        actionCell.appendChild(toggleStatusBtn);
+      });
+    } else {
+      const row = usersBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 6;
+      cell.textContent = "No user data to display.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+  }
+
+  // Function to populate Admin Audit Logs Table
+  function populateAdminAuditLogsTable() {
+    const auditLogsBody = document.getElementById('admin-audit-logs-body');
+    auditLogsBody.innerHTML = ''; // Clear previous data
+
+    // Sort logs by timestamp, most recent first
+    const sortedLogs = [...adminAuditLogData].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    if (sortedLogs.length > 0) {
+      sortedLogs.forEach(log => {
+        const row = auditLogsBody.insertRow();
+        row.insertCell(0).textContent = log.timestamp;
+        row.insertCell(1).textContent = log.user;
+        row.insertCell(2).textContent = log.action;
+        row.insertCell(3).textContent = log.details;
+      });
+    } else {
+      const row = auditLogsBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 4;
+      cell.textContent = "No audit logs to display.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+  }
+
+  // NEW: Admin HR Overview
+  function populateAdminHROverview() {
+    const jobsSummaryBody = document.getElementById('admin-hr-jobs-summary-body');
+    jobsSummaryBody.innerHTML = '';
+    const applicantsSummaryBody = document.getElementById('admin-hr-applicants-summary-body');
+    applicantsSummaryBody.innerHTML = '';
+
+    const totalJobs = Object.keys(postedJobs).length;
+    const activeJobs = Object.values(postedJobs).filter(job => job.status === 'Active').length;
+    const closedJobs = Object.values(postedJobs).filter(job => job.status === 'Closed').length;
+
+    let totalApplicants = 0;
+    let interviewedApplicants = 0;
+    let hiredApplicants = 0;
+    Object.values(allJobApplicants).forEach(jobApps => {
+        totalApplicants += jobApps.length;
+        interviewedApplicants += jobApps.filter(app => app.status === 'Interview Scheduled' || app.status === 'Interviewed').length;
+        hiredApplicants += jobApps.filter(app => app.status === 'Hired').length;
+    });
+
+    jobsSummaryBody.insertRow().insertCell(0).textContent = 'Total Jobs Posted';
+    jobsSummaryBody.rows[0].insertCell(1).textContent = totalJobs;
+    jobsSummaryBody.insertRow().insertCell(0).textContent = 'Active Jobs';
+    jobsSummaryBody.rows[1].insertCell(1).textContent = activeJobs;
+    jobsSummaryBody.insertRow().insertCell(0).textContent = 'Closed Jobs';
+    jobsSummaryBody.rows[2].insertCell(1).textContent = closedJobs;
+
+    applicantsSummaryBody.insertRow().insertCell(0).textContent = 'Total Applicants';
+    applicantsSummaryBody.rows[0].insertCell(1).textContent = totalApplicants;
+    applicantsSummaryBody.insertRow().insertCell(0).textContent = 'Interviewed/Scheduled';
+    applicantsSummaryBody.rows[1].insertCell(1).textContent = interviewedApplicants;
+    applicantsSummaryBody.insertRow().insertCell(0).textContent = 'Hired Applicants';
+    applicantsSummaryBody.rows[2].insertCell(1).textContent = hiredApplicants;
+  }
+
+  // NEW: Admin Candidate Overview
+  function populateAdminCandidateOverview() {
+    const candidateStatusBody = document.getElementById('admin-candidate-status-body');
+    candidateStatusBody.innerHTML = '';
+    const candidateApplicationsBody = document.getElementById('admin-candidate-applications-body');
+    candidateApplicationsBody.innerHTML = '';
+    const candidateAttendanceBody = document.getElementById('admin-candidate-attendance-body');
+    candidateAttendanceBody.innerHTML = '';
+
+    // Candidate Status Summary
+    const totalCandidates = adminUsersData.filter(user => user.role === 'Candidate').length;
+    const activeCandidates = adminUsersData.filter(user => user.role === 'Candidate' && user.status === 'Active').length;
+    const inactiveCandidates = totalCandidates - activeCandidates;
+
+    candidateStatusBody.insertRow().insertCell(0).textContent = 'Total Candidates';
+    candidateStatusBody.rows[0].insertCell(1).textContent = totalCandidates;
+    candidateStatusBody.insertRow().insertCell(0).textContent = 'Active Candidates';
+    candidateStatusBody.rows[1].insertCell(1).textContent = activeCandidates;
+    candidateStatusBody.insertRow().insertCell(0).textContent = 'Inactive Candidates';
+    candidateStatusBody.rows[2].insertCell(1).textContent = inactiveCandidates;
+
+    // Application Status Breakdown
+    const applicationStatuses = {};
+    candidateMyApplicationsData.forEach(app => {
+        applicationStatuses[app.applicationStatus] = (applicationStatuses[app.applicationStatus] || 0) + 1;
+    });
+    for (const status in applicationStatuses) {
+        const row = candidateApplicationsBody.insertRow();
+        row.insertCell(0).textContent = status;
+        row.insertCell(1).textContent = applicationStatuses[status];
+    }
+
+    // Attendance & Work Summary
+    let totalShifts = hrAttendanceData.length;
+    let completedShifts = hrAttendanceData.filter(rec => rec.status === 'Completed' || rec.status === 'Invoiced').length;
+    let activeShifts = hrAttendanceData.filter(rec => rec.status === 'Active').length;
+    let totalHoursWorked = 0;
+    hrAttendanceData.forEach(rec => {
+        if (rec.checkIn && rec.checkOut) {
+            totalHoursWorked += calculateHours(rec.checkIn, rec.checkOut);
+        }
+    });
+
+    candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Total Shifts Recorded';
+    candidateAttendanceBody.rows[0].insertCell(1).textContent = totalShifts;
+    candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Completed Shifts';
+    candidateAttendanceBody.rows[1].insertCell(1).textContent = completedShifts;
+    candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Active Shifts';
+    candidateAttendanceBody.rows[2].insertCell(1).textContent = activeShifts;
+    candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Total Hours Worked';
+    candidateAttendanceBody.rows[3].insertCell(1).textContent = `${totalHoursWorked.toFixed(1)} hrs`;
+  }
+
+  // NEW: Admin Sales Overview
+  function populateAdminSalesOverview() {
+    const salesSummaryBody = document.getElementById('admin-sales-summary-body');
+    salesSummaryBody.innerHTML = '';
+
+    const totalClients = salesClientsData.length;
+    let totalContractValue = 0;
+    let activeContractValue = 0;
+    salesContractsData.forEach(contract => {
+        totalContractValue += contract.value;
+        if (contract.status === 'Active') {
+            activeContractValue += contract.value;
+        }
+    });
+
+    salesSummaryBody.insertRow().insertCell(0).textContent = 'Total Clients';
+    salesSummaryBody.rows[0].insertCell(1).textContent = totalClients;
+    salesSummaryBody.insertRow().insertCell(0).textContent = 'Total Contract Value';
+    salesSummaryBody.rows[1].insertCell(1).textContent = `Rs. ${totalContractValue.toLocaleString()}`;
+    salesSummaryBody.insertRow().insertCell(0).textContent = 'Active Contract Value';
+    salesSummaryBody.rows[2].insertCell(1).textContent = `Rs. ${activeContractValue.toLocaleString()}`;
+  }
+
+  // NEW: Admin Finance Overview
+  function populateAdminFinanceOverview() {
+    const financeSummaryBody = document.getElementById('admin-finance-summary-body');
+    financeSummaryBody.innerHTML = '';
+    const financePayrollBody = document.getElementById('admin-finance-payroll-body');
+    financePayrollBody.innerHTML = '';
+
+    let totalInvoiced = 0;
+    let totalPaidInvoices = 0;
+    let totalOutstandingInvoices = 0;
+    let totalWorkerPayouts = 0;
+    let totalPendingPayouts = 0;
+
+    hrInvoicesData.forEach(invoice => {
+        if (invoice.type === 'Client') {
+            totalInvoiced += invoice.amount;
+            if (invoice.status === 'Paid') {
+                totalPaidInvoices += invoice.amount;
+            } else if (invoice.status === 'Pending') {
+                totalOutstandingInvoices += invoice.amount;
+            }
+        } else if (invoice.type === 'Worker Payout') {
+            totalWorkerPayouts += invoice.amount;
+            if (invoice.status !== 'Paid') { // Assuming 'Generated' or 'Pending' are pending
+                totalPendingPayouts += invoice.amount;
+            }
+        }
+    });
+
+    financeSummaryBody.insertRow().insertCell(0).textContent = 'Total Client Invoiced';
+    financeSummaryBody.rows[0].insertCell(1).textContent = `Rs. ${totalInvoiced.toLocaleString()}`;
+    financeSummaryBody.insertRow().insertCell(0).textContent = 'Paid Invoices';
+    financeSummaryBody.rows[1].insertCell(1).textContent = `Rs. ${totalPaidInvoices.toLocaleString()}`;
+    financeSummaryBody.insertRow().insertCell(0).textContent = 'Outstanding Invoices';
+    financeSummaryBody.rows[2].insertCell(1).textContent = `Rs. ${totalOutstandingInvoices.toLocaleString()}`;
+
+
+    financePayrollBody.insertRow().insertCell(0).textContent = 'Total Worker Payouts';
+    financePayrollBody.rows[0].insertCell(1).textContent = `Rs. ${totalWorkerPayouts.toLocaleString()}`;
+    financePayrollBody.insertRow().insertCell(0).textContent = 'Pending Worker Payouts';
+    financePayrollBody.rows[1].insertCell(1).textContent = `Rs. ${totalPendingPayouts.toLocaleString()}`;
   }
 
 
@@ -1578,7 +2114,7 @@
     document.getElementById('candidate-attendance-date').value = getCurrentDateFormatted();
 
 
-    // Attach click listeners to navigation tabs
+    // Attach click listeners to navigation tabs (for login roles)
     document.querySelectorAll('#nav-login-tabs button').forEach(button => {
       button.addEventListener('click', () => {
         showSection(button.dataset.target);
@@ -1609,7 +2145,7 @@
         showSection('hr-attendance-invoicing');
     });
 
-    // Post New Job Form Actions
+    // Post New Job Form Actions (HR)
     document.getElementById('form-post-job').addEventListener('submit', handlePostJob);
     document.getElementById('cancel-post-job').addEventListener('click', () => {
       document.getElementById('form-post-job').reset();
@@ -1620,6 +2156,7 @@
     document.getElementById('back-to-hr-dashboard-from-applicants').addEventListener('click', () => {
       showSection('dashboard-hr');
     });
+    // Event delegation for applicant count clicks
     document.querySelector('#job-postings-table tbody').addEventListener('click', (event) => {
         if (event.target.classList.contains('applicant-count')) {
             const jobId = event.target.dataset.jobId; // Use jobId
@@ -1648,18 +2185,18 @@
     // Candidate Dashboard Nav Buttons (within dashboard-candidate section)
     document.getElementById('view-available-jobs-cand-btn').addEventListener('click', () => {
         showAvailableSlots(); // This function already calls showSection()
-        setCandidateDashboardActiveTab('view-available-jobs-cand-btn');
+        setDashboardActiveTab('dashboard-candidate', 'view-available-jobs-cand-btn');
     });
 
     document.getElementById('my-applications-cand-btn').addEventListener('click', () => {
         showMyApplications(); // This function already calls showSection()
-        setCandidateDashboardActiveTab('my-applications-cand-btn');
+        setDashboardActiveTab('dashboard-candidate', 'my-applications-cand-btn');
     });
 
     // Payment History Actions (Candidate)
     document.getElementById('payment-history-cand-btn').addEventListener('click', () => {
         showCandidatePaymentHistory(); // This function already calls showSection()
-        setCandidateDashboardActiveTab('payment-history-cand-btn');
+        setDashboardActiveTab('dashboard-candidate', 'payment-history-cand-btn');
     });
 
 
@@ -1668,26 +2205,92 @@
         showSection('dashboard-candidate');
         populateCandidateAttendanceTable(); // Re-populate the default view
         populateCandidateAttendanceForm(); // Reset form for default view
-        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+        setDashboardActiveTab('dashboard-candidate', null); // No button active when default view is shown
     });
 
     document.getElementById('back-to-candidate-dashboard-from-applications').addEventListener('click', () => {
         showSection('dashboard-candidate');
         populateCandidateAttendanceTable(); // Re-populate the default view
         populateCandidateAttendanceForm(); // Reset form for default view
-        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+        setDashboardActiveTab('dashboard-candidate', null); // No button active when default view is shown
     });
 
     document.getElementById('back-to-candidate-dashboard-from-payment-history').addEventListener('click', () => {
         showSection('dashboard-candidate');
         populateCandidateAttendanceTable(); // Re-populate the default view
         populateCandidateAttendanceForm(); // Reset form for default view
-        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+        setDashboardActiveTab('dashboard-candidate', null); // No button active when default view is shown
     });
 
     // Candidate Self-Service Attendance Buttons
     document.getElementById('candidate-mark-check-in-btn').addEventListener('click', handleCandidateCheckIn);
     document.getElementById('candidate-mark-check-out-btn').addEventListener('click', handleCandidateCheckOut);
+
+
+    // Admin Dashboard Actions (NEW)
+    document.getElementById('admin-manage-users-btn').addEventListener('click', () => {
+        populateAdminUsersTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-manage-users-btn');
+        showSection('admin-manage-users'); // Make sure the correct section is shown
+    });
+    document.getElementById('admin-audit-logs-btn').addEventListener('click', () => {
+        populateAdminAuditLogsTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn');
+        // No showSection needed here as audit logs are the default main content of dashboard-admin
+    });
+    document.getElementById('admin-hr-overview-btn').addEventListener('click', () => {
+        populateAdminHROverview();
+        setDashboardActiveTab('dashboard-admin', 'admin-hr-overview-btn');
+        showSection('admin-hr-overview');
+    });
+    document.getElementById('admin-candidate-overview-btn').addEventListener('click', () => {
+        populateAdminCandidateOverview();
+        setDashboardActiveTab('dashboard-admin', 'admin-candidate-overview-btn');
+        showSection('admin-candidate-overview');
+    });
+    document.getElementById('admin-sales-overview-btn').addEventListener('click', () => {
+        populateAdminSalesOverview();
+        setDashboardActiveTab('dashboard-admin', 'admin-sales-overview-btn');
+        showSection('admin-sales-overview');
+    });
+    document.getElementById('admin-finance-overview-btn').addEventListener('click', () => {
+        populateAdminFinanceOverview();
+        setDashboardActiveTab('dashboard-admin', 'admin-finance-overview-btn');
+        showSection('admin-finance-overview');
+    });
+
+
+    // Back buttons from Admin sub-sections
+    document.getElementById('back-to-admin-dashboard-from-users').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable(); // Show default audit logs
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn'); // Activate audit logs button
+    });
+    document.getElementById('back-to-admin-dashboard-from-audit-logs').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable(); // Show default audit logs
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn'); // Activate audit logs button
+    });
+    document.getElementById('back-to-admin-dashboard-from-hr-overview').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn');
+    });
+    document.getElementById('back-to-admin-dashboard-from-candidate-overview').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn');
+    });
+    document.getElementById('back-to-admin-dashboard-from-sales-overview').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn');
+    });
+    document.getElementById('back-to-admin-dashboard-from-finance-overview').addEventListener('click', () => {
+        showSection('dashboard-admin');
+        populateAdminAuditLogsTable();
+        setDashboardActiveTab('dashboard-admin', 'admin-audit-logs-btn');
+    });
 
 
     // Initial setup logic
