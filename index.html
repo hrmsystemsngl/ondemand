@@ -525,7 +525,7 @@
           <th>Slot Time</th>
           <th>Hours</th>
           <th>Amount (Rs.)</th>
-        </tr>
+          <th>Action</th> </tr>
       </thead>
       <tbody id="available-slots-body">
         </tbody>
@@ -821,7 +821,6 @@
       "JOB-AIML-002": { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22 },
       "JOB-FDR-003": { jobId: "JOB-FDR-003", jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30 },
   };
-
   const allJobApplicants = {
     "JOB-QSE-001": [ // Linked to Job ID now
       { name: "Alice Johnson", contact: "alice@example.com", appliedOn: "2025-07-08", status: "Reviewing", resumeLink: "#" },
@@ -836,25 +835,21 @@
       { name: "Henry Black", contact: "henry@example.com", appliedOn: "2025-06-19", status: "Rejected", resumeLink: "#" },
     ]
   };
-
   const hrSlotsData = [
     { jobRole: "Data Entry (Morning)", candidate: "John Doe", date: "2025-07-23", timeSlot: "9:00 AM - 1:00 PM", status: "Confirmed" },
     { jobRole: "Customer Support (Evening)", candidate: "Jane Smith", date: "2025-07-23", timeSlot: "5:00 PM - 9:00 PM", status: "Pending Confirmation" },
   ];
-
   const hrInvoicesData = [
     { invoiceId: "INV-HR-001", clientWorker: "Tech Solutions Inc.", amount: 50000, date: "2025-07-15", dueDate: "2025-07-15", status: "Paid", type: "Client", action: "N/A" },
     { invoiceId: "INV-HR-002", clientWorker: "Innovate Corp", amount: 25000, date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", type: "Client", action: "Send Reminder" },
     { invoiceId: "INV-HR-003", clientWorker: "Global Ventures", amount: 75000, date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", type: "Client", action: "N/A" },
     { invoiceId: "INV-HR-004", clientWorker: "CAND-001 (Candidate User)", amount: 10000, date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", type: "Worker Payout", action: "Approve Payment" },
   ];
-
   const hrAttendanceData = [ // HR's view of all attendance, now includes Candidate ID and Job ID
       { workerName: "Ramesh Kumar", candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
       { workerName: "Priya Sharma", candidateId: "CAND-002", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
       { workerName: "Suresh Gupta", candidateId: "CAND-003", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
   ];
-
   // Candidate - Available Slots data (dynamically updated by HR job postings)
   const candidateAvailableSlotsData = [
       { jobId: "JOB-DEA-004", jobRole: "Data Entry Assistant", workArea: "Perungudi", city: "Chennai", state: "Tamil Nadu", slotTime: "9:00 AM - 1:00 PM", hours: 4, amount: 800 },
@@ -862,28 +857,24 @@
       { jobId: "JOB-WH-006", jobRole: "Warehouse Helper", workArea: "Ambattur", city: "Chennai", state: "Tamil Nadu", slotTime: "10:00 AM - 6:00 PM", hours: 8, amount: 1500 },
       { jobId: "JOB-GD-007", jobRole: "Graphic Designer (Part-time)", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (4 hrs/day)", hours: 4, amount: 2000 },
   ];
-
   // Candidate - My Applications data with more details, now linked to Job ID
   const candidateMyApplicationsData = [
       { candidateId: "CAND-001", jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
       { candidateId: "CAND-001", jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
       { candidateId: "CAND-001", jobId: "JOB-EP-005", jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
   ];
-
   // Candidate - My Attendance Data (Candidate's perspective), linked to Job ID and Candidate ID
   const candidateMyAttendanceData = [
     { candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
     { candidateId: "CAND-001", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
     { candidateId: "CAND-001", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
   ];
-
   // Sample data for Candidate Payment History, linked to Job ID and Candidate ID
   const candidatePaymentHistoryData = [
       { candidateId: "CAND-001", workId: "WKID-DE-001", jobId: "JOB-DE-001", jobRole: "Data Entry", date: "2025-07-21", amount: 800, status: "Paid" },
       { candidateId: "CAND-001", workId: "WKID-CS-002", jobId: "JOB-CS-002", jobRole: "Customer Support", date: "2025-07-21", amount: 1000, status: "Paid" },
       { candidateId: "CAND-001", workId: "WKID-DE-003", jobId: "JOB-DE-003", jobRole: "Delivery Executive", date: "2025-07-22", amount: "Pending Calc.", status: "Pending" }
   ];
-
   // Admin Users Data (extended)
   const adminUsersData = [
       { userId: "ADM-001", username: "admin@example.com", role: "Admin", lastLogin: "2025-07-22 21:00", status: "Active" },
@@ -895,7 +886,6 @@
       { userId: "CAND-003", username: "suresh_g", role: "Candidate", lastLogin: "2025-07-22 09:30", status: "Active" },
       { userId: "INACT-001", username: "old_user", role: "Candidate", lastLogin: "2025-06-01 10:00", status: "Inactive" },
   ];
-
   // Admin Audit Log Data (original, will be populated dynamically)
   const adminAuditLogData = [
       { timestamp: "2025-07-22 21:10:05", user: "HR-001", action: "Post New Job", details: "JOB-ND-004 (New Driver)" },
@@ -904,21 +894,18 @@
       { timestamp: "2025-07-21 17:00:00", user: "HR-001", action: "Manual Check-out", details: "Worker: Ramesh Kumar, Work ID: WKID-DE-001" },
       { timestamp: "2025-07-21 09:00:00", user: "CAND-001", action: "Check-in", details: "Work ID: WKID-DE-001" },
   ];
-
   // NEW: Sales Clients Data for Admin Overview
   const salesClientsData = [
       { clientId: "CLI-001", clientName: "Tech Solutions Inc.", totalContracts: 3, activeContracts: 2, lastEngagement: "2025-07-15" },
       { clientId: "CLI-002", clientName: "Innovate Corp", totalContracts: 1, activeContracts: 1, lastEngagement: "2025-07-20" },
       { clientId: "CLI-003", clientName: "Global Ventures", totalContracts: 2, activeContracts: 0, lastEngagement: "2025-06-25" },
   ];
-
   // NEW: Sales Contracts Data for Admin Overview (can be linked to Client Data via Client ID)
   const salesContractsData = [
       { contractId: "CON-001", clientId: "CLI-001", value: 50000, status: "Active", startDate: "2025-01-01", endDate: "2026-01-01" },
       { contractId: "CON-002", clientId: "CLI-001", value: 20000, status: "Completed", startDate: "2024-06-01", endDate: "2025-06-01" },
       { contractId: "CON-003", clientId: "CLI-002", value: 25000, status: "Active", startDate: "2025-07-01", endDate: "2026-07-01" },
   ];
-
 
   const loggedInCandidate = { id: "CAND-001", name: "Candidate User" }; // Fixed for demo
 
@@ -1079,7 +1066,6 @@
 
     // Add empty applicant list for the new job ID
     allJobApplicants[jobId] = [];
-
     // Create a new table row for the job postings table (HR View)
     const jobTableBody = document.querySelector('#job-postings-table tbody');
     const newRow = jobTableBody.insertRow(0); // Insert at the top
@@ -1106,8 +1092,6 @@
 
     // Add this new job to the candidate's available slots data
     candidateAvailableSlotsData.push({ jobId, ...newJob });
-
-
     const jobDetailsAlert = `
       Job Posted Successfully!
       ------------------------
@@ -1120,13 +1104,10 @@
       Posted On: ${postedOn}
     `;
     alert(jobDetailsAlert);
-
     // Clear the form fields after submission
     document.getElementById('form-post-job').reset();
-
     // After submission, return to HR Dashboard
     showSection('dashboard-hr');
-
     // Record action in audit log
     adminAuditLogData.push({
         timestamp: getCurrentTimestampFormatted(),
@@ -1249,8 +1230,6 @@
         const dateB = new Date(`${b.date}T${b.checkIn || '00:00'}`);
         return dateB - dateA;
     });
-
-
     if (sortedAttendance.length > 0) {
       sortedAttendance.forEach(record => {
         const row = attendanceBody.insertRow();
@@ -1302,14 +1281,12 @@
           record.date === attendanceDate &&
           record.status === "Active"
       );
-
       if (existingActiveRecord) {
           alert(`${workerName} is already checked in for Job ID ${jobId} on ${attendanceDate}. Please check out first.`);
           return;
       }
 
       const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
-
       // Simulate finding candidate ID based on worker name (for HR's manual entry)
       let candidateIdForHR = null;
       const matchingUser = adminUsersData.find(user => user.username === workerName || (user.role === 'Candidate' && user.username === '9876543210' && workerName === loggedInCandidate.name));
@@ -1321,7 +1298,7 @@
         if (workerName === loggedInCandidate.name) {
             candidateIdForHR = loggedInCandidate.id;
         } else {
-             candidateIdForHR = `CAND-${String(userIdCounter++).padStart(3,'0')}`; // Assign new ID for new workers
+             candidateIdForHR = `CAND-${String(userIdCounter++).padStart(3,'0')}`;
              adminUsersData.push({userId: candidateIdForHR, username: workerName, role: 'Candidate', lastLogin: getCurrentTimestampFormatted(), status: 'Active'});
         }
       }
@@ -1365,7 +1342,7 @@
       currentWorkingWorker = newRecord; // Keep track of the active worker for potential auto-fill on checkout
 
       alert(`Checked in ${workerName} for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nWork ID: ${workId}`);
-       // Record action in audit log
+      // Record action in audit log
       adminAuditLogData.push({
           timestamp: getCurrentTimestampFormatted(),
           user: "hr@example.com", // Assuming HR user for this action
@@ -1401,7 +1378,6 @@
           record.date === attendanceDate &&
           record.status === "Active"
       );
-
       if (recordToUpdate) {
           recordToUpdate.checkOut = checkOutTime;
           recordToUpdate.status = "Completed";
@@ -1424,7 +1400,6 @@
                   const hoursWorked = calculateHours(recordToUpdate.checkIn, recordToUpdate.checkOut);
                   const estimatedRatePerHour = job.salary / (job.hours || 1); // Calculate rate based on job or default
                   const amountEarned = hoursWorked * estimatedRatePerHour;
-
                   candidatePaymentHistoryData.push({
                       candidateId: loggedInCandidate.id, // Ensure candidateId is stored
                       workId: recordToUpdate.workId,
@@ -1461,7 +1436,6 @@
   // Function to generate Invoice (simplified for HR)
   function generateInvoiceForSelected() {
       const unbilledRecords = hrAttendanceData.filter(record => record.status === "Completed" && !record.invoiced);
-
       if (unbilledRecords.length === 0) {
           alert("No completed and unbilled attendance records to generate invoices for.");
           return;
@@ -1492,12 +1466,9 @@
       const dueDate = new Date(today);
       dueDate.setDate(dueDate.getDate() + 7);
       const formattedDueDate = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
-
       // Combine multiple workers into one clientWorker for simplicity in demo invoice
       const clientWorkerString = Array.from(workersInvoiced.keys()).map(name => `${name} (Worker)`).join(", ");
       const totalInvoiceAmount = Array.from(workersInvoiced.values()).reduce((sum, val) => sum + val, 0);
-
-
       hrInvoicesData.push({
           invoiceId: invoiceId,
           clientWorker: clientWorkerString,
@@ -1507,7 +1478,6 @@
           status: "Generated",
           action: "Approve Payment"
       });
-
       showInvoicesPayments(); // Go to invoices section to show the new invoice
       alert(`${invoiceDetails}\nTotal Invoice Amount: Rs. ${totalInvoiceAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments. Status updated in attendance records.`);
       // Record action in audit log
@@ -1532,7 +1502,6 @@
 
       // Filter for active jobs only
       const activeAvailableSlots = Object.values(postedJobs).filter(job => job.status === 'Active');
-
       if (activeAvailableSlots.length > 0) {
           activeAvailableSlots.forEach(job => { // Use job object directly
               const row = availableSlotsBody.insertRow();
@@ -1544,17 +1513,99 @@
               row.insertCell(5).textContent = job.slotTime;
               row.insertCell(6).textContent = `${job.hours} hrs`; // Display hours
               row.insertCell(7).textContent = `Rs. ${job.salary}`; // Amount (using salary as per job post)
+
+              const actionCell = row.insertCell(8); // New cell for the button
+              const applyButton = document.createElement('button');
+              applyButton.textContent = 'Apply Now';
+              applyButton.classList.add('apply-now-btn'); // Add a class for potential styling
+              applyButton.style.padding = '5px 10px';
+              applyButton.style.marginBottom = '0';
+              applyButton.style.width = 'fit-content';
+              applyButton.onclick = () => handleApplyForJob(job.jobId); // Attach click handler
+              actionCell.appendChild(applyButton);
           });
       } else {
           const row = availableSlotsBody.insertRow();
           const cell = row.insertCell(0);
-          cell.colSpan = 8; // Updated colspan
+          cell.colSpan = 9; // Updated colspan
           cell.textContent = "No available job slots at the moment. Please check back later!";
           cell.style.textAlign = "center";
           cell.style.fontStyle = "italic";
           cell.style.padding = "20px";
       }
       showSection('candidate-available-slots');
+  }
+
+  // Function to handle applying for a job (Candidate)
+  function handleApplyForJob(jobId) {
+    const jobToApply = postedJobs[jobId];
+    if (!jobToApply) {
+      alert("Job not found.");
+      return;
+    }
+
+    // Check if the candidate has already applied for this job
+    const alreadyApplied = candidateMyApplicationsData.some(
+      app => app.candidateId === loggedInCandidate.id && app.jobId === jobId
+    );
+
+    if (alreadyApplied) {
+      alert(`You have already applied for ${jobToApply.jobTitle} (Job ID: ${jobId}).`);
+      return;
+    }
+
+    const applicationDate = getCurrentDateFormatted();
+
+    // Add to candidate's applications
+    candidateMyApplicationsData.push({
+      candidateId: loggedInCandidate.id,
+      jobId: jobToApply.jobId,
+      jobTitle: jobToApply.jobTitle,
+      workArea: jobToApply.workArea,
+      city: jobToApply.city,
+      state: jobToApply.state,
+      slotTime: jobToApply.slotTime,
+      hours: jobToApply.hours,
+      applicationStatus: "Pending", // Initial status
+      appliedOn: applicationDate
+    });
+
+    // Add to HR's job applicants list
+    if (!allJobApplicants[jobId]) {
+      allJobApplicants[jobId] = [];
+    }
+    allJobApplicants[jobId].push({
+      name: loggedInCandidate.name,
+      contact: loggedInCandidate.id === "CAND-001" ? "9876543210" : "candidate_contact@example.com", // Adjust contact info as needed
+      appliedOn: applicationDate,
+      status: "Pending",
+      resumeLink: "#" // Placeholder for resume link
+    });
+
+    // Update the applicant count in the HR dashboard's job postings table
+    const hrJobPostingRow = document.querySelector(`#job-postings-table tbody tr[data-job-id="${jobId}"]`);
+    if (hrJobPostingRow) {
+        const applicantCountSpan = hrJobPostingRow.querySelector('.applicant-count');
+        if (applicantCountSpan) {
+            jobToApply.applicants = (jobToApply.applicants || 0) + 1; // Increment applicant count in data
+            applicantCountSpan.textContent = jobToApply.applicants; // Update displayed count
+        }
+    }
+
+
+    alert(`Successfully applied for: ${jobToApply.jobTitle} (Job ID: ${jobId})`);
+
+    // Optionally, navigate to "My Applications" after applying
+    showMyApplications();
+    setDashboardActiveTab('dashboard-candidate', 'my-applications-cand-btn');
+
+    // Record action in audit log
+    adminAuditLogData.push({
+        timestamp: getCurrentTimestampFormatted(),
+        user: `${loggedInCandidate.id} (${loggedInCandidate.name})`,
+        action: "Applied for Job",
+        details: `Job ID: ${jobId}, Job Title: ${jobToApply.jobTitle}`
+    });
   }
 
   // Function to display candidate's applications
@@ -1615,7 +1666,6 @@
             const dateB = new Date(`${b.date}T${b.checkIn || '00:00'}`);
             return dateB - dateA;
         });
-
       if (filteredAttendance.length > 0) {
           filteredAttendance.forEach(record => {
               const row = candidateAttendanceBody.insertRow();
@@ -1650,7 +1700,6 @@
       const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
       let checkInTime = document.getElementById('candidate-check-in-time').value;
-
       if (!checkInTime) {
           checkInTime = getCurrentTimeFormatted();
           document.getElementById('candidate-check-in-time').value = checkInTime;
@@ -1674,14 +1723,12 @@
           record.date === attendanceDate &&
           record.status === "Active"
       );
-
       if (existingActiveRecord) {
           alert(`You are already checked in for Job ID ${jobId} on ${attendanceDate}. Please check out first.`);
           return;
       }
 
       const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
-
       const newRecord = {
           candidateId: candidateId, // Include candidate ID
           jobId: jobId, // Store jobId
@@ -1691,11 +1738,9 @@
           workId,
           status: "Active"
       };
-
       candidateMyAttendanceData.push(newRecord);
       // Also update HR's data (assuming this is the centralized data source)
       hrAttendanceData.push({ workerName: loggedInCandidate.name, ...newRecord });
-
       populateCandidateAttendanceTable(); // Refresh candidate's table
       populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
       alert(`Checked in for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nYour Work ID: ${workId}`);
@@ -1713,7 +1758,6 @@
       const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
       let checkOutTime = document.getElementById('candidate-check-out-time').value;
-
       if (!checkOutTime) {
           checkOutTime = getCurrentTimeFormatted();
           document.getElementById('candidate-check-out-time').value = checkOutTime;
@@ -1729,7 +1773,6 @@
       }
 
       const candidateId = loggedInCandidate.id;
-
       // Find the active record for this candidate and job on this date
       const recordToUpdate = candidateMyAttendanceData.find(record =>
           record.candidateId === candidateId &&
@@ -1737,11 +1780,9 @@
           record.date === attendanceDate &&
           record.status === "Active"
       );
-
       if (recordToUpdate) {
           recordToUpdate.checkOut = checkOutTime;
           recordToUpdate.status = "Completed";
-
           // Update HR's data (simulated centralized data)
           const hrRecordToUpdate = hrAttendanceData.find(record =>
               record.candidateId === candidateId &&
@@ -1760,7 +1801,6 @@
           const hoursWorked = calculateHours(recordToUpdate.checkIn, recordToUpdate.checkOut);
           const estimatedRatePerHour = job.salary / (job.hours || 1); // Calculate rate based on job or default
           const amountEarned = hoursWorked * estimatedRatePerHour;
-
           candidatePaymentHistoryData.push({
               candidateId: loggedInCandidate.id, // Ensure candidateId is stored
               workId: recordToUpdate.workId,
@@ -1770,8 +1810,6 @@
               amount: amountEarned.toFixed(2),
               status: "Pending Payment"
           });
-
-
           populateCandidateAttendanceTable(); // Refresh candidate's table
           populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
           alert(`Checked out for Job ID ${jobId} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
@@ -1835,7 +1873,6 @@
     buttons.forEach(btn => {
         btn.classList.remove('active');
     });
-
     // Set active class on the clicked button if provided
     if (activeButtonId) {
         document.getElementById(activeButtonId).classList.add('active');
@@ -1932,7 +1969,6 @@
 
     // Sort logs by timestamp, most recent first
     const sortedLogs = [...adminAuditLogData].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
     if (sortedLogs.length > 0) {
       sortedLogs.forEach(log => {
         const row = auditLogsBody.insertRow();
@@ -1971,7 +2007,6 @@
         interviewedApplicants += jobApps.filter(app => app.status === 'Interview Scheduled' || app.status === 'Interviewed').length;
         hiredApplicants += jobApps.filter(app => app.status === 'Hired').length;
     });
-
     jobsSummaryBody.insertRow().insertCell(0).textContent = 'Total Jobs Posted';
     jobsSummaryBody.rows[0].insertCell(1).textContent = totalJobs;
     jobsSummaryBody.insertRow().insertCell(0).textContent = 'Active Jobs';
@@ -1995,12 +2030,10 @@
     candidateApplicationsBody.innerHTML = '';
     const candidateAttendanceBody = document.getElementById('admin-candidate-attendance-body');
     candidateAttendanceBody.innerHTML = '';
-
     // Candidate Status Summary
     const totalCandidates = adminUsersData.filter(user => user.role === 'Candidate').length;
     const activeCandidates = adminUsersData.filter(user => user.role === 'Candidate' && user.status === 'Active').length;
     const inactiveCandidates = totalCandidates - activeCandidates;
-
     candidateStatusBody.insertRow().insertCell(0).textContent = 'Total Candidates';
     candidateStatusBody.rows[0].insertCell(1).textContent = totalCandidates;
     candidateStatusBody.insertRow().insertCell(0).textContent = 'Active Candidates';
@@ -2029,7 +2062,6 @@
             totalHoursWorked += calculateHours(rec.checkIn, rec.checkOut);
         }
     });
-
     candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Total Shifts Recorded';
     candidateAttendanceBody.rows[0].insertCell(1).textContent = totalShifts;
     candidateAttendanceBody.insertRow().insertCell(0).textContent = 'Completed Shifts';
@@ -2054,7 +2086,6 @@
             activeContractValue += contract.value;
         }
     });
-
     salesSummaryBody.insertRow().insertCell(0).textContent = 'Total Clients';
     salesSummaryBody.rows[0].insertCell(1).textContent = totalClients;
     salesSummaryBody.insertRow().insertCell(0).textContent = 'Total Contract Value';
@@ -2075,7 +2106,6 @@
     let totalOutstandingInvoices = 0;
     let totalWorkerPayouts = 0;
     let totalPendingPayouts = 0;
-
     hrInvoicesData.forEach(invoice => {
         if (invoice.type === 'Client') {
             totalInvoiced += invoice.amount;
