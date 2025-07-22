@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quantum ON Demand JoBs - Multi-role Login & Dashboard with Icons</title>
+
+<!-- Font Awesome CDN for Icons -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0; background: #f4f7fc; color: #333;
+  }
+  header {
+    background: #004aad; color: white;
+    padding: 1rem 2rem; text-align: center; font-size: 1.8rem; font-weight: bold;
+    letter-spacing: 1.2px;
+  }
+  main {
+    max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+  }
+  h2 { color: #004aad; margin-bottom: 1rem; }
+  section {
+    background: white; border-radius: 8px;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.12);
+    margin-bottom: 2rem; padding: 2rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+  label {
+    display: block; margin-bottom: 0.3rem; font-weight: 600;
+  }
+  input, button {
+    width: 100%; padding: 0.55rem; margin-bottom: 1rem;
+    border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;
+    box-sizing: border-box;
+  }
+  button {
+    background: #004aad; color: white; border: none; cursor: pointer;
+    font-weight: 700; transition: background 0.3s ease;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  }
+  button:hover { background: #00337f; }
+  nav {
+    display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem;
+  }
+  nav button {
+    width: auto; padding: 0.5rem 1.2rem;
+    font-weight: 600; display: flex; align-items: center; gap: 0.5rem;
+    border-radius: 6px; border: 2px solid transparent;
+    background: #e1e9ff; color: #004aad;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  nav button:hover {
+    background: #004aad; color: white; border-color: #00255a;
+  }
+  nav button.active {
+    background: #00337f; color: white; border-color: #001f4d;
+  }
+  .hidden { display: none; }
+  .dashboard-section button {
+    width: auto; margin-right: 1rem; margin-bottom: 1rem;
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border-radius: 6px;
+  }
+  .logout-btn {
+    background: #c82333 !important;
+  }
+  .logout-btn:hover {
+    background: #a71d2a !important;
+  }
+  table {
+    width: 100%; border-collapse: collapse; margin-bottom: 1rem;
+  }
+  th, td {
+    border: 1px solid #ddd; padding: 8px; text-align: left;
+  }
+  th {
+    background-color: #004aad; color: white;
+  }
+  .small-text {
+    font-size: 0.9rem; color: #555;
+  }
+</style>
+</head>
+<body>
+
+<header>Quantum ON Demand JoBs</header>
+
+<main>
+
+  <!-- Navigation Tabs for Login -->
+  <nav id="nav-login-tabs">
+    <button onclick="showSection('login-hr')" id="tab-hr">
+      <i class="fa-solid fa-user-tie"></i> HR Login
+    </button>
+    <button onclick="showSection('login-candidate')" id="tab-candidate">
+      <i class="fa-solid fa-user"></i> Candidate Login
+    </button>
+    <button onclick="showSection('login-admin')" id="tab-admin">
+      <i class="fa-solid fa-shield-halved"></i> Admin Login
+    </button>
+    <button onclick="showSection('login-sales')" id="tab-sales">
+      <i class="fa-solid fa-handshake"></i> Sales Login
+    </button>
+    <button onclick="showSection('login-finance')" id="tab-finance">
+      <i class="fa-solid fa-coins"></i> Finance Login
+    </button>
+  </nav>
+
+  <!-- HR Login -->
+  <section id="login-hr" class="">
+    <h2><i class="fa-solid fa-user-tie"></i> HR Login</h2>
+    <form id="form-hr-login" onsubmit="handleLogin(event, 'hr')">
+      <label for="hr-email">Email</label>
+      <input type="email" id="hr-email" required placeholder="hr@example.com" />
+      <label for="hr-password">Password</label>
+      <input type="password" id="hr-password" required placeholder="Password" />
+      <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+  </section>
+
+  <!-- Candidate Login -->
+  <section id="login-candidate" class="hidden">
+    <h2><i class="fa-solid fa-user"></i> Candidate Login</h2>
+    <form id="form-candidate-login" onsubmit="handleLogin(event, 'candidate')">
+      <label for="cand-phone-login">Phone Number</label>
+      <input type="tel" id="cand-phone-login" required placeholder="9876543210" />
+      <label for="cand-password-login">Password</label>
+      <input type="password" id="cand-password-login" required placeholder="Password" />
+      <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+  </section>
+
+  <!-- Admin Login -->
+  <section id="login-admin" class="hidden">
+    <h2><i class="fa-solid fa-shield-halved"></i> Admin Login</h2>
+    <form id="form-admin-login" onsubmit="handleLogin(event, 'admin')">
+      <label for="admin-email">Email</label>
+      <input type="email" id="admin-email" required placeholder="admin@example.com" />
+      <label for="admin-password">Password</label>
+      <input type="password" id="admin-password" required placeholder="Password" />
+      <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+  </section>
+
+  <!-- Sales Login -->
+  <section id="login-sales" class="hidden">
+    <h2><i class="fa-solid fa-handshake"></i> Sales Login</h2>
+    <form id="form-sales-login" onsubmit="handleLogin(event, 'sales')">
+      <label for="sales-email">Email</label>
+      <input type="email" id="sales-email" required placeholder="sales@example.com" />
+      <label for="sales-password">Password</label>
+      <input type="password" id="sales-password" required placeholder="Password" />
+      <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+  </section>
+
+  <!-- Finance Login -->
+  <section id="login-finance" class="hidden">
+    <h2><i class="fa-solid fa-coins"></i> Finance Login</h2>
+    <form id="form-finance-login" onsubmit="handleLogin(event, 'finance')">
+      <label for="finance-email">Email</label>
+      <input type="email" id="finance-email" required placeholder="finance@example.com" />
+      <label for="finance-password">Password</label>
+      <input type="password" id="finance-password" required placeholder="Password" />
+      <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+  </section>
+
+  <!-- HR Dashboard -->
+  <section id="dashboard-hr" class="hidden dashboard-section">
+    <h2><i class="fa-solid fa-user-tie"></i> HR Dashboard</h2>
+    <button onclick="alert('Post New Job')"><i class="fa-solid fa-pen-to-square"></i> Post New Job</button>
+    <button onclick="alert('Manage Slots & Assignments')"><i class="fa-solid fa-clock"></i> Manage Slots & Assignments</button>
+    <button onclick="alert('View Invoices & Payments')"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</button>
+
+    <!-- ... tables unchanged ... -->
+
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+  <!-- Candidate Dashboard -->
+  <section id="dashboard-candidate" class="hidden dashboard-section">
+    <h2><i class="fa-solid fa-user"></i> Candidate Dashboard</h2>
+    <button onclick="alert('View Available Jobs')"><i class="fa-solid fa-briefcase"></i> View & Apply Jobs</button>
+    <button onclick="alert('My Assigned Slots & Work IDs')"><i class="fa-solid fa-list-check"></i> Assigned Slots</button>
+    <button onclick="alert('Payment History')"><i class="fa-solid fa-credit-card"></i> Payment History</button>
+
+    <!-- ... tables unchanged ... -->
+
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+  <!-- Admin Dashboard -->
+  <section id="dashboard-admin" class="hidden dashboard-section">
+    <h2><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</h2>
+    <button onclick="alert('Manage Users & Roles')"><i class="fa-solid fa-users-cog"></i> Manage Users</button>
+    <button onclick="alert('Audit Logs')"><i class="fa-solid fa-file-alt"></i> Audit Logs</button>
+
+    <!-- ... tables and logs unchanged ... -->
+
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+  <!-- Sales Dashboard -->
+  <section id="dashboard-sales" class="hidden dashboard-section">
+    <h2><i class="fa-solid fa-handshake"></i> Sales Dashboard</h2>
+    <button onclick="alert('Manage Clients & Contracts')"><i class="fa-solid fa-building"></i> Clients & Contracts</button>
+    <button onclick="alert('View Sales Reports')"><i class="fa-solid fa-chart-line"></i> Sales Reports</button>
+
+    <!-- ... tables unchanged ... -->
+
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+  <!-- Finance Dashboard -->
+  <section id="dashboard-finance" class="hidden dashboard-section">
+    <h2><i class="fa-solid fa-coins"></i> Finance Dashboard</h2>
+    <button onclick="alert('View Invoices & Payments')"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</button>
+    <button onclick="alert('Manage Payroll & Payouts')"><i class="fa-solid fa-wallet"></i> Payroll & Payouts</button>
+
+    <!-- ... tables unchanged ... -->
+
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+  </section>
+
+</main>
+
+<script>
+  // Show login section based on nav button click
+  function showSection(sectionId) {
+    const allSections = [
+      'login-hr', 'login-candidate', 'login-admin', 'login-sales', 'login-finance',
+      'dashboard-hr', 'dashboard-candidate', 'dashboard-admin', 'dashboard-sales', 'dashboard-finance'
+    ];
+    allSections.forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById(sectionId).classList.remove('hidden');
+
+    // Show login nav only when not logged in
+    if (sectionId.startsWith('login')) {
+      document.getElementById('nav-login-tabs').style.display = 'flex';
+      setActiveTab(sectionId);
+    } else {
+      document.getElementById('nav-login-tabs').style.display = 'none';
+    }
+  }
+
+  // Highlight active tab in nav
+  function setActiveTab(activeLoginId) {
+    const tabs = ['tab-hr', 'tab-candidate', 'tab-admin', 'tab-sales', 'tab-finance'];
+    tabs.forEach(tabId => {
+      const btn = document.getElementById(tabId);
+      if (btn) {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(activeLoginId));
+      }
+    });
+  }
+
+  // Fake authentication & show respective dashboard
+  function handleLogin(event, role) {
+    event.preventDefault();
+
+    // For demo, accept any input as valid
+    // In real app, you'd verify credentials from server
+
+    // Show dashboard & hide login forms/nav
+    showSection('dashboard-' + role);
+  }
+
+  // Logout function
+  function logout() {
+    alert('Logged out!');
+    showSection('login-hr');
+  }
+
+  // Initially show HR login and highlight tab
+  showSection('login-hr');
+</script>
+
+</body>
+</html>
