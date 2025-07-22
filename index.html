@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Quantum ON Demand JoBs - Multi-role Login & Dashboard with Icons</title>
 
-<!-- Font Awesome CDN for Icons -->
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -34,7 +33,7 @@
   label {
     display: block; margin-bottom: 0.3rem; font-weight: 600;
   }
-  input, button {
+  input, button, select { /* Added select for consistency */
     width: 100%; padding: 0.55rem; margin-bottom: 1rem;
     border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;
     box-sizing: border-box;
@@ -55,9 +54,6 @@
     background: #e1e9ff; color: #004aad;
     transition: background 0.3s ease, border-color 0.3s ease;
   }
-  nav button:hover {
-    background: #004aad; color: white; border-color: #00255a;
-  }
   nav button.active {
     background: #00337f; color: white; border-color: #001f4d;
   }
@@ -76,15 +72,93 @@
   }
   table {
     width: 100%; border-collapse: collapse; margin-bottom: 1rem;
+    margin-top: 1.5rem; /* Added for spacing above tables */
+    font-size: 0.9em; /* Make font slightly smaller for more columns */
   }
   th, td {
     border: 1px solid #ddd; padding: 8px; text-align: left;
+    vertical-align: top; /* Align content to top for multi-line */
   }
   th {
     background-color: #004aad; color: white;
   }
-  .small-text {
-    font-size: 0.9rem; color: #555;
+  .applicant-count {
+    color: #004aad;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .applicant-count:hover {
+    color: #00337f;
+  }
+  /* Styles for forms with multiple buttons at the bottom */
+  .form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .form-buttons button {
+    width: auto;
+    flex-grow: 1; /* Make buttons take equal width */
+  }
+  .form-buttons .cancel-btn {
+    background: #6c757d; /* Grey for cancel */
+  }
+  .form-buttons .cancel-btn:hover {
+    background: #5a6268;
+  }
+
+  /* Specific styles for attendance */
+  .attendance-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+  }
+  .attendance-form-row div {
+      margin-bottom: 1rem;
+  }
+  .attendance-form-row label {
+      margin-bottom: 0.3rem;
+  }
+  .attendance-form-row input {
+      margin-bottom: 0; /* Remove default input margin */
+  }
+
+  /* Candidate Dashboard specific styling for nav buttons */
+  #dashboard-candidate .dashboard-nav-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center; /* Center the buttons */
+  }
+  #dashboard-candidate .dashboard-nav-buttons button {
+    width: auto;
+    flex-grow: 1;
+    min-width: 150px; /* Ensure buttons don't get too small */
+    background: #e1e9ff;
+    color: #004aad;
+    border: 2px solid #004aad;
+  }
+  #dashboard-candidate .dashboard-nav-buttons button:hover {
+    background: #004aad;
+    color: white;
+  }
+  /* Candidate Dashboard currently displayed tab */
+  #dashboard-candidate .dashboard-nav-buttons button.active {
+      background: #00337f;
+      color: white;
+      border-color: #001f4d;
+  }
+
+  /* Ensure main table in candidate dashboard gets proper styling */
+  #dashboard-candidate table {
+    margin-top: 1rem; /* Adjust spacing below main nav buttons */
+  }
+  #candidate-attendance-form-container {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
   }
 </style>
 </head>
@@ -94,195 +168,1420 @@
 
 <main>
 
-  <!-- Navigation Tabs for Login -->
   <nav id="nav-login-tabs">
-    <button onclick="showSection('login-hr')" id="tab-hr">
+    <button id="tab-hr" data-target="login-hr">
       <i class="fa-solid fa-user-tie"></i> HR Login
     </button>
-    <button onclick="showSection('login-candidate')" id="tab-candidate">
+    <button id="tab-candidate" data-target="login-candidate">
       <i class="fa-solid fa-user"></i> Candidate Login
     </button>
-    <button onclick="showSection('login-admin')" id="tab-admin">
+    <button id="tab-admin" data-target="login-admin">
       <i class="fa-solid fa-shield-halved"></i> Admin Login
     </button>
-    <button onclick="showSection('login-sales')" id="tab-sales">
+    <button id="tab-sales" data-target="login-sales">
       <i class="fa-solid fa-handshake"></i> Sales Login
     </button>
-    <button onclick="showSection('login-finance')" id="tab-finance">
+    <button id="tab-finance" data-target="login-finance">
       <i class="fa-solid fa-coins"></i> Finance Login
     </button>
   </nav>
 
-  <!-- HR Login -->
   <section id="login-hr" class="">
     <h2><i class="fa-solid fa-user-tie"></i> HR Login</h2>
-    <form id="form-hr-login" onsubmit="handleLogin(event, 'hr')">
+    <form id="form-hr-login" data-role="hr">
       <label for="hr-email">Email</label>
-      <input type="email" id="hr-email" required placeholder="hr@example.com" />
+      <input type="email" id="hr-email" required placeholder="hr@example.com" value="hr@example.com" />
       <label for="hr-password">Password</label>
-      <input type="password" id="hr-password" required placeholder="Password" />
+      <input type="password" id="hr-password" required placeholder="Password" value="hrpass" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
 
-  <!-- Candidate Login -->
   <section id="login-candidate" class="hidden">
     <h2><i class="fa-solid fa-user"></i> Candidate Login</h2>
-    <form id="form-candidate-login" onsubmit="handleLogin(event, 'candidate')">
+    <form id="form-candidate-login" data-role="candidate">
       <label for="cand-phone-login">Phone Number</label>
-      <input type="tel" id="cand-phone-login" required placeholder="9876543210" />
+      <input type="tel" id="cand-phone-login" required placeholder="9876543210" value="9876543210" />
       <label for="cand-password-login">Password</label>
-      <input type="password" id="cand-password-login" required placeholder="Password" />
+      <input type="password" id="cand-password-login" required placeholder="Password" value="candpass" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
 
-  <!-- Admin Login -->
   <section id="login-admin" class="hidden">
     <h2><i class="fa-solid fa-shield-halved"></i> Admin Login</h2>
-    <form id="form-admin-login" onsubmit="handleLogin(event, 'admin')">
+    <form id="form-admin-login" data-role="admin">
       <label for="admin-email">Email</label>
-      <input type="email" id="admin-email" required placeholder="admin@example.com" />
+      <input type="email" id="admin-email" required placeholder="admin@example.com" value="admin@example.com" />
       <label for="admin-password">Password</label>
-      <input type="password" id="admin-password" required placeholder="Password" />
+      <input type="password" id="admin-password" required placeholder="Password" value="adminpass" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
 
-  <!-- Sales Login -->
   <section id="login-sales" class="hidden">
     <h2><i class="fa-solid fa-handshake"></i> Sales Login</h2>
-    <form id="form-sales-login" onsubmit="handleLogin(event, 'sales')">
+    <form id="form-sales-login" data-role="sales">
       <label for="sales-email">Email</label>
-      <input type="email" id="sales-email" required placeholder="sales@example.com" />
+      <input type="email" id="sales-email" required placeholder="sales@example.com" value="sales@example.com" />
       <label for="sales-password">Password</label>
-      <input type="password" id="sales-password" required placeholder="Password" />
+      <input type="password" id="sales-password" required placeholder="Password" value="salespass" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
 
-  <!-- Finance Login -->
   <section id="login-finance" class="hidden">
     <h2><i class="fa-solid fa-coins"></i> Finance Login</h2>
-    <form id="form-finance-login" onsubmit="handleLogin(event, 'finance')">
+    <form id="form-finance-login" data-role="finance">
       <label for="finance-email">Email</label>
-      <input type="email" id="finance-email" required placeholder="finance@example.com" />
+      <input type="email" id="finance-email" required placeholder="finance@example.com" value="finance@example.com" />
       <label for="finance-password">Password</label>
-      <input type="password" id="finance-password" required placeholder="Password" />
+      <input type="password" id="finance-password" required placeholder="Password" value="financepass" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
 
-  <!-- HR Dashboard -->
   <section id="dashboard-hr" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-user-tie"></i> HR Dashboard</h2>
-    <button onclick="alert('Post New Job')"><i class="fa-solid fa-pen-to-square"></i> Post New Job</button>
-    <button onclick="alert('Manage Slots & Assignments')"><i class="fa-solid fa-clock"></i> Manage Slots & Assignments</button>
-    <button onclick="alert('View Invoices & Payments')"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</button>
+    <button id="post-job-btn"><i class="fa-solid fa-pen-to-square"></i> Post New Job</button>
+    <button id="manage-slots-btn"><i class="fa-solid fa-clock"></i> Manage Slots & Assignments</button>
+    <button id="view-invoices-btn"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</button>
+    <button id="manage-attendance-btn"><i class="fa-solid fa-user-check"></i> Manage Attendance & Invoicing</button>
 
-    <!-- ... tables unchanged ... -->
+    <h3>Recent Job Postings</h3>
+    <table id="job-postings-table">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Status</th>
+                <th>Applicants</th>
+                <th>Slot Time</th>
+                <th>Work Area</th>
+                <th>Location</th>
+                <th>Salary (Rs.)</th>
+                <th>Posted On</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-job-role="Quantum Software Engineer">
+                <td>Quantum Software Engineer</td>
+                <td>Active</td>
+                <td><span class="applicant-count" data-job-role="Quantum Software Engineer">15</span></td>
+                <td>9:00 AM - 5:00 PM</td>
+                <td>Hitech City</td>
+                <td>Hyderabad, Telangana</td>
+                <td>95000</td>
+                <td>2025-07-10</td>
+            </tr>
+            <tr data-job-role="AI/ML Specialist">
+                <td>AI/ML Specialist</td>
+                <td>Active</td>
+                <td><span class="applicant-count" data-job-role="AI/ML Specialist">22</span></td>
+                <td>10:00 AM - 6:00 PM</td>
+                <td>Electronic City</td>
+                <td>Bengaluru, Karnataka</td>
+                <td>80000</td>
+                <td>2025-07-05</td>
+            </tr>
+            <tr data-job-role="Frontend Developer (React)">
+                <td>Frontend Developer (React)</td>
+                <td>Closed</td>
+                <td><span class="applicant-count" data-job-role="Frontend Developer (React)">30</span></td>
+                <td>9:30 AM - 5:30 PM</td>
+                <td>Guindy</td>
+                <td>Chennai, Tamil Nadu</td>
+                <td>60000</td>
+                <td>2025-06-20</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </section>
 
-  <!-- Candidate Dashboard -->
+  <section id="hr-post-job" class="hidden">
+    <h2><i class="fa-solid fa-pen-to-square"></i> Post New Job</h2>
+    <form id="form-post-job">
+      <label for="job-role">Job Role</label>
+      <input type="text" id="job-role" required placeholder="e.g., Data Analyst" />
+
+      <label for="slot-time-start">Slot Time Start</label>
+      <input type="time" id="slot-time-start" required />
+
+      <label for="slot-time-end">Slot Time End</label>
+      <input type="time" id="slot-time-end" required />
+
+      <label for="work-area">Work Area</label>
+      <input type="text" id="work-area" required placeholder="e.g., Chennai IT Park" />
+
+      <label for="city">City</label>
+      <input type="text" id="city" required placeholder="e.g., Chennai" />
+
+      <label for="state">State</label>
+      <input type="text" id="state" required placeholder="e.g., Tamil Nadu" />
+
+      <label for="salary">Salary (Rs.)</label>
+      <input type="number" id="salary" required placeholder="e.g., 30000" min="0" />
+
+      <div class="form-buttons">
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Post Job</button>
+        <button type="button" class="cancel-btn" id="cancel-post-job"><i class="fa-solid fa-xmark"></i> Cancel</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="hr-applicants-list" class="hidden">
+    <h2><i class="fa-solid fa-users"></i> Applicants for [Job Title]</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Applicant Name</th>
+          <th>Contact</th>
+          <th>Applied On</th>
+          <th>Status</th>
+          <th>Resume</th>
+        </tr>
+      </thead>
+      <tbody id="applicants-detail-body">
+        </tbody>
+    </table>
+    <button id="back-to-hr-dashboard-from-applicants" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="hr-slots-assignments" class="hidden">
+    <h2><i class="fa-solid fa-clock"></i> Manage Slots & Assignments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Job Role</th>
+                <th>Candidate</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="slots-assignments-body">
+            </tbody>
+    </table>
+    <button id="back-to-hr-dashboard-from-slots" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="hr-invoices-payments" class="hidden">
+    <h2><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Client/Worker</th>
+                <th>Amount (Rs.)</th>
+                <th>Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="invoices-payments-body">
+            </tbody>
+    </table>
+    <button id="back-to-hr-dashboard-from-invoices" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="hr-attendance-invoicing" class="hidden">
+    <h2><i class="fa-solid fa-user-check"></i> Manage Attendance & Invoicing</h2>
+
+    <h3>Mark Attendance Manually (HR)</h3>
+    <form id="form-mark-attendance">
+        <label for="worker-name">Worker Name</label>
+        <input type="text" id="worker-name" required placeholder="e.g., John Doe" />
+
+        <label for="job-for-attendance">Job Role / Assignment</label>
+        <input type="text" id="job-for-attendance" required placeholder="e.g., Data Entry Project" />
+
+        <label for="attendance-date">Date</label>
+        <input type="date" id="attendance-date" required />
+
+        <div class="attendance-form-row">
+            <div>
+                <label for="check-in-time">Check-in Time</label>
+                <input type="time" id="check-in-time" />
+            </div>
+            <div>
+                <label for="check-out-time">Check-out Time</label>
+                <input type="time" id="check-out-time" />
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button type="button" id="mark-check-in-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Check-in</button>
+            <button type="button" id="mark-check-out-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Check-out</button>
+        </div>
+    </form>
+
+    <hr style="margin: 2rem 0; border-color: #eee;">
+
+    <h3>Recent Attendance Records</h3>
+    <table style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Worker</th>
+                <th>Job Role</th>
+                <th>Date</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Work ID</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="attendance-records-body">
+            </tbody>
+    </table>
+
+    <button id="generate-invoice-btn"><i class="fa-solid fa-file-invoice"></i> Generate Invoice for Selected</button>
+    <button id="back-to-hr-dashboard-from-attendance" class="cancel-btn" style="margin-top: 1rem;"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+
   <section id="dashboard-candidate" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-user"></i> Candidate Dashboard</h2>
-    <button onclick="alert('View Available Jobs')"><i class="fa-solid fa-briefcase"></i> View & Apply Jobs</button>
-    <button onclick="alert('My Assigned Slots & Work IDs')"><i class="fa-solid fa-list-check"></i> Assigned Slots</button>
-    <button onclick="alert('Payment History')"><i class="fa-solid fa-credit-card"></i> Payment History</button>
 
-    <!-- ... tables unchanged ... -->
+    <div class="dashboard-nav-buttons">
+        <button id="view-available-jobs-cand-btn"><i class="fa-solid fa-briefcase"></i> View & Apply Jobs</button>
+        <button id="my-applications-cand-btn"><i class="fa-solid fa-list-check"></i> My Applications</button>
+        <button id="payment-history-cand-btn"><i class="fa-solid fa-credit-card"></i> Payment History</button>
+    </div>
 
-    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <div id="candidate-attendance-form-container">
+        <h3>Mark My Attendance</h3>
+        <form id="form-candidate-attendance">
+            <label for="candidate-job-role">Job Role / Assignment</label>
+            <input type="text" id="candidate-job-role" required placeholder="e.g., Data Entry Project" />
+
+            <label for="candidate-attendance-date">Date</label>
+            <input type="date" id="candidate-attendance-date" required />
+
+            <div class="attendance-form-row">
+                <div>
+                    <label for="candidate-check-in-time">Check-in Time</label>
+                    <input type="time" id="candidate-check-in-time" />
+                </div>
+                <div>
+                    <label for="candidate-check-out-time">Check-out Time</label>
+                    <input type="time" id="candidate-check-out-time" />
+                </div>
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" id="candidate-mark-check-in-btn"><i class="fa-solid fa-arrow-right-to-bracket"></i> Check-in</button>
+                <button type="button" id="candidate-mark-check-out-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Check-out</button>
+            </div>
+        </form>
+    </div>
+
+
+    <hr style="margin: 2rem 0; border-color: #eee;">
+
+    <h3>My Attendance & Work IDs</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Job Role</th>
+          <th>Date</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Work ID</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="candidate-attendance-body">
+        </tbody>
+    </table>
+
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </section>
 
-  <!-- Admin Dashboard -->
+  <section id="candidate-available-slots" class="hidden">
+    <h2><i class="fa-solid fa-briefcase"></i> Available Job Slots</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Job Role</th>
+          <th>Work Area</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Slot Time</th>
+          <th>Hours</th>
+          <th>Amount (Rs.)</th>
+        </tr>
+      </thead>
+      <tbody id="available-slots-body">
+        </tbody>
+    </table>
+    <button id="back-to-candidate-dashboard-from-available-slots" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="candidate-my-applications" class="hidden">
+    <h2><i class="fa-solid fa-list-check"></i> My Applications</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Job Title</th>
+          <th>Work Area</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Slot Time</th>
+          <th>Hours</th>
+          <th>Application Status</th>
+          <th>Applied On</th>
+        </tr>
+      </thead>
+      <tbody id="my-applications-body">
+        </tbody>
+    </table>
+    <button id="back-to-candidate-dashboard-from-applications" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+  <section id="candidate-payment-history" class="hidden">
+    <h2><i class="fa-solid fa-credit-card"></i> Payment History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Work ID</th>
+                <th>Job Role</th>
+                <th>Date</th>
+                <th>Amount (Rs.)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="candidate-payment-history-body">
+            <tr><td>WKID-DE-001</td><td>Data Entry</td><td>2025-07-21</td><td>800</td><td>Paid</td></tr>
+            <tr><td>WKID-CS-002</td><td>Customer Support</td><td>2025-07-21</td><td>1000</td><td>Paid</td></tr>
+            <tr><td>WKID-DE-003</td><td>Delivery Executive</td><td>2025-07-22</td><td>Pending Calc.</td><td>Pending</td></tr>
+        </tbody>
+    </table>
+    <button id="back-to-candidate-dashboard-from-payment-history" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+  </section>
+
+
   <section id="dashboard-admin" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</h2>
     <button onclick="alert('Manage Users & Roles')"><i class="fa-solid fa-users-cog"></i> Manage Users</button>
     <button onclick="alert('Audit Logs')"><i class="fa-solid fa-file-alt"></i> Audit Logs</button>
 
-    <!-- ... tables and logs unchanged ... -->
+    <h3>System Activity Log</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2025-07-22 14:30</td>
+                <td>admin@example.com</td>
+                <td>User 'Jane Doe' created</td>
+            </tr>
+            <tr>
+                <td>2025-07-22 14:20</td>
+                <td>hr@example.com</td>
+                <td>New job 'Data Scientist' posted</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </section>
 
-  <!-- Sales Dashboard -->
   <section id="dashboard-sales" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-handshake"></i> Sales Dashboard</h2>
     <button onclick="alert('Manage Clients & Contracts')"><i class="fa-solid fa-building"></i> Clients & Contracts</button>
     <button onclick="alert('View Sales Reports')"><i class="fa-solid fa-chart-line"></i> Sales Reports</button>
 
-    <!-- ... tables unchanged ... -->
+    <h3>Active Client Contracts</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Contract Value</th>
+                <th>Renewal Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GlobalTech Solutions</td>
+                <td>$50,000</td>
+                <td>2026-03-15</td>
+            </tr>
+            <tr>
+                <td>Innovate Corp</td>
+                <td>$35,000</td>
+                <td>2025-11-01</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </section>
 
-  <!-- Finance Dashboard -->
   <section id="dashboard-finance" class="hidden dashboard-section">
     <h2><i class="fa-solid fa-coins"></i> Finance Dashboard</h2>
     <button onclick="alert('View Invoices & Payments')"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & Payments</button>
     <button onclick="alert('Manage Payroll & Payouts')"><i class="fa-solid fa-wallet"></i> Payroll & Payouts</button>
 
-    <!-- ... tables unchanged ... -->
+    <h3>Outstanding Invoices</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Amount</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>INV-00123</td>
+                <td>$1,500</td>
+                <td>2025-07-30</td>
+                <td>Unpaid</td>
+            </tr>
+            <tr>
+                <td>INV-00122</td>
+                <td>$2,200</td>
+                <td>2025-07-25</td>
+                <td>Unpaid</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
   </section>
 
 </main>
 
 <script>
-  // Show login section based on nav button click
+  // --- Sample Data ---
+  const allJobApplicants = {
+    "Quantum Software Engineer": [
+      { name: "Alice Johnson", contact: "alice@example.com", appliedOn: "2025-07-08", status: "Reviewing", resumeLink: "#" },
+      { name: "Bob Williams", contact: "bob@example.com", appliedOn: "2025-07-09", status: "Interview Scheduled", resumeLink: "#" },
+      { name: "Charlie Davis", contact: "charlie@example.com", appliedOn: "2025-07-09", status: "Rejected", resumeLink: "#" },
+      { name: "Diana Miller", contact: "diana@example.com", appliedOn: "2025-07-10", status: "Pending", resumeLink: "#" },
+    ],
+    "AI/ML Specialist": [
+      { name: "Eve Brown", contact: "eve@example.com", appliedOn: "2025-07-01", status: "Interviewed", resumeLink: "#" },
+      { name: "Frank White", contact: "frank@example.com", appliedOn: "2025-07-02", status: "Offer Extended", resumeLink: "#" },
+    ],
+    "Frontend Developer (React)": [
+      { name: "Grace Green", contact: "grace@example.com", appliedOn: "2025-06-18", status: "Hired", resumeLink: "#" },
+      { name: "Henry Black", contact: "henry@example.com", appliedOn: "2025-06-19", status: "Rejected", resumeLink: "#" },
+    ]
+  };
+
+  const hrSlotsData = [
+    { jobRole: "Data Entry (Morning)", candidate: "John Doe", date: "2025-07-23", timeSlot: "9:00 AM - 1:00 PM", status: "Confirmed" },
+    { jobRole: "Customer Support (Evening)", candidate: "Jane Smith", date: "2025-07-23", timeSlot: "5:00 PM - 9:00 PM", status: "Pending Confirmation" },
+    { jobRole: "Content Writer (Full Day)", candidate: "Sarah Lee", date: "2025-07-21", timeSlot: "9:00 AM - 5:00 PM", status: "Completed" },
+    { jobRole: "UI/UX Designer", candidate: "Michael Brown", date: "2025-07-24", timeSlot: "10:00 AM - 6:00 PM", status: "Scheduled" },
+  ];
+
+  const hrInvoicesData = [
+    { invoiceId: "INV-HR-001", clientWorker: "Tech Solutions Inc.", amount: "50,000", date: "2025-07-15", dueDate: "2025-07-15", status: "Paid", action: "N/A" },
+    { invoiceId: "INV-HR-002", clientWorker: "Innovate Corp", amount: "25,000", date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", action: "Send Reminder" },
+    { invoiceId: "INV-HR-003", clientWorker: "Global Ventures", amount: "75,000", date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", action: "N/A" },
+    { invoiceId: "INV-HR-004", clientWorker: "Rajesh Kumar (Worker)", amount: "10,000", date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", action: "Approve Payment" },
+  ];
+
+  const hrAttendanceData = [
+      { workerName: "Ramesh Kumar", jobRole: "Data Entry", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
+      { workerName: "Priya Sharma", jobRole: "Customer Support", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
+      { workerName: "Suresh Gupta", jobRole: "Delivery Executive", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
+  ];
+
+  // Candidate - Available Slots data (dynamically updated by HR job postings)
+  const candidateAvailableSlotsData = [
+      { jobRole: "Data Entry Assistant", workArea: "Perungudi", city: "Chennai", state: "Tamil Nadu", slotTime: "9:00 AM - 1:00 PM", hours: 4, amount: 800 },
+      { jobRole: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, amount: 1200 },
+      { jobRole: "Warehouse Helper", workArea: "Ambattur", city: "Chennai", state: "Tamil Nadu", slotTime: "10:00 AM - 6:00 PM", hours: 8, amount: 1500 },
+      { jobRole: "Graphic Designer (Part-time)", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (4 hrs/day)", hours: 4, amount: 2000 },
+  ];
+
+  // Candidate - My Applications data with more details
+  const candidateMyApplicationsData = [
+      { jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
+      { jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
+      { jobTitle: "Content Writer", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (6 hrs/day)", hours: 6, applicationStatus: "Rejected", appliedOn: "2025-07-01" },
+      { jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
+  ];
+
+  // Candidate - My Attendance Data (Candidate's perspective)
+  const candidateMyAttendanceData = [
+    { jobRole: "Data Entry", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
+    { jobRole: "Customer Support", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
+    { jobRole: "Delivery Executive", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
+  ];
+
+  // Sample data for Candidate Payment History
+  const candidatePaymentHistoryData = [
+      { workId: "WKID-DE-001", jobRole: "Data Entry", date: "2025-07-21", amount: 800, status: "Paid" },
+      { workId: "WKID-CS-002", jobRole: "Customer Support", date: "2025-07-21", amount: 1000, status: "Paid" },
+      { workId: "WKID-DE-003", jobRole: "Delivery Executive", date: "2025-07-22", amount: "Pending Calc.", status: "Pending" }
+  ];
+
+
+  let currentWorkingWorker = null; // To track a worker who has checked in but not out
+
+  // Helper to get current formatted date (YYYY-MM-DD) for form default
+  function getCurrentDateFormatted() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+  }
+
+  // Helper to get current formatted time (HH:MM) for form default
+  function getCurrentTimeFormatted() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      return `${hours}:${minutes}`;
+  }
+
+  // Helper to calculate hours between two time strings (HH:MM)
+  function calculateHours(startTime, endTime) {
+      if (!startTime || !endTime) return 0;
+      try {
+        const start = new Date(`2000-01-01T${startTime}:00`);
+        const end = new Date(`2000-01-01T${endTime}:00`);
+        const diffMs = end - start;
+        return diffMs / (1000 * 60 * 60); // Convert milliseconds to hours
+      } catch (e) {
+        console.error("Error calculating hours:", e);
+        return 0; // Return 0 on invalid time format
+      }
+  }
+
+
   function showSection(sectionId) {
-    const allSections = [
-      'login-hr', 'login-candidate', 'login-admin', 'login-sales', 'login-finance',
-      'dashboard-hr', 'dashboard-candidate', 'dashboard-admin', 'dashboard-sales', 'dashboard-finance'
-    ];
-    allSections.forEach(id => {
-      document.getElementById(id).classList.add('hidden');
+    const allSections = document.querySelectorAll('section');
+    allSections.forEach(section => {
+      section.classList.add('hidden');
     });
     document.getElementById(sectionId).classList.remove('hidden');
 
-    // Show login nav only when not logged in
+    const navLoginTabs = document.getElementById('nav-login-tabs');
     if (sectionId.startsWith('login')) {
-      document.getElementById('nav-login-tabs').style.display = 'flex';
+      navLoginTabs.style.display = 'flex';
       setActiveTab(sectionId);
     } else {
-      document.getElementById('nav-login-tabs').style.display = 'none';
+      navLoginTabs.style.display = 'none';
     }
   }
 
-  // Highlight active tab in nav
   function setActiveTab(activeLoginId) {
-    const tabs = ['tab-hr', 'tab-candidate', 'tab-admin', 'tab-sales', 'tab-finance'];
-    tabs.forEach(tabId => {
-      const btn = document.getElementById(tabId);
-      if (btn) {
-        btn.classList.toggle('active', btn.getAttribute('onclick').includes(activeLoginId));
-      }
+    const tabs = document.querySelectorAll('#nav-login-tabs button');
+    tabs.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === activeLoginId);
     });
   }
 
-  // Fake authentication & show respective dashboard
-  function handleLogin(event, role) {
+  function handleLogin(event) {
     event.preventDefault();
-
+    const role = event.target.dataset.role;
     // For demo, accept any input as valid
-    // In real app, you'd verify credentials from server
-
-    // Show dashboard & hide login forms/nav
-    showSection('dashboard-' + role);
+    if (role === 'candidate') {
+        showSection('dashboard-' + role);
+        populateCandidateAttendanceForm(); // Pre-fill attendance form on candidate login
+        populateCandidateAttendanceTable(); // Directly load attendance for candidate on login
+        setCandidateDashboardActiveTab(null); // No button active initially for primary view
+    } else {
+        showSection('dashboard-' + role);
+    }
   }
 
-  // Logout function
   function logout() {
     alert('Logged out!');
     showSection('login-hr');
   }
 
-  // Initially show HR login and highlight tab
-  showSection('login-hr');
+  // Function to show the job post form (HR)
+  function showPostJobForm() {
+    document.getElementById('form-post-job').reset(); // Clear form on opening
+    showSection('hr-post-job'); // Hide current dashboard, show job post form
+  }
+
+  // Function to handle job post submission (HR)
+  function handlePostJob(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const jobRole = document.getElementById('job-role').value;
+    const slotTimeStart = document.getElementById('slot-time-start').value;
+    const slotTimeEnd = document.getElementById('slot-time-end').value;
+    const workArea = document.getElementById('work-area').value;
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const salary = document.getElementById('salary').value; // This is per month/total, consider converting to slot amount if needed
+
+    const postedOn = "2025-07-22"; // Fixed date as per context: Tuesday, July 22, 2025
+
+    // Calculate hours for the slot
+    const hours = calculateHours(slotTimeStart, slotTimeEnd);
+    const formattedHours = hours.toFixed(1);
+
+
+    // Add a new entry to our sample applicants data for this new job
+    if (!allJobApplicants[jobRole]) {
+      allJobApplicants[jobRole] = []; // Initialize empty array for new job's applicants
+    }
+    const initialApplicantCount = allJobApplicants[jobRole].length;
+
+
+    // Create a new table row for the job postings table (HR View)
+    const jobTableBody = document.querySelector('#job-postings-table tbody');
+    const newRow = jobTableBody.insertRow(0); // Insert at the top
+    newRow.dataset.jobRole = jobRole; // Store job role for easy retrieval
+
+    // Insert cells for the new row, matching the new header structure
+    newRow.insertCell(0).textContent = jobRole;
+    newRow.insertCell(1).textContent = 'Active'; // Default status for a new job
+    const applicantCountCell = newRow.insertCell(2);
+    const applicantCountSpan = document.createElement('span');
+    applicantCountSpan.className = 'applicant-count';
+    applicantCountSpan.textContent = initialApplicantCount;
+    applicantCountSpan.dataset.jobRole = jobRole; // Attach job role to the span
+    applicantCountCell.appendChild(applicantCountSpan);
+    applicantCountSpan.addEventListener('click', () => showApplicantsList(jobRole)); // Attach click listener
+    newRow.insertCell(3).textContent = `${slotTimeStart} - ${slotTimeEnd}`; // Slot Time
+    newRow.insertCell(4).textContent = workArea;
+    newRow.insertCell(5).textContent = `${city}, ${state}`; // Location
+    newRow.insertCell(6).textContent = salary;
+    newRow.insertCell(7).textContent = postedOn; // Posted On
+
+    // Also add this new job to the candidate's available slots data
+    candidateAvailableSlotsData.push({
+        jobRole: jobRole,
+        workArea: workArea,
+        city: city,
+        state: state,
+        slotTime: `${slotTimeStart} - ${slotTimeEnd}`,
+        hours: parseFloat(formattedHours), // Store the calculated hours
+        amount: salary // Using the same salary for now, can be adjusted for per-slot payment
+    });
+
+
+    const jobDetailsAlert = `
+      Job Posted Successfully!
+      ------------------------
+      Role: ${jobRole}
+      Slot: ${slotTimeStart} - ${slotTimeEnd} (${formattedHours} hrs)
+      Work Area: ${workArea}
+      Location: ${city}, ${state}
+      Salary: Rs. ${salary}
+      Posted On: ${postedOn}
+    `;
+    alert(jobDetailsAlert);
+
+    // Clear the form fields after submission
+    document.getElementById('form-post-job').reset();
+
+    // After submission, return to HR Dashboard
+    showSection('dashboard-hr');
+  }
+
+  // Function to display applicants for a specific job (HR)
+  function showApplicantsList(jobRole) {
+    const applicantsListBody = document.getElementById('applicants-detail-body');
+    applicantsListBody.innerHTML = ''; // Clear previous applicants
+
+    document.getElementById('applicants-list-title').textContent = `Applicants for ${jobRole}`;
+
+    const applicants = allJobApplicants[jobRole];
+
+    if (applicants && applicants.length > 0) {
+      applicants.forEach(applicant => {
+        const row = applicantsListBody.insertRow();
+        row.insertCell(0).textContent = applicant.name;
+        row.insertCell(1).textContent = applicant.contact;
+        row.insertCell(2).textContent = applicant.appliedOn;
+        row.insertCell(3).textContent = applicant.status;
+        const resumeCell = row.insertCell(4);
+        const resumeLink = document.createElement('a');
+        resumeLink.href = applicant.resumeLink;
+        resumeLink.textContent = "View";
+        resumeLink.target = "_blank"; // Open in new tab
+        resumeCell.appendChild(resumeLink);
+      });
+    } else {
+      const row = applicantsListBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 5; // Span all columns
+      cell.textContent = "No applicants for this job yet.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+
+    showSection('hr-applicants-list');
+  }
+
+  // Function to display Slots & Assignments (HR)
+  function showSlotsAssignments() {
+    const slotsBody = document.getElementById('slots-assignments-body');
+    slotsBody.innerHTML = ''; // Clear previous data
+
+    if (hrSlotsData.length > 0) {
+      hrSlotsData.forEach(slot => {
+        const row = slotsBody.insertRow();
+        row.insertCell(0).textContent = slot.jobRole;
+        row.insertCell(1).textContent = slot.candidate;
+        row.insertCell(2).textContent = slot.date;
+        row.insertCell(3).textContent = slot.timeSlot;
+        row.insertCell(4).textContent = slot.status;
+      });
+    } else {
+      const row = slotsBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 5;
+      cell.textContent = "No slots or assignments to display.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+    showSection('hr-slots-assignments');
+  }
+
+  // Function to display Invoices & Payments (HR)
+  function showInvoicesPayments() {
+    const invoicesBody = document.getElementById('invoices-payments-body');
+    invoicesBody.innerHTML = ''; // Clear previous data
+
+    if (hrInvoicesData.length > 0) {
+      hrInvoicesData.forEach(invoice => {
+        const row = invoicesBody.insertRow();
+        row.insertCell(0).textContent = invoice.invoiceId;
+        row.insertCell(1).textContent = invoice.clientWorker;
+        row.insertCell(2).textContent = invoice.amount;
+        row.insertCell(3).textContent = invoice.date;
+        row.insertCell(4).textContent = invoice.dueDate;
+        row.insertCell(5).textContent = invoice.status;
+        const actionCell = row.insertCell(6);
+        if (invoice.action && invoice.action !== "N/A") {
+          const actionButton = document.createElement('button');
+          actionButton.textContent = invoice.action;
+          actionButton.style.padding = '5px 10px';
+          actionButton.style.marginBottom = '0';
+          actionButton.style.width = 'fit-content';
+          actionButton.onclick = () => alert(`Action: ${invoice.action} for ${invoice.invoiceId}`);
+          actionCell.appendChild(actionButton);
+        } else {
+          actionCell.textContent = invoice.action;
+        }
+      });
+    } else {
+      const row = invoicesBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 7;
+      cell.textContent = "No invoices or payments to display.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+    showSection('hr-invoices-payments');
+  }
+
+  // Function to display attendance records (HR)
+  function populateAttendanceTable() {
+    const attendanceBody = document.getElementById('attendance-records-body');
+    attendanceBody.innerHTML = ''; // Clear previous data
+
+    if (hrAttendanceData.length > 0) {
+      hrAttendanceData.forEach(record => {
+        const row = attendanceBody.insertRow();
+        row.insertCell(0).textContent = record.workerName;
+        row.insertCell(1).textContent = record.jobRole;
+        row.insertCell(2).textContent = record.date;
+        row.insertCell(3).textContent = record.checkIn;
+        row.insertCell(4).textContent = record.checkOut;
+        row.insertCell(5).textContent = record.workId;
+        row.insertCell(6).textContent = record.status;
+      });
+    } else {
+      const row = attendanceBody.insertRow();
+      const cell = row.insertCell(0);
+      cell.colSpan = 7;
+      cell.textContent = "No attendance records to display.";
+      cell.style.textAlign = "center";
+      cell.style.fontStyle = "italic";
+      cell.style.padding = "20px";
+    }
+  }
+
+  // Function to handle Check-in (HR)
+  function handleCheckIn() {
+      const workerName = document.getElementById('worker-name').value;
+      const jobRole = document.getElementById('job-for-attendance').value;
+      const attendanceDate = document.getElementById('attendance-date').value;
+      let checkInTime = document.getElementById('check-in-time').value; // Use let as it might be updated
+
+      // If checkInTime is empty, auto-populate with current time
+      if (!checkInTime) {
+          checkInTime = getCurrentTimeFormatted();
+          document.getElementById('check-in-time').value = checkInTime; // Update the input field
+      }
+
+      if (!workerName || !jobRole || !attendanceDate || !checkInTime) {
+          alert("Please fill in Worker Name, Job Role, Date, and Check-in Time to mark attendance.");
+          return;
+      }
+
+      const existingActiveRecord = hrAttendanceData.find(record =>
+          record.workerName === workerName &&
+          record.date === attendanceDate &&
+          record.status === "Active"
+      );
+
+      if (existingActiveRecord) {
+          alert(`${workerName} is already checked in for ${jobRole} on ${attendanceDate}. Please check out first.`);
+          return;
+      }
+
+      const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+
+      const newRecord = {
+          workerName,
+          jobRole,
+          date: attendanceDate,
+          checkIn: checkInTime,
+          checkOut: "",
+          workId,
+          status: "Active"
+      };
+
+      hrAttendanceData.push(newRecord);
+      // Also add to candidate's attendance data if it's "our" candidate (for demo purposes)
+      // In a real app, this would be linked to a specific candidate's user ID
+      const currentCandidatePhone = document.getElementById('cand-phone-login').value; // Assuming the candidate is logged in via phone
+      const currentCandidateName = "Candidate User"; // Placeholder, in real app would get from login session
+      if (currentCandidateName === "Candidate User") { // Simple check, could be more robust
+          candidateMyAttendanceData.push({
+              jobRole: newRecord.jobRole,
+              date: newRecord.date,
+              checkIn: newRecord.checkIn,
+              checkOut: newRecord.checkOut,
+              workId: newRecord.workId,
+              status: newRecord.status
+          });
+      }
+
+
+      populateAttendanceTable(); // Refresh HR's table
+      // If we are currently in candidate dashboard attendance view, refresh it too
+      if (!document.getElementById('candidate-available-slots').classList.contains('hidden') && !document.getElementById('candidate-my-applications').classList.contains('hidden') && !document.getElementById('candidate-payment-history').classList.contains('hidden')) { // Check if main dashboard is visible
+          populateCandidateAttendanceTable();
+      }
+
+      document.getElementById('check-in-time').value = ""; // Clear check-in time for next entry
+      document.getElementById('check-out-time').value = ""; // Clear check-out time for next entry
+
+      currentWorkingWorker = newRecord; // Keep track of the active worker for potential auto-fill on checkout
+
+      alert(`Checked in ${workerName} for ${jobRole} on ${attendanceDate} at ${checkInTime}.\nWork ID: ${workId}`);
+  }
+
+  // Function to handle Check-out (HR)
+  function handleCheckOut() {
+      const workerName = document.getElementById('worker-name').value;
+      const jobRole = document.getElementById('job-for-attendance').value;
+      const attendanceDate = document.getElementById('attendance-date').value;
+      let checkOutTime = document.getElementById('check-out-time').value; // Use let
+
+      // If checkOutTime is empty, auto-populate with current time
+      if (!checkOutTime) {
+          checkOutTime = getCurrentTimeFormatted();
+          document.getElementById('check-out-time').value = checkOutTime; // Update the input field
+      }
+
+      if (!workerName || !jobRole || !attendanceDate || !checkOutTime) {
+          alert("Please fill in Worker Name, Job Role, Date, and Check-out Time to mark check-out.");
+          return;
+      }
+
+      const recordToUpdate = hrAttendanceData.find(record =>
+          record.workerName === workerName &&
+          record.jobRole === jobRole &&
+          record.date === attendanceDate &&
+          record.status === "Active"
+      );
+
+      if (recordToUpdate) {
+          recordToUpdate.checkOut = checkOutTime;
+          recordToUpdate.status = "Completed";
+          populateAttendanceTable(); // Refresh HR's table
+
+          // Update candidate's attendance data as well
+          const currentCandidateName = "Candidate User"; // Placeholder, in real app would get from login session
+          if (currentCandidateName === "Candidate User") {
+              const candidateRecordToUpdate = candidateMyAttendanceData.find(record =>
+                  record.jobRole === jobRole &&
+                  record.date === attendanceDate &&
+                  record.workId === recordToUpdate.workId && // Match by work ID for accuracy
+                  record.status === "Active"
+              );
+              if (candidateRecordToUpdate) {
+                  candidateRecordToUpdate.checkOut = checkOutTime;
+                  candidateRecordToUpdate.status = "Completed";
+              }
+          }
+
+          // If we are currently in candidate dashboard attendance view, refresh it too
+          if (!document.getElementById('candidate-available-slots').classList.contains('hidden') && !document.getElementById('candidate-my-applications').classList.contains('hidden') && !document.getElementById('candidate-payment-history').classList.contains('hidden')) { // Check if main dashboard is visible
+              populateCandidateAttendanceTable();
+          }
+
+
+          document.getElementById('form-mark-attendance').reset(); // Clear form after successful checkout
+          currentWorkingWorker = null;
+          alert(`Checked out ${workerName} for ${jobRole} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+      } else {
+          alert(`No active check-in found for ${workerName} for ${jobRole} on ${attendanceDate}. Please check in first.`);
+      }
+  }
+
+  // Function to generate Invoice (simplified for HR)
+  function generateInvoiceForSelected() {
+      const unbilledRecords = hrAttendanceData.filter(record => record.status === "Completed" && !record.invoiced);
+
+      if (unbilledRecords.length === 0) {
+          alert("No completed and unbilled attendance records to generate invoices for.");
+          return;
+      }
+
+      let invoiceDetails = "Generated Invoice:\n\n";
+      let totalAmount = 0;
+      let workersInvoiced = new Set();
+
+      unbilledRecords.forEach(record => {
+          const hoursWorked = calculateHours(record.checkIn, record.checkOut);
+          const ratePerHour = 100; // Sample rate Rs. 100 per hour
+          const amount = hoursWorked * ratePerHour;
+          totalAmount += amount;
+          workersInvoiced.add(record.workerName);
+
+          invoiceDetails += `Worker: ${record.workerName}, Job: ${record.jobRole}, Date: ${record.date}, Hours: ${hoursWorked.toFixed(1)}, Amount: Rs. ${amount.toFixed(2)}\n`;
+          record.invoiced = true;
+          record.status = "Invoiced";
+      });
+
+      populateAttendanceTable(); // Refresh HR's attendance table
+
+      const invoiceId = `INV-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+      const today = getCurrentDateFormatted();
+      const dueDate = new Date(today);
+      dueDate.setDate(dueDate.getDate() + 7);
+      const formattedDueDate = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
+
+
+      hrInvoicesData.push({
+          invoiceId: invoiceId,
+          clientWorker: Array.from(workersInvoiced).join(", "),
+          amount: totalAmount.toFixed(2),
+          date: today,
+          dueDate: formattedDueDate,
+          status: "Generated",
+          action: "Approve Payment"
+      });
+
+      showInvoicesPayments(); // Go to invoices section to show the new invoice
+      alert(`${invoiceDetails}\nTotal Invoice Amount: Rs. ${totalAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments. Status updated in attendance records.`);
+  }
+
+
+  // Function to display available slots for candidates
+  function showAvailableSlots() {
+      // Hide the default attendance form and table in candidate dashboard
+      document.getElementById('candidate-attendance-form-container').classList.add('hidden');
+      document.getElementById('dashboard-candidate').querySelector('h3').classList.add('hidden'); // "My Attendance & Work IDs" heading
+      document.getElementById('candidate-attendance-body').parentNode.classList.add('hidden'); // The attendance table itself
+
+      const availableSlotsBody = document.getElementById('available-slots-body');
+      availableSlotsBody.innerHTML = ''; // Clear previous data
+
+      if (candidateAvailableSlotsData.length > 0) {
+          candidateAvailableSlotsData.forEach(slot => {
+              const row = availableSlotsBody.insertRow();
+              row.insertCell(0).textContent = slot.jobRole;
+              row.insertCell(1).textContent = slot.workArea;
+              row.insertCell(2).textContent = slot.city;
+              row.insertCell(3).textContent = slot.state;
+              row.insertCell(4).textContent = slot.slotTime;
+              row.insertCell(5).textContent = `${slot.hours} hrs`; // Display hours
+              row.insertCell(6).textContent = `Rs. ${slot.amount}`;
+          });
+      } else {
+          const row = availableSlotsBody.insertRow();
+          const cell = row.insertCell(0);
+          cell.colSpan = 7; // Updated colspan
+          cell.textContent = "No available job slots at the moment. Please check back later!";
+          cell.style.textAlign = "center";
+          cell.style.fontStyle = "italic";
+          cell.style.padding = "20px";
+      }
+      showSection('candidate-available-slots');
+  }
+
+  // Function to display candidate's applications
+  function showMyApplications() {
+      // Hide the default attendance form and table in candidate dashboard
+      document.getElementById('candidate-attendance-form-container').classList.add('hidden');
+      document.getElementById('dashboard-candidate').querySelector('h3').classList.add('hidden');
+      document.getElementById('candidate-attendance-body').parentNode.classList.add('hidden');
+
+      const myApplicationsBody = document.getElementById('my-applications-body');
+      myApplicationsBody.innerHTML = ''; // Clear previous data
+
+      if (candidateMyApplicationsData.length > 0) {
+          candidateMyApplicationsData.forEach(application => {
+              const row = myApplicationsBody.insertRow();
+              row.insertCell(0).textContent = application.jobTitle;
+              row.insertCell(1).textContent = application.workArea;
+              row.insertCell(2).textContent = application.city;
+              row.insertCell(3).textContent = application.state;
+              row.insertCell(4).textContent = application.slotTime;
+              row.insertCell(5).textContent = `${application.hours} hrs`;
+              row.insertCell(6).textContent = application.applicationStatus;
+              row.insertCell(7).textContent = application.appliedOn;
+          });
+      } else {
+          const row = myApplicationsBody.insertRow();
+          const cell = row.insertCell(0);
+          cell.colSpan = 8; // Updated colspan to match new headers
+          cell.textContent = "You haven't applied for any jobs yet.";
+          cell.style.textAlign = "center";
+          cell.style.fontStyle = "italic";
+          cell.style.padding = "20px";
+      }
+      showSection('candidate-my-applications');
+  }
+
+  // Function to populate candidate's attendance records table (called on load and refresh)
+  function populateCandidateAttendanceTable() {
+      // Ensure the default attendance form and table are visible when this is the primary view
+      document.getElementById('candidate-attendance-form-container').classList.remove('hidden');
+      document.getElementById('dashboard-candidate').querySelector('h3').classList.remove('hidden');
+      document.getElementById('candidate-attendance-body').parentNode.classList.remove('hidden');
+
+      const candidateAttendanceBody = document.getElementById('candidate-attendance-body');
+      candidateAttendanceBody.innerHTML = ''; // Clear previous data
+
+      if (candidateMyAttendanceData.length > 0) {
+          candidateMyAttendanceData.forEach(record => {
+              const row = candidateAttendanceBody.insertRow();
+              row.insertCell(0).textContent = record.jobRole;
+              row.insertCell(1).textContent = record.date;
+              row.insertCell(2).textContent = record.checkIn;
+              row.insertCell(3).textContent = record.checkOut;
+              row.insertCell(4).textContent = record.workId;
+              row.insertCell(5).textContent = record.status;
+          });
+      } else {
+          const row = candidateAttendanceBody.insertRow();
+          const cell = row.insertCell(0);
+          cell.colSpan = 6; // Match number of columns in header
+          cell.textContent = "No attendance records found yet.";
+          cell.style.textAlign = "center";
+          cell.style.fontStyle = "italic";
+          cell.style.padding = "20px";
+      }
+  }
+
+  // New: Function to populate candidate attendance form fields
+  function populateCandidateAttendanceForm() {
+      document.getElementById('form-candidate-attendance').reset();
+      document.getElementById('candidate-attendance-date').value = getCurrentDateFormatted();
+      document.getElementById('candidate-check-in-time').value = getCurrentTimeFormatted(); // Pre-fill check-in time
+      document.getElementById('candidate-check-out-time').value = ""; // Clear check-out time
+      // The Job Role input will remain empty for manual entry, or could be pre-filled based on current assignments
+  }
+
+  // NEW: Candidate Check-in logic
+  function handleCandidateCheckIn() {
+      const jobRole = document.getElementById('candidate-job-role').value;
+      const attendanceDate = document.getElementById('candidate-attendance-date').value;
+      let checkInTime = document.getElementById('candidate-check-in-time').value;
+
+      if (!jobRole || !attendanceDate || !checkInTime) {
+          alert("Please fill in Job Role, Date, and Check-in Time.");
+          return;
+      }
+
+      // Assume a static candidate name for this demo
+      const candidateName = "Candidate User"; // This would be dynamic in a real app
+
+      // Check for an active session for this candidate and job on this date
+      const existingActiveRecord = candidateMyAttendanceData.find(record =>
+          record.jobRole === jobRole &&
+          record.date === attendanceDate &&
+          record.status === "Active"
+      );
+
+      if (existingActiveRecord) {
+          alert(`You are already checked in for ${jobRole} on ${attendanceDate}. Please check out first.`);
+          return;
+      }
+
+      const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
+
+      const newRecord = {
+          jobRole,
+          date: attendanceDate,
+          checkIn: checkInTime,
+          checkOut: "",
+          workId,
+          status: "Active"
+      };
+
+      candidateMyAttendanceData.push(newRecord);
+      // Also update HR's data for this candidate (simulated)
+      hrAttendanceData.push({ workerName: candidateName, ...newRecord });
+
+      populateCandidateAttendanceTable(); // Refresh candidate's table
+      populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
+      alert(`Checked in for ${jobRole} on ${attendanceDate} at ${checkInTime}.\nYour Work ID: ${workId}`);
+  }
+
+  // NEW: Candidate Check-out logic
+  function handleCandidateCheckOut() {
+      const jobRole = document.getElementById('candidate-job-role').value;
+      const attendanceDate = document.getElementById('candidate-attendance-date').value;
+      let checkOutTime = document.getElementById('candidate-check-out-time').value;
+
+      if (!jobRole || !attendanceDate || !checkOutTime) {
+          alert("Please fill in Job Role, Date, and Check-out Time.");
+          return;
+      }
+
+      const candidateName = "Candidate User"; // This would be dynamic in a real app
+
+      // Find the active record for this candidate and job on this date
+      const recordToUpdate = candidateMyAttendanceData.find(record =>
+          record.jobRole === jobRole &&
+          record.date === attendanceDate &&
+          record.status === "Active"
+      );
+
+      if (recordToUpdate) {
+          recordToUpdate.checkOut = checkOutTime;
+          recordToUpdate.status = "Completed";
+
+          // Update HR's data for this candidate (simulated)
+          const hrRecordToUpdate = hrAttendanceData.find(record =>
+              record.workerName === candidateName &&
+              record.jobRole === jobRole &&
+              record.date === attendanceDate &&
+              record.workId === recordToUpdate.workId &&
+              record.status === "Active"
+          );
+          if (hrRecordToUpdate) {
+              hrRecordToUpdate.checkOut = checkOutTime;
+              hrRecordToUpdate.status = "Completed";
+          }
+
+          // Optionally, add to payment history
+          const hoursWorked = calculateHours(recordToUpdate.checkIn, recordToUpdate.checkOut);
+          const amountEarned = hoursWorked * 100; // Assuming Rs. 100/hour
+          candidatePaymentHistoryData.push({
+              workId: recordToUpdate.workId,
+              jobRole: recordToUpdate.jobRole,
+              date: recordToUpdate.date,
+              amount: amountEarned.toFixed(2),
+              status: "Pending Payment"
+          });
+
+
+          populateCandidateAttendanceTable(); // Refresh candidate's table
+          populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
+          alert(`Checked out for ${jobRole} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+      } else {
+          alert(`No active check-in found for ${jobRole} on ${attendanceDate}. Please check in first.`);
+      }
+  }
+
+
+  // Function to display candidate's payment history
+  function showCandidatePaymentHistory() {
+      // Hide the default attendance form and table in candidate dashboard
+      document.getElementById('candidate-attendance-form-container').classList.add('hidden');
+      document.getElementById('dashboard-candidate').querySelector('h3').classList.add('hidden');
+      document.getElementById('candidate-attendance-body').parentNode.classList.add('hidden');
+
+      const paymentHistoryBody = document.getElementById('candidate-payment-history-body');
+      paymentHistoryBody.innerHTML = ''; // Clear previous data
+
+      if (candidatePaymentHistoryData.length > 0) {
+          candidatePaymentHistoryData.forEach(payment => {
+              const row = paymentHistoryBody.insertRow();
+              row.insertCell(0).textContent = payment.workId;
+              row.insertCell(1).textContent = payment.jobRole;
+              row.insertCell(2).textContent = payment.date;
+              row.insertCell(3).textContent = `Rs. ${payment.amount}`;
+              row.insertCell(4).textContent = payment.status;
+          });
+      } else {
+          const row = paymentHistoryBody.insertRow();
+          const cell = row.insertCell(0);
+          cell.colSpan = 5;
+          cell.textContent = "No payment history found.";
+          cell.style.textAlign = "center";
+          cell.style.fontStyle = "italic";
+          cell.style.padding = "20px";
+      }
+      showSection('candidate-payment-history');
+  }
+
+
+  // Helper function to manage active state of Candidate Dashboard sub-nav buttons
+  function setCandidateDashboardActiveTab(activeButtonId) {
+    const buttons = document.querySelectorAll('#dashboard-candidate .dashboard-nav-buttons button');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    if (activeButtonId) {
+        document.getElementById(activeButtonId).classList.add('active');
+    }
+    // When a sub-tab is activated, hide the default attendance content
+    if (activeButtonId !== null) { // if a specific tab is active
+        document.getElementById('candidate-attendance-form-container').classList.add('hidden');
+        document.getElementById('dashboard-candidate').querySelector('h3').classList.add('hidden');
+        document.getElementById('candidate-attendance-body').parentNode.classList.add('hidden');
+    }
+  }
+
+
+  // --- Event Listeners Initialization ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set default date for attendance forms to today
+    document.getElementById('attendance-date').value = getCurrentDateFormatted();
+    document.getElementById('candidate-attendance-date').value = getCurrentDateFormatted();
+
+
+    // Attach click listeners to navigation tabs
+    document.querySelectorAll('#nav-login-tabs button').forEach(button => {
+      button.addEventListener('click', () => {
+        showSection(button.dataset.target);
+      });
+    });
+
+    // Attach submit listeners to login forms
+    document.querySelectorAll('form[id^="form-"]').forEach(form => {
+      form.addEventListener('submit', handleLogin);
+    });
+
+    // Attach click listeners to all logout buttons
+    document.querySelectorAll('.logout-btn').forEach(button => {
+      button.addEventListener('click', logout);
+    });
+
+    // HR Dashboard Actions
+    document.getElementById('post-job-btn').addEventListener('click', showPostJobForm);
+    document.getElementById('manage-slots-btn').addEventListener('click', showSlotsAssignments);
+    document.getElementById('view-invoices-btn').addEventListener('click', showInvoicesPayments);
+    document.getElementById('manage-attendance-btn').addEventListener('click', () => {
+        populateAttendanceTable(); // Load HR attendance data when entering the section
+        // Pre-fill current time for HR attendance form when section loads
+        document.getElementById('attendance-date').value = getCurrentDateFormatted();
+        document.getElementById('check-in-time').value = getCurrentTimeFormatted();
+        document.getElementById('check-out-time').value = ''; // Clear checkout time
+
+        showSection('hr-attendance-invoicing');
+    });
+
+    // Post New Job Form Actions
+    document.getElementById('form-post-job').addEventListener('submit', handlePostJob);
+    document.getElementById('cancel-post-job').addEventListener('click', () => {
+      document.getElementById('form-post-job').reset();
+      showSection('dashboard-hr');
+    });
+
+    // Applicants List Actions (HR)
+    document.getElementById('back-to-hr-dashboard-from-applicants').addEventListener('click', () => {
+      showSection('dashboard-hr');
+    });
+    document.querySelector('#job-postings-table tbody').addEventListener('click', (event) => {
+        if (event.target.classList.contains('applicant-count')) {
+            const jobRole = event.target.dataset.jobRole;
+            showApplicantsList(jobRole);
+        }
+    });
+
+    // Slots & Assignments Actions (HR)
+    document.getElementById('back-to-hr-dashboard-from-slots').addEventListener('click', () => {
+        showSection('dashboard-hr');
+    });
+
+    // Invoices & Payments Actions (HR)
+    document.getElementById('back-to-hr-dashboard-from-invoices').addEventListener('click', () => {
+        showSection('dashboard-hr');
+    });
+
+    // Attendance & Invoicing Actions (HR)
+    document.getElementById('mark-check-in-btn').addEventListener('click', handleCheckIn);
+    document.getElementById('mark-check-out-btn').addEventListener('click', handleCheckOut);
+    document.getElementById('generate-invoice-btn').addEventListener('click', generateInvoiceForSelected);
+    document.getElementById('back-to-hr-dashboard-from-attendance').addEventListener('click', () => {
+        showSection('dashboard-hr');
+    });
+
+    // Candidate Dashboard Nav Buttons (within dashboard-candidate section)
+    document.getElementById('view-available-jobs-cand-btn').addEventListener('click', () => {
+        showAvailableSlots(); // This function already calls showSection()
+        setCandidateDashboardActiveTab('view-available-jobs-cand-btn');
+    });
+
+    document.getElementById('my-applications-cand-btn').addEventListener('click', () => {
+        showMyApplications(); // This function already calls showSection()
+        setCandidateDashboardActiveTab('my-applications-cand-btn');
+    });
+
+    // Payment History Actions (Candidate)
+    document.getElementById('payment-history-cand-btn').addEventListener('click', () => {
+        showCandidatePaymentHistory(); // This function already calls showSection()
+        setCandidateDashboardActiveTab('payment-history-cand-btn');
+    });
+
+
+    // Back buttons from Candidate sub-sections
+    document.getElementById('back-to-candidate-dashboard-from-available-slots').addEventListener('click', () => {
+        showSection('dashboard-candidate');
+        populateCandidateAttendanceTable(); // Re-populate the default view
+        populateCandidateAttendanceForm(); // Reset form for default view
+        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+    });
+
+    document.getElementById('back-to-candidate-dashboard-from-applications').addEventListener('click', () => {
+        showSection('dashboard-candidate');
+        populateCandidateAttendanceTable(); // Re-populate the default view
+        populateCandidateAttendanceForm(); // Reset form for default view
+        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+    });
+
+    document.getElementById('back-to-candidate-dashboard-from-payment-history').addEventListener('click', () => {
+        showSection('dashboard-candidate');
+        populateCandidateAttendanceTable(); // Re-populate the default view
+        populateCandidateAttendanceForm(); // Reset form for default view
+        setCandidateDashboardActiveTab(null); // No button active when default view is shown
+    });
+
+    // NEW: Candidate Self-Service Attendance Buttons
+    document.getElementById('candidate-mark-check-in-btn').addEventListener('click', handleCandidateCheckIn);
+    document.getElementById('candidate-mark-check-out-btn').addEventListener('click', handleCandidateCheckOut);
+
+
+    // Initial setup logic
+    // This runs when the page first loads
+    showSection('login-hr'); // Default initial login tab on page load
+  });
 </script>
 
 </body>
