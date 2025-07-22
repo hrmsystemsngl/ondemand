@@ -192,7 +192,7 @@
       <label for="hr-email">Email</label>
       <input type="email" id="hr-email" required placeholder="hr@example.com" value="hr@example.com" />
       <label for="hr-password">Password</label>
-      <input type="password" id="hr-password" required placeholder="Password" value="hrpass" />
+      <input type="password" id="hr-password" required placeholder="Password" value="hr123" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
@@ -203,7 +203,7 @@
       <label for="cand-phone-login">Phone Number</label>
       <input type="tel" id="cand-phone-login" required placeholder="9876543210" value="9876543210" />
       <label for="cand-password-login">Password</label>
-      <input type="password" id="cand-password-login" required placeholder="Password" value="candpass" />
+      <input type="password" id="cand-password-login" required placeholder="Password" value="cand123" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
@@ -214,7 +214,7 @@
       <label for="admin-email">Email</label>
       <input type="email" id="admin-email" required placeholder="admin@example.com" value="admin@example.com" />
       <label for="admin-password">Password</label>
-      <input type="password" id="admin-password" required placeholder="Password" value="adminpass" />
+      <input type="password" id="admin-password" required placeholder="Password" value="admin123" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
@@ -225,7 +225,7 @@
       <label for="sales-email">Email</label>
       <input type="email" id="sales-email" required placeholder="sales@example.com" value="sales@example.com" />
       <label for="sales-password">Password</label>
-      <input type="password" id="sales-password" required placeholder="Password" value="salespass" />
+      <input type="password" id="sales-password" required placeholder="Password" value="sales123" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
@@ -236,7 +236,7 @@
       <label for="finance-email">Email</label>
       <input type="email" id="finance-email" required placeholder="finance@example.com" value="finance@example.com" />
       <label for="finance-password">Password</label>
-      <input type="password" id="finance-password" required placeholder="Password" value="financepass" />
+      <input type="password" id="finance-password" required placeholder="Password" value="finance123" />
       <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
     </form>
   </section>
@@ -252,7 +252,7 @@
     <table id="job-postings-table">
         <thead>
             <tr>
-                <th>Job Title</th>
+                <th>Job ID</th> <th>Job Title</th>
                 <th>Status</th>
                 <th>Applicants</th>
                 <th>Slot Time</th>
@@ -263,30 +263,33 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-job-role="Quantum Software Engineer">
+            <tr data-job-role="Quantum Software Engineer" data-job-id="JOB-QSE-001">
+                <td>JOB-QSE-001</td>
                 <td>Quantum Software Engineer</td>
                 <td>Active</td>
-                <td><span class="applicant-count" data-job-role="Quantum Software Engineer">15</span></td>
+                <td><span class="applicant-count" data-job-role="Quantum Software Engineer" data-job-id="JOB-QSE-001">15</span></td>
                 <td>9:00 AM - 5:00 PM</td>
                 <td>Hitech City</td>
                 <td>Hyderabad, Telangana</td>
                 <td>95000</td>
                 <td>2025-07-10</td>
             </tr>
-            <tr data-job-role="AI/ML Specialist">
+            <tr data-job-role="AI/ML Specialist" data-job-id="JOB-AIML-002">
+                <td>JOB-AIML-002</td>
                 <td>AI/ML Specialist</td>
                 <td>Active</td>
-                <td><span class="applicant-count" data-job-role="AI/ML Specialist">22</span></td>
+                <td><span class="applicant-count" data-job-role="AI/ML Specialist" data-job-id="JOB-AIML-002">22</span></td>
                 <td>10:00 AM - 6:00 PM</td>
                 <td>Electronic City</td>
                 <td>Bengaluru, Karnataka</td>
                 <td>80000</td>
                 <td>2025-07-05</td>
             </tr>
-            <tr data-job-role="Frontend Developer (React)">
+            <tr data-job-role="Frontend Developer (React)" data-job-id="JOB-FDR-003">
+                <td>JOB-FDR-003</td>
                 <td>Frontend Developer (React)</td>
                 <td>Closed</td>
-                <td><span class="applicant-count" data-job-role="Frontend Developer (React)">30</span></td>
+                <td><span class="applicant-count" data-job-role="Frontend Developer (React)" data-job-id="JOB-FDR-003">30</span></td>
                 <td>9:30 AM - 5:30 PM</td>
                 <td>Guindy</td>
                 <td>Chennai, Tamil Nadu</td>
@@ -302,7 +305,7 @@
   <section id="hr-post-job" class="hidden">
     <h2><i class="fa-solid fa-pen-to-square"></i> Post New Job</h2>
     <form id="form-post-job">
-      <label for="job-role">Job Role</label>
+      <label for="job-role">Job Role Title</label>
       <input type="text" id="job-role" required placeholder="e.g., Data Analyst" />
 
       <label for="slot-time-start">Slot Time Start</label>
@@ -331,7 +334,7 @@
   </section>
 
   <section id="hr-applicants-list" class="hidden">
-    <h2><i class="fa-solid fa-users"></i> Applicants for [Job Title]</h2>
+    <h2 id="applicants-list-title"><i class="fa-solid fa-users"></i> Applicants for [Job Title]</h2>
     <table>
       <thead>
         <tr>
@@ -394,8 +397,7 @@
         <label for="worker-name">Worker Name</label>
         <input type="text" id="worker-name" required placeholder="e.g., John Doe" />
 
-        <label for="job-for-attendance">Job Role / Assignment</label>
-        <input type="text" id="job-for-attendance" required placeholder="e.g., Data Entry Project" />
+        <label for="job-id-for-attendance">Job ID</label> <input type="text" id="job-id-for-attendance" required placeholder="e.g., JOB-DE-001" />
 
         <label for="attendance-date">Date</label>
         <input type="date" id="attendance-date" required />
@@ -424,8 +426,7 @@
         <thead>
             <tr>
                 <th>Worker</th>
-                <th>Job Role</th>
-                <th>Date</th>
+                <th>Job ID</th> <th>Date</th>
                 <th>Check-in</th>
                 <th>Check-out</th>
                 <th>Work ID</th>
@@ -453,8 +454,7 @@
     <div id="candidate-attendance-form-container">
         <h3>Mark My Attendance</h3>
         <form id="form-candidate-attendance">
-            <label for="candidate-job-role">Job Role / Assignment</label>
-            <input type="text" id="candidate-job-role" required placeholder="e.g., Data Entry Project" />
+            <label for="candidate-job-id">Job ID</label> <input type="text" id="candidate-job-id" required placeholder="e.g., JOB-DE-001" />
 
             <label for="candidate-attendance-date">Date</label>
             <input type="date" id="candidate-attendance-date" required />
@@ -484,8 +484,7 @@
     <table>
       <thead>
         <tr>
-          <th>Job Role</th>
-          <th>Date</th>
+          <th>Job ID</th> <th>Date</th>
           <th>Check-in</th>
           <th>Check-out</th>
           <th>Work ID</th>
@@ -504,7 +503,7 @@
     <table>
       <thead>
         <tr>
-          <th>Job Role</th>
+          <th>Job ID</th> <th>Job Role</th>
           <th>Work Area</th>
           <th>City</th>
           <th>State</th>
@@ -524,7 +523,7 @@
     <table>
       <thead>
         <tr>
-          <th>Job Title</th>
+          <th>Job ID</th> <th>Job Title</th>
           <th>Work Area</th>
           <th>City</th>
           <th>State</th>
@@ -546,16 +545,16 @@
         <thead>
             <tr>
                 <th>Work ID</th>
-                <th>Job Role</th>
+                <th>Job ID</th> <th>Job Role</th>
                 <th>Date</th>
                 <th>Amount (Rs.)</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody id="candidate-payment-history-body">
-            <tr><td>WKID-DE-001</td><td>Data Entry</td><td>2025-07-21</td><td>800</td><td>Paid</td></tr>
-            <tr><td>WKID-CS-002</td><td>Customer Support</td><td>2025-07-21</td><td>1000</td><td>Paid</td></tr>
-            <tr><td>WKID-DE-003</td><td>Delivery Executive</td><td>2025-07-22</td><td>Pending Calc.</td><td>Pending</td></tr>
+            <tr><td>WKID-DE-001</td><td>JOB-DE-001</td><td>Data Entry</td><td>2025-07-21</td><td>800</td><td>Paid</td></tr>
+            <tr><td>WKID-CS-002</td><td>JOB-CS-002</td><td>Customer Support</td><td>2025-07-21</td><td>1000</td><td>Paid</td></tr>
+            <tr><td>WKID-DE-003</td><td>JOB-DE-003</td><td>Delivery Executive</td><td>2025-07-22</td><td>Pending Calc.</td><td>Pending</td></tr>
         </tbody>
     </table>
     <button id="back-to-candidate-dashboard-from-payment-history" class="cancel-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
@@ -661,19 +660,28 @@
 </main>
 
 <script>
+  // --- Global Unique ID Counter (for demo purposes) ---
+  let jobIdCounter = 3; // Starting after initial sample jobs
+  let candidateIdCounter = 1; // Assuming 'Candidate User' is CAND-001
+
   // --- Sample Data ---
+  // Store jobs with their generated IDs
+  const postedJobs = {
+      "JOB-QSE-001": { jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, salary: 95000, postedOn: "2025-07-10", status: "Active", applicants: 15 },
+      "JOB-AIML-002": { jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22 },
+      "JOB-FDR-003": { jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30 },
+  };
+
   const allJobApplicants = {
-    "Quantum Software Engineer": [
+    "JOB-QSE-001": [ // Linked to Job ID now
       { name: "Alice Johnson", contact: "alice@example.com", appliedOn: "2025-07-08", status: "Reviewing", resumeLink: "#" },
       { name: "Bob Williams", contact: "bob@example.com", appliedOn: "2025-07-09", status: "Interview Scheduled", resumeLink: "#" },
-      { name: "Charlie Davis", contact: "charlie@example.com", appliedOn: "2025-07-09", status: "Rejected", resumeLink: "#" },
-      { name: "Diana Miller", contact: "diana@example.com", appliedOn: "2025-07-10", status: "Pending", resumeLink: "#" },
     ],
-    "AI/ML Specialist": [
+    "JOB-AIML-002": [ // Linked to Job ID now
       { name: "Eve Brown", contact: "eve@example.com", appliedOn: "2025-07-01", status: "Interviewed", resumeLink: "#" },
       { name: "Frank White", contact: "frank@example.com", appliedOn: "2025-07-02", status: "Offer Extended", resumeLink: "#" },
     ],
-    "Frontend Developer (React)": [
+    "JOB-FDR-003": [ // Linked to Job ID now
       { name: "Grace Green", contact: "grace@example.com", appliedOn: "2025-06-18", status: "Hired", resumeLink: "#" },
       { name: "Henry Black", contact: "henry@example.com", appliedOn: "2025-06-19", status: "Rejected", resumeLink: "#" },
     ]
@@ -682,53 +690,53 @@
   const hrSlotsData = [
     { jobRole: "Data Entry (Morning)", candidate: "John Doe", date: "2025-07-23", timeSlot: "9:00 AM - 1:00 PM", status: "Confirmed" },
     { jobRole: "Customer Support (Evening)", candidate: "Jane Smith", date: "2025-07-23", timeSlot: "5:00 PM - 9:00 PM", status: "Pending Confirmation" },
-    { jobRole: "Content Writer (Full Day)", candidate: "Sarah Lee", date: "2025-07-21", timeSlot: "9:00 AM - 5:00 PM", status: "Completed" },
-    { jobRole: "UI/UX Designer", candidate: "Michael Brown", date: "2025-07-24", timeSlot: "10:00 AM - 6:00 PM", status: "Scheduled" },
   ];
 
   const hrInvoicesData = [
     { invoiceId: "INV-HR-001", clientWorker: "Tech Solutions Inc.", amount: "50,000", date: "2025-07-15", dueDate: "2025-07-15", status: "Paid", action: "N/A" },
     { invoiceId: "INV-HR-002", clientWorker: "Innovate Corp", amount: "25,000", date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", action: "Send Reminder" },
     { invoiceId: "INV-HR-003", clientWorker: "Global Ventures", amount: "75,000", date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", action: "N/A" },
-    { invoiceId: "INV-HR-004", clientWorker: "Rajesh Kumar (Worker)", amount: "10,000", date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", action: "Approve Payment" },
+    { invoiceId: "INV-HR-004", clientWorker: "CAND-001 (Candidate User)", amount: "10,000", date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", action: "Approve Payment" },
   ];
 
-  const hrAttendanceData = [
-      { workerName: "Ramesh Kumar", jobRole: "Data Entry", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
-      { workerName: "Priya Sharma", jobRole: "Customer Support", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
-      { workerName: "Suresh Gupta", jobRole: "Delivery Executive", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
+  const hrAttendanceData = [ // HR's view of all attendance, now includes Candidate ID and Job ID
+      { workerName: "Ramesh Kumar", candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
+      { workerName: "Priya Sharma", candidateId: "CAND-002", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
+      { workerName: "Suresh Gupta", candidateId: "CAND-003", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
   ];
 
   // Candidate - Available Slots data (dynamically updated by HR job postings)
   const candidateAvailableSlotsData = [
-      { jobRole: "Data Entry Assistant", workArea: "Perungudi", city: "Chennai", state: "Tamil Nadu", slotTime: "9:00 AM - 1:00 PM", hours: 4, amount: 800 },
-      { jobRole: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, amount: 1200 },
-      { jobRole: "Warehouse Helper", workArea: "Ambattur", city: "Chennai", state: "Tamil Nadu", slotTime: "10:00 AM - 6:00 PM", hours: 8, amount: 1500 },
-      { jobRole: "Graphic Designer (Part-time)", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (4 hrs/day)", hours: 4, amount: 2000 },
+      { jobId: "JOB-DEA-004", jobRole: "Data Entry Assistant", workArea: "Perungudi", city: "Chennai", state: "Tamil Nadu", slotTime: "9:00 AM - 1:00 PM", hours: 4, amount: 800 },
+      { jobId: "JOB-EP-005", jobRole: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, amount: 1200 },
+      { jobId: "JOB-WH-006", jobRole: "Warehouse Helper", workArea: "Ambattur", city: "Chennai", state: "Tamil Nadu", slotTime: "10:00 AM - 6:00 PM", hours: 8, amount: 1500 },
+      { jobId: "JOB-GD-007", jobRole: "Graphic Designer (Part-time)", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (4 hrs/day)", hours: 4, amount: 2000 },
   ];
 
-  // Candidate - My Applications data with more details
+  // Candidate - My Applications data with more details, now linked to Job ID
   const candidateMyApplicationsData = [
-      { jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
-      { jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
-      { jobTitle: "Content Writer", workArea: "Remote", city: "Any", state: "Any", slotTime: "Flexible (6 hrs/day)", hours: 6, applicationStatus: "Rejected", appliedOn: "2025-07-01" },
-      { jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
+      { jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, applicationStatus: "Under Review", appliedOn: "2025-07-12" },
+      { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, applicationStatus: "Interview Scheduled", appliedOn: "2025-07-07" },
+      { jobId: "JOB-EP-005", jobTitle: "Event Promoter", workArea: "Anna Nagar", city: "Chennai", state: "Tamil Nadu", slotTime: "4:00 PM - 8:00 PM", hours: 4, applicationStatus: "Pending", appliedOn: "2025-07-20" },
   ];
 
-  // Candidate - My Attendance Data (Candidate's perspective)
+  // Candidate - My Attendance Data (Candidate's perspective), linked to Job ID and Candidate ID
   const candidateMyAttendanceData = [
-    { jobRole: "Data Entry", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
-    { jobRole: "Customer Support", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
-    { jobRole: "Delivery Executive", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
+    { candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
+    { candidateId: "CAND-001", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
+    { candidateId: "CAND-001", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
   ];
 
-  // Sample data for Candidate Payment History
+  // Sample data for Candidate Payment History, linked to Job ID and Candidate ID
   const candidatePaymentHistoryData = [
-      { workId: "WKID-DE-001", jobRole: "Data Entry", date: "2025-07-21", amount: 800, status: "Paid" },
-      { workId: "WKID-CS-002", jobRole: "Customer Support", date: "2025-07-21", amount: 1000, status: "Paid" },
-      { workId: "WKID-DE-003", jobRole: "Delivery Executive", date: "2025-07-22", amount: "Pending Calc.", status: "Pending" }
+      { candidateId: "CAND-001", workId: "WKID-DE-001", jobId: "JOB-DE-001", jobRole: "Data Entry", date: "2025-07-21", amount: 800, status: "Paid" },
+      { candidateId: "CAND-001", workId: "WKID-CS-002", jobId: "JOB-CS-002", jobRole: "Customer Support", date: "2025-07-21", amount: 1000, status: "Paid" },
+      { candidateId: "CAND-001", workId: "WKID-DE-003", jobId: "JOB-DE-003", jobRole: "Delivery Executive", date: "2025-07-22", amount: "Pending Calc.", status: "Pending" }
   ];
 
+
+  // For demo, assume candidate logs in as this user
+  const loggedInCandidate = { id: "CAND-001", name: "Candidate User" }; // Fixed for demo
 
   let currentWorkingWorker = null; // To track a worker who has checked in but not out
 
@@ -816,7 +824,7 @@
   function handlePostJob(event) {
     event.preventDefault(); // Prevent default form submission
 
-    const jobRole = document.getElementById('job-role').value;
+    const jobTitle = document.getElementById('job-role').value; // Changed to jobTitle
     const slotTimeStart = document.getElementById('slot-time-start').value;
     const slotTimeEnd = document.getElementById('slot-time-end').value;
     const workArea = document.getElementById('work-area').value;
@@ -826,55 +834,69 @@
 
     const postedOn = "2025-07-22"; // Fixed date as per context: Tuesday, July 22, 2025
 
+    // Generate unique Job ID
+    jobIdCounter++;
+    // Use first few letters of job title for ID prefix, ensure unique
+    const jobTitlePrefix = jobTitle.replace(/[^a-zA-Z0-9]/g, '').substring(0,3).toUpperCase();
+    const jobId = `JOB-${jobTitlePrefix}-${String(jobIdCounter).padStart(3, '0')}`;
+
+
     // Calculate hours for the slot
     const hours = calculateHours(slotTimeStart, slotTimeEnd);
     const formattedHours = hours.toFixed(1);
 
+    // Create new job object
+    const newJob = {
+        jobId, // Add the generated Job ID
+        jobTitle,
+        workArea,
+        city,
+        state,
+        slotTime: `${slotTimeStart} - ${slotTimeEnd}`,
+        hours: parseFloat(formattedHours),
+        salary: parseFloat(salary), // Store as number for calculations
+        postedOn,
+        status: "Active", // Default status for new job
+        applicants: 0 // Default applicants for new job
+    };
+    postedJobs[jobId] = newJob; // Store the new job with its ID
 
-    // Add a new entry to our sample applicants data for this new job
-    if (!allJobApplicants[jobRole]) {
-      allJobApplicants[jobRole] = []; // Initialize empty array for new job's applicants
-    }
-    const initialApplicantCount = allJobApplicants[jobRole].length;
-
+    // Add empty applicant list for the new job ID
+    allJobApplicants[jobId] = [];
 
     // Create a new table row for the job postings table (HR View)
     const jobTableBody = document.querySelector('#job-postings-table tbody');
     const newRow = jobTableBody.insertRow(0); // Insert at the top
-    newRow.dataset.jobRole = jobRole; // Store job role for easy retrieval
+    newRow.dataset.jobId = jobId; // Store job ID for easy retrieval
+    newRow.dataset.jobRole = jobTitle; // Keep job role for old functions if needed
 
-    // Insert cells for the new row, matching the new header structure
-    newRow.insertCell(0).textContent = jobRole;
-    newRow.insertCell(1).textContent = 'Active'; // Default status for a new job
-    const applicantCountCell = newRow.insertCell(2);
+    // Insert cells for the new row
+    newRow.insertCell(0).textContent = jobId; // Display Job ID
+    newRow.insertCell(1).textContent = jobTitle;
+    newRow.insertCell(2).textContent = 'Active'; // Default status for a new job
+    const applicantCountCell = newRow.insertCell(3); // Adjusted cell index
     const applicantCountSpan = document.createElement('span');
     applicantCountSpan.className = 'applicant-count';
-    applicantCountSpan.textContent = initialApplicantCount;
-    applicantCountSpan.dataset.jobRole = jobRole; // Attach job role to the span
+    applicantCountSpan.textContent = 0; // New jobs have 0 applicants
+    applicantCountSpan.dataset.jobId = jobId; // Attach job ID to the span
     applicantCountCell.appendChild(applicantCountSpan);
-    applicantCountSpan.addEventListener('click', () => showApplicantsList(jobRole)); // Attach click listener
-    newRow.insertCell(3).textContent = `${slotTimeStart} - ${slotTimeEnd}`; // Slot Time
-    newRow.insertCell(4).textContent = workArea;
-    newRow.insertCell(5).textContent = `${city}, ${state}`; // Location
-    newRow.insertCell(6).textContent = salary;
-    newRow.insertCell(7).textContent = postedOn; // Posted On
+    applicantCountSpan.addEventListener('click', () => showApplicantsList(jobId)); // Attach click listener
+    newRow.insertCell(4).textContent = `${slotTimeStart} - ${slotTimeEnd}`; // Slot Time (Adjusted cell index)
+    newRow.insertCell(5).textContent = workArea; // Adjusted cell index
+    newRow.insertCell(6).textContent = `${city}, ${state}`; // Location (Adjusted cell index)
+    newRow.insertCell(7).textContent = salary; // Adjusted cell index
+    newRow.insertCell(8).textContent = postedOn; // Posted On (Adjusted cell index)
 
-    // Also add this new job to the candidate's available slots data
-    candidateAvailableSlotsData.push({
-        jobRole: jobRole,
-        workArea: workArea,
-        city: city,
-        state: state,
-        slotTime: `${slotTimeStart} - ${slotTimeEnd}`,
-        hours: parseFloat(formattedHours), // Store the calculated hours
-        amount: salary // Using the same salary for now, can be adjusted for per-slot payment
-    });
+
+    // Add this new job to the candidate's available slots data
+    candidateAvailableSlotsData.push({ jobId, ...newJob });
 
 
     const jobDetailsAlert = `
       Job Posted Successfully!
       ------------------------
-      Role: ${jobRole}
+      Job ID: ${jobId}
+      Role: ${jobTitle}
       Slot: ${slotTimeStart} - ${slotTimeEnd} (${formattedHours} hrs)
       Work Area: ${workArea}
       Location: ${city}, ${state}
@@ -891,13 +913,14 @@
   }
 
   // Function to display applicants for a specific job (HR)
-  function showApplicantsList(jobRole) {
+  function showApplicantsList(jobId) { // Now takes jobId
     const applicantsListBody = document.getElementById('applicants-detail-body');
     applicantsListBody.innerHTML = ''; // Clear previous applicants
 
-    document.getElementById('applicants-list-title').textContent = `Applicants for ${jobRole}`;
+    const jobTitle = postedJobs[jobId] ? postedJobs[jobId].jobTitle : jobId; // Get job title or use ID
+    document.getElementById('applicants-list-title').textContent = `Applicants for ${jobTitle} (${jobId})`;
 
-    const applicants = allJobApplicants[jobRole];
+    const applicants = allJobApplicants[jobId]; // Use jobId for lookup
 
     if (applicants && applicants.length > 0) {
       applicants.forEach(applicant => {
@@ -996,11 +1019,19 @@
     const attendanceBody = document.getElementById('attendance-records-body');
     attendanceBody.innerHTML = ''; // Clear previous data
 
-    if (hrAttendanceData.length > 0) {
-      hrAttendanceData.forEach(record => {
+    // Get a sorted list (most recent first)
+    const sortedAttendance = [...hrAttendanceData].sort((a, b) => {
+        const dateA = new Date(`${a.date}T${a.checkIn || '00:00'}`);
+        const dateB = new Date(`${b.date}T${b.checkIn || '00:00'}`);
+        return dateB - dateA;
+    });
+
+
+    if (sortedAttendance.length > 0) {
+      sortedAttendance.forEach(record => {
         const row = attendanceBody.insertRow();
         row.insertCell(0).textContent = record.workerName;
-        row.insertCell(1).textContent = record.jobRole;
+        row.insertCell(1).textContent = record.jobId; // Display Job ID
         row.insertCell(2).textContent = record.date;
         row.insertCell(3).textContent = record.checkIn;
         row.insertCell(4).textContent = record.checkOut;
@@ -1021,7 +1052,7 @@
   // Function to handle Check-in (HR)
   function handleCheckIn() {
       const workerName = document.getElementById('worker-name').value;
-      const jobRole = document.getElementById('job-for-attendance').value;
+      const jobId = document.getElementById('job-id-for-attendance').value; // Changed to jobId
       const attendanceDate = document.getElementById('attendance-date').value;
       let checkInTime = document.getElementById('check-in-time').value; // Use let as it might be updated
 
@@ -1031,27 +1062,41 @@
           document.getElementById('check-in-time').value = checkInTime; // Update the input field
       }
 
-      if (!workerName || !jobRole || !attendanceDate || !checkInTime) {
-          alert("Please fill in Worker Name, Job Role, Date, and Check-in Time to mark attendance.");
+      if (!workerName || !jobId || !attendanceDate || !checkInTime) {
+          alert("Please fill in Worker Name, Job ID, Date, and Check-in Time to mark attendance.");
+          return;
+      }
+      if (!postedJobs[jobId]) {
+          alert("Invalid Job ID for attendance. Please enter a valid Job ID.");
           return;
       }
 
+
       const existingActiveRecord = hrAttendanceData.find(record =>
           record.workerName === workerName &&
+          record.jobId === jobId && // Check by jobId now
           record.date === attendanceDate &&
           record.status === "Active"
       );
 
       if (existingActiveRecord) {
-          alert(`${workerName} is already checked in for ${jobRole} on ${attendanceDate}. Please check out first.`);
+          alert(`${workerName} is already checked in for Job ID ${jobId} on ${attendanceDate}. Please check out first.`);
           return;
       }
 
       const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
 
+      // Simulate finding candidate ID based on worker name (for HR's manual entry)
+      let candidateIdForHR = null;
+      if (workerName === "Ramesh Kumar") candidateIdForHR = "CAND-001";
+      else if (workerName === "Priya Sharma") candidateIdForHR = "CAND-002";
+      else if (workerName === "Suresh Gupta") candidateIdForHR = "CAND-003"; // Add more as needed
+
+
       const newRecord = {
           workerName,
-          jobRole,
+          candidateId: candidateIdForHR, // Add candidate ID
+          jobId, // Store jobId
           date: attendanceDate,
           checkIn: checkInTime,
           checkOut: "",
@@ -1061,12 +1106,10 @@
 
       hrAttendanceData.push(newRecord);
       // Also add to candidate's attendance data if it's "our" candidate (for demo purposes)
-      // In a real app, this would be linked to a specific candidate's user ID
-      const currentCandidatePhone = document.getElementById('cand-phone-login').value; // Assuming the candidate is logged in via phone
-      const currentCandidateName = "Candidate User"; // Placeholder, in real app would get from login session
-      if (currentCandidateName === "Candidate User") { // Simple check, could be more robust
+      if (candidateIdForHR === loggedInCandidate.id) { // Only update if it's the currently logged-in demo candidate
           candidateMyAttendanceData.push({
-              jobRole: newRecord.jobRole,
+              candidateId: newRecord.candidateId,
+              jobId: newRecord.jobId,
               date: newRecord.date,
               checkIn: newRecord.checkIn,
               checkOut: newRecord.checkOut,
@@ -1078,7 +1121,7 @@
 
       populateAttendanceTable(); // Refresh HR's table
       // If we are currently in candidate dashboard attendance view, refresh it too
-      if (!document.getElementById('candidate-available-slots').classList.contains('hidden') && !document.getElementById('candidate-my-applications').classList.contains('hidden') && !document.getElementById('candidate-payment-history').classList.contains('hidden')) { // Check if main dashboard is visible
+      if (!document.getElementById('dashboard-candidate').classList.contains('hidden')) { // Check if main dashboard is visible
           populateCandidateAttendanceTable();
       }
 
@@ -1087,30 +1130,33 @@
 
       currentWorkingWorker = newRecord; // Keep track of the active worker for potential auto-fill on checkout
 
-      alert(`Checked in ${workerName} for ${jobRole} on ${attendanceDate} at ${checkInTime}.\nWork ID: ${workId}`);
+      alert(`Checked in ${workerName} for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nWork ID: ${workId}`);
   }
 
   // Function to handle Check-out (HR)
   function handleCheckOut() {
       const workerName = document.getElementById('worker-name').value;
-      const jobRole = document.getElementById('job-for-attendance').value;
+      const jobId = document.getElementById('job-id-for-attendance').value; // Changed to Job ID
       const attendanceDate = document.getElementById('attendance-date').value;
-      let checkOutTime = document.getElementById('check-out-time').value; // Use let
+      let checkOutTime = document.getElementById('check-out-time').value;
 
-      // If checkOutTime is empty, auto-populate with current time
       if (!checkOutTime) {
           checkOutTime = getCurrentTimeFormatted();
-          document.getElementById('check-out-time').value = checkOutTime; // Update the input field
+          document.getElementById('check-out-time').value = checkOutTime;
       }
 
-      if (!workerName || !jobRole || !attendanceDate || !checkOutTime) {
-          alert("Please fill in Worker Name, Job Role, Date, and Check-out Time to mark check-out.");
+      if (!workerName || !jobId || !attendanceDate || !checkOutTime) {
+          alert("Please fill in Worker Name, Job ID, Date, and Check-out Time to mark check-out.");
+          return;
+      }
+      if (!postedJobs[jobId]) {
+          alert("Invalid Job ID for attendance. Cannot check out for an unknown Job ID.");
           return;
       }
 
       const recordToUpdate = hrAttendanceData.find(record =>
           record.workerName === workerName &&
-          record.jobRole === jobRole &&
+          record.jobId === jobId && // Check by jobId now
           record.date === attendanceDate &&
           record.status === "Active"
       );
@@ -1120,32 +1166,47 @@
           recordToUpdate.status = "Completed";
           populateAttendanceTable(); // Refresh HR's table
 
-          // Update candidate's attendance data as well
-          const currentCandidateName = "Candidate User"; // Placeholder, in real app would get from login session
-          if (currentCandidateName === "Candidate User") {
+          // Update candidate's attendance data as well if applicable
+          if (recordToUpdate.candidateId === loggedInCandidate.id) {
               const candidateRecordToUpdate = candidateMyAttendanceData.find(record =>
-                  record.jobRole === jobRole &&
+                  record.jobId === jobId &&
                   record.date === attendanceDate &&
-                  record.workId === recordToUpdate.workId && // Match by work ID for accuracy
+                  record.workId === recordToUpdate.workId &&
                   record.status === "Active"
               );
               if (candidateRecordToUpdate) {
                   candidateRecordToUpdate.checkOut = checkOutTime;
                   candidateRecordToUpdate.status = "Completed";
+
+                  // Add to candidate's payment history
+                  const job = postedJobs[jobId] || { salary: 100, hours: 1 }; // Fallback values
+                  const hoursWorked = calculateHours(recordToUpdate.checkIn, recordToUpdate.checkOut);
+                  const estimatedRatePerHour = job.salary / (job.hours || 1); // Calculate rate based on job or default
+                  const amountEarned = hoursWorked * estimatedRatePerHour;
+
+                  candidatePaymentHistoryData.push({
+                      candidateId: loggedInCandidate.id, // Ensure candidateId is stored
+                      workId: recordToUpdate.workId,
+                      jobId: recordToUpdate.jobId, // Add jobId to payment history
+                      jobRole: job.jobTitle || "Unknown Job",
+                      date: recordToUpdate.date,
+                      amount: amountEarned.toFixed(2),
+                      status: "Pending Payment"
+                  });
               }
           }
 
-          // If we are currently in candidate dashboard attendance view, refresh it too
-          if (!document.getElementById('candidate-available-slots').classList.contains('hidden') && !document.getElementById('candidate-my-applications').classList.contains('hidden') && !document.getElementById('candidate-payment-history').classList.contains('hidden')) { // Check if main dashboard is visible
+          // If candidate dashboard is visible, refresh its attendance table
+          if (!document.getElementById('dashboard-candidate').classList.contains('hidden')) {
               populateCandidateAttendanceTable();
           }
 
 
-          document.getElementById('form-mark-attendance').reset(); // Clear form after successful checkout
+          document.getElementById('form-mark-attendance').reset();
           currentWorkingWorker = null;
-          alert(`Checked out ${workerName} for ${jobRole} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+          alert(`Checked out ${workerName} for Job ID ${jobId} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
       } else {
-          alert(`No active check-in found for ${workerName} for ${jobRole} on ${attendanceDate}. Please check in first.`);
+          alert(`No active check-in found for ${workerName} for Job ID ${jobId} on ${attendanceDate}. Please check in first.`);
       }
   }
 
@@ -1160,16 +1221,18 @@
 
       let invoiceDetails = "Generated Invoice:\n\n";
       let totalAmount = 0;
-      let workersInvoiced = new Set();
+      let workersInvoiced = new Map(); // Map workerName to total amount for them
 
       unbilledRecords.forEach(record => {
           const hoursWorked = calculateHours(record.checkIn, record.checkOut);
-          const ratePerHour = 100; // Sample rate Rs. 100 per hour
-          const amount = hoursWorked * ratePerHour;
-          totalAmount += amount;
-          workersInvoiced.add(record.workerName);
+          const job = postedJobs[record.jobId] || { salary: 100, hours: 1 }; // Fallback rate per hour if job not found
+          const estimatedRatePerHour = job.salary / (job.hours || 1); // Get rate from job or default
+          const amount = hoursWorked * estimatedRatePerHour;
 
-          invoiceDetails += `Worker: ${record.workerName}, Job: ${record.jobRole}, Date: ${record.date}, Hours: ${hoursWorked.toFixed(1)}, Amount: Rs. ${amount.toFixed(2)}\n`;
+          let currentWorkerTotal = workersInvoiced.get(record.workerName) || 0;
+          workersInvoiced.set(record.workerName, currentWorkerTotal + amount);
+
+          invoiceDetails += `Worker: ${record.workerName}, Job ID: ${record.jobId}, Date: ${record.date}, Hours: ${hoursWorked.toFixed(1)}, Amount: Rs. ${amount.toFixed(2)}\n`;
           record.invoiced = true;
           record.status = "Invoiced";
       });
@@ -1182,11 +1245,15 @@
       dueDate.setDate(dueDate.getDate() + 7);
       const formattedDueDate = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
 
+      // Combine multiple workers into one clientWorker for simplicity in demo invoice
+      const clientWorkerString = Array.from(workersInvoiced.keys()).map(name => `${name} (Worker)`).join(", ");
+      const totalInvoiceAmount = Array.from(workersInvoiced.values()).reduce((sum, val) => sum + val, 0);
+
 
       hrInvoicesData.push({
           invoiceId: invoiceId,
-          clientWorker: Array.from(workersInvoiced).join(", "),
-          amount: totalAmount.toFixed(2),
+          clientWorker: clientWorkerString,
+          amount: totalInvoiceAmount.toFixed(2),
           date: today,
           dueDate: formattedDueDate,
           status: "Generated",
@@ -1194,7 +1261,7 @@
       });
 
       showInvoicesPayments(); // Go to invoices section to show the new invoice
-      alert(`${invoiceDetails}\nTotal Invoice Amount: Rs. ${totalAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments. Status updated in attendance records.`);
+      alert(`${invoiceDetails}\nTotal Invoice Amount: Rs. ${totalInvoiceAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments. Status updated in attendance records.`);
   }
 
 
@@ -1208,21 +1275,25 @@
       const availableSlotsBody = document.getElementById('available-slots-body');
       availableSlotsBody.innerHTML = ''; // Clear previous data
 
-      if (candidateAvailableSlotsData.length > 0) {
-          candidateAvailableSlotsData.forEach(slot => {
+      // Filter for active jobs only
+      const activeAvailableSlots = Object.values(postedJobs).filter(job => job.status === 'Active');
+
+      if (activeAvailableSlots.length > 0) {
+          activeAvailableSlots.forEach(job => { // Use job object directly
               const row = availableSlotsBody.insertRow();
-              row.insertCell(0).textContent = slot.jobRole;
-              row.insertCell(1).textContent = slot.workArea;
-              row.insertCell(2).textContent = slot.city;
-              row.insertCell(3).textContent = slot.state;
-              row.insertCell(4).textContent = slot.slotTime;
-              row.insertCell(5).textContent = `${slot.hours} hrs`; // Display hours
-              row.insertCell(6).textContent = `Rs. ${slot.amount}`;
+              row.insertCell(0).textContent = job.jobId; // Display Job ID
+              row.insertCell(1).textContent = job.jobTitle;
+              row.insertCell(2).textContent = job.workArea;
+              row.insertCell(3).textContent = job.city;
+              row.insertCell(4).textContent = job.state;
+              row.insertCell(5).textContent = job.slotTime;
+              row.insertCell(6).textContent = `${job.hours} hrs`; // Display hours
+              row.insertCell(7).textContent = `Rs. ${job.salary}`; // Amount (using salary as per job post)
           });
       } else {
           const row = availableSlotsBody.insertRow();
           const cell = row.insertCell(0);
-          cell.colSpan = 7; // Updated colspan
+          cell.colSpan = 8; // Updated colspan
           cell.textContent = "No available job slots at the moment. Please check back later!";
           cell.style.textAlign = "center";
           cell.style.fontStyle = "italic";
@@ -1241,22 +1312,28 @@
       const myApplicationsBody = document.getElementById('my-applications-body');
       myApplicationsBody.innerHTML = ''; // Clear previous data
 
-      if (candidateMyApplicationsData.length > 0) {
-          candidateMyApplicationsData.forEach(application => {
+      // Filter applications for the logged-in candidate
+      const filteredApplications = candidateMyApplicationsData.filter(
+          app => app.candidateId === loggedInCandidate.id // Assuming applications eventually have candidateId
+      ).sort((a, b) => new Date(b.appliedOn) - new Date(a.appliedOn)); // Sort by applied date
+
+      if (filteredApplications.length > 0) {
+          filteredApplications.forEach(application => {
               const row = myApplicationsBody.insertRow();
-              row.insertCell(0).textContent = application.jobTitle;
-              row.insertCell(1).textContent = application.workArea;
-              row.insertCell(2).textContent = application.city;
-              row.insertCell(3).textContent = application.state;
-              row.insertCell(4).textContent = application.slotTime;
-              row.insertCell(5).textContent = `${application.hours} hrs`;
-              row.insertCell(6).textContent = application.applicationStatus;
-              row.insertCell(7).textContent = application.appliedOn;
+              row.insertCell(0).textContent = application.jobId; // Display Job ID
+              row.insertCell(1).textContent = application.jobTitle;
+              row.insertCell(2).textContent = application.workArea;
+              row.insertCell(3).textContent = application.city;
+              row.insertCell(4).textContent = application.state;
+              row.insertCell(5).textContent = application.slotTime;
+              row.insertCell(6).textContent = `${application.hours} hrs`;
+              row.insertCell(7).textContent = application.applicationStatus;
+              row.insertCell(8).textContent = application.appliedOn;
           });
       } else {
           const row = myApplicationsBody.insertRow();
           const cell = row.insertCell(0);
-          cell.colSpan = 8; // Updated colspan to match new headers
+          cell.colSpan = 9; // Updated colspan to match new headers
           cell.textContent = "You haven't applied for any jobs yet.";
           cell.style.textAlign = "center";
           cell.style.fontStyle = "italic";
@@ -1275,10 +1352,19 @@
       const candidateAttendanceBody = document.getElementById('candidate-attendance-body');
       candidateAttendanceBody.innerHTML = ''; // Clear previous data
 
-      if (candidateMyAttendanceData.length > 0) {
-          candidateMyAttendanceData.forEach(record => {
+      // Filter attendance records by logged-in candidate's ID
+      const filteredAttendance = candidateMyAttendanceData.filter(
+          record => record.candidateId === loggedInCandidate.id
+      ).sort((a, b) => { // Sort by date and time, most recent first
+            const dateA = new Date(`${a.date}T${a.checkIn || '00:00'}`);
+            const dateB = new Date(`${b.date}T${b.checkIn || '00:00'}`);
+            return dateB - dateA;
+        });
+
+      if (filteredAttendance.length > 0) {
+          filteredAttendance.forEach(record => {
               const row = candidateAttendanceBody.insertRow();
-              row.insertCell(0).textContent = record.jobRole;
+              row.insertCell(0).textContent = record.jobId; // Display Job ID
               row.insertCell(1).textContent = record.date;
               row.insertCell(2).textContent = record.checkIn;
               row.insertCell(3).textContent = record.checkOut;
@@ -1296,45 +1382,49 @@
       }
   }
 
-  // New: Function to populate candidate attendance form fields
+  // Function to populate candidate attendance form fields
   function populateCandidateAttendanceForm() {
       document.getElementById('form-candidate-attendance').reset();
       document.getElementById('candidate-attendance-date').value = getCurrentDateFormatted();
       document.getElementById('candidate-check-in-time').value = getCurrentTimeFormatted(); // Pre-fill check-in time
       document.getElementById('candidate-check-out-time').value = ""; // Clear check-out time
-      // The Job Role input will remain empty for manual entry, or could be pre-filled based on current assignments
   }
 
   // NEW: Candidate Check-in logic
   function handleCandidateCheckIn() {
-      const jobRole = document.getElementById('candidate-job-role').value;
+      const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
       let checkInTime = document.getElementById('candidate-check-in-time').value;
 
-      if (!jobRole || !attendanceDate || !checkInTime) {
-          alert("Please fill in Job Role, Date, and Check-in Time.");
+      if (!jobId || !attendanceDate || !checkInTime) {
+          alert("Please fill in Job ID, Date, and Check-in Time.");
+          return;
+      }
+      if (!postedJobs[jobId]) {
+          alert("Invalid Job ID. Please enter a valid Job ID from available slots or your applications.");
           return;
       }
 
-      // Assume a static candidate name for this demo
-      const candidateName = "Candidate User"; // This would be dynamic in a real app
+      const candidateId = loggedInCandidate.id; // Get logged-in candidate ID
 
       // Check for an active session for this candidate and job on this date
       const existingActiveRecord = candidateMyAttendanceData.find(record =>
-          record.jobRole === jobRole &&
+          record.candidateId === candidateId &&
+          record.jobId === jobId &&
           record.date === attendanceDate &&
           record.status === "Active"
       );
 
       if (existingActiveRecord) {
-          alert(`You are already checked in for ${jobRole} on ${attendanceDate}. Please check out first.`);
+          alert(`You are already checked in for Job ID ${jobId} on ${attendanceDate}. Please check out first.`);
           return;
       }
 
       const workId = `WKID-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
 
       const newRecord = {
-          jobRole,
+          candidateId: candidateId, // Include candidate ID
+          jobId: jobId, // Store jobId
           date: attendanceDate,
           checkIn: checkInTime,
           checkOut: "",
@@ -1343,30 +1433,40 @@
       };
 
       candidateMyAttendanceData.push(newRecord);
-      // Also update HR's data for this candidate (simulated)
-      hrAttendanceData.push({ workerName: candidateName, ...newRecord });
+      // Also update HR's data (assuming this is the centralized data source)
+      hrAttendanceData.push({ workerName: loggedInCandidate.name, ...newRecord });
 
       populateCandidateAttendanceTable(); // Refresh candidate's table
       populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
-      alert(`Checked in for ${jobRole} on ${attendanceDate} at ${checkInTime}.\nYour Work ID: ${workId}`);
+      alert(`Checked in for Job ID ${jobId} on ${attendanceDate} at ${checkInTime}.\nYour Work ID: ${workId}`);
   }
 
   // NEW: Candidate Check-out logic
   function handleCandidateCheckOut() {
-      const jobRole = document.getElementById('candidate-job-role').value;
+      const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
       const attendanceDate = document.getElementById('candidate-attendance-date').value;
       let checkOutTime = document.getElementById('candidate-check-out-time').value;
 
-      if (!jobRole || !attendanceDate || !checkOutTime) {
-          alert("Please fill in Job Role, Date, and Check-out Time.");
+      if (!checkOutTime) {
+          checkOutTime = getCurrentTimeFormatted();
+          document.getElementById('candidate-check-out-time').value = checkOutTime;
+      }
+
+      if (!jobId || !attendanceDate || !checkOutTime) {
+          alert("Please fill in Job ID, Date, and Check-out Time.");
+          return;
+      }
+      if (!postedJobs[jobId]) {
+          alert("Invalid Job ID. Cannot check out for an unknown Job ID.");
           return;
       }
 
-      const candidateName = "Candidate User"; // This would be dynamic in a real app
+      const candidateId = loggedInCandidate.id;
 
       // Find the active record for this candidate and job on this date
       const recordToUpdate = candidateMyAttendanceData.find(record =>
-          record.jobRole === jobRole &&
+          record.candidateId === candidateId &&
+          record.jobId === jobId &&
           record.date === attendanceDate &&
           record.status === "Active"
       );
@@ -1375,10 +1475,10 @@
           recordToUpdate.checkOut = checkOutTime;
           recordToUpdate.status = "Completed";
 
-          // Update HR's data for this candidate (simulated)
+          // Update HR's data (simulated centralized data)
           const hrRecordToUpdate = hrAttendanceData.find(record =>
-              record.workerName === candidateName &&
-              record.jobRole === jobRole &&
+              record.candidateId === candidateId &&
+              record.jobId === jobId &&
               record.date === attendanceDate &&
               record.workId === recordToUpdate.workId &&
               record.status === "Active"
@@ -1388,12 +1488,17 @@
               hrRecordToUpdate.status = "Completed";
           }
 
-          // Optionally, add to payment history
+          // Add to payment history
+          const job = postedJobs[jobId] || { salary: 100, hours: 1 }; // Fallback values
           const hoursWorked = calculateHours(recordToUpdate.checkIn, recordToUpdate.checkOut);
-          const amountEarned = hoursWorked * 100; // Assuming Rs. 100/hour
+          const estimatedRatePerHour = job.salary / (job.hours || 1); // Calculate rate based on job or default
+          const amountEarned = hoursWorked * estimatedRatePerHour;
+
           candidatePaymentHistoryData.push({
+              candidateId: loggedInCandidate.id, // Ensure candidateId is stored
               workId: recordToUpdate.workId,
-              jobRole: recordToUpdate.jobRole,
+              jobId: recordToUpdate.jobId, // Add jobId to payment history
+              jobRole: job.jobTitle || "Unknown Job",
               date: recordToUpdate.date,
               amount: amountEarned.toFixed(2),
               status: "Pending Payment"
@@ -1402,9 +1507,9 @@
 
           populateCandidateAttendanceTable(); // Refresh candidate's table
           populateCandidateAttendanceForm(); // Reset form and pre-fill for next action
-          alert(`Checked out for ${jobRole} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
+          alert(`Checked out for Job ID ${jobId} on ${attendanceDate} at ${checkOutTime}.\nWork ID: ${recordToUpdate.workId}`);
       } else {
-          alert(`No active check-in found for ${jobRole} on ${attendanceDate}. Please check in first.`);
+          alert(`No active check-in found for Job ID ${jobId} on ${attendanceDate}. Please check in first.`);
       }
   }
 
@@ -1419,19 +1524,26 @@
       const paymentHistoryBody = document.getElementById('candidate-payment-history-body');
       paymentHistoryBody.innerHTML = ''; // Clear previous data
 
-      if (candidatePaymentHistoryData.length > 0) {
-          candidatePaymentHistoryData.forEach(payment => {
+      // Filter payments by logged-in candidate's ID
+      const filteredPayments = candidatePaymentHistoryData.filter(
+          payment => payment.candidateId === loggedInCandidate.id
+      ).sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date, most recent first
+
+
+      if (filteredPayments.length > 0) {
+          filteredPayments.forEach(payment => {
               const row = paymentHistoryBody.insertRow();
               row.insertCell(0).textContent = payment.workId;
-              row.insertCell(1).textContent = payment.jobRole;
-              row.insertCell(2).textContent = payment.date;
-              row.insertCell(3).textContent = `Rs. ${payment.amount}`;
-              row.insertCell(4).textContent = payment.status;
+              row.insertCell(1).textContent = payment.jobId || 'N/A'; // Display Job ID
+              row.insertCell(2).textContent = payment.jobRole;
+              row.insertCell(3).textContent = payment.date;
+              row.insertCell(4).textContent = `Rs. ${payment.amount}`;
+              row.insertCell(5).textContent = payment.status;
           });
       } else {
           const row = paymentHistoryBody.insertRow();
           const cell = row.insertCell(0);
-          cell.colSpan = 5;
+          cell.colSpan = 6;
           cell.textContent = "No payment history found.";
           cell.style.textAlign = "center";
           cell.style.fontStyle = "italic";
@@ -1450,12 +1562,12 @@
     if (activeButtonId) {
         document.getElementById(activeButtonId).classList.add('active');
     }
-    // When a sub-tab is activated, hide the default attendance content
-    if (activeButtonId !== null) { // if a specific tab is active
-        document.getElementById('candidate-attendance-form-container').classList.add('hidden');
-        document.getElementById('dashboard-candidate').querySelector('h3').classList.add('hidden');
-        document.getElementById('candidate-attendance-body').parentNode.classList.add('hidden');
-    }
+
+    // Toggle visibility of default attendance form/table based on active tab
+    const isAttendanceView = !activeButtonId; // If no specific button is active, it's the default attendance view
+    document.getElementById('candidate-attendance-form-container').classList.toggle('hidden', !isAttendanceView);
+    document.getElementById('dashboard-candidate').querySelector('h3').classList.toggle('hidden', !isAttendanceView); // "My Attendance & Work IDs" heading
+    document.getElementById('candidate-attendance-body').parentNode.classList.toggle('hidden', !isAttendanceView); // The attendance table itself
   }
 
 
@@ -1510,8 +1622,8 @@
     });
     document.querySelector('#job-postings-table tbody').addEventListener('click', (event) => {
         if (event.target.classList.contains('applicant-count')) {
-            const jobRole = event.target.dataset.jobRole;
-            showApplicantsList(jobRole);
+            const jobId = event.target.dataset.jobId; // Use jobId
+            showApplicantsList(jobId);
         }
     });
 
@@ -1573,13 +1685,12 @@
         setCandidateDashboardActiveTab(null); // No button active when default view is shown
     });
 
-    // NEW: Candidate Self-Service Attendance Buttons
+    // Candidate Self-Service Attendance Buttons
     document.getElementById('candidate-mark-check-in-btn').addEventListener('click', handleCandidateCheckIn);
     document.getElementById('candidate-mark-check-out-btn').addEventListener('click', handleCandidateCheckOut);
 
 
     // Initial setup logic
-    // This runs when the page first loads
     showSection('login-hr'); // Default initial login tab on page load
   });
 </script>
