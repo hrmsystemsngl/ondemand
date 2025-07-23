@@ -317,7 +317,8 @@
                     <th>Location</th>
                     <th>Salary (Rs.)</th>
                     <th>Posted On</th>
-                    <th>Client</th> </tr>
+                    <th>Client</th>
+                </tr>
             </thead>
             <tbody>
                 <tr data-job-role="Quantum Software Engineer" data-job-id="JOB-QSE-001">
@@ -330,7 +331,8 @@
                     <td>Hyderabad, Telangana</td>
                     <td>95000</td>
                     <td>2025-07-10</td>
-                    <td>GlobalTech Solutions</td> </tr>
+                    <td>GlobalTech Solutions</td>
+                </tr>
                 <tr data-job-role="AI/ML Specialist" data-job-id="JOB-AIML-002">
                     <td>JOB-AIML-002</td>
                     <td>AI/ML Specialist</td>
@@ -341,7 +343,8 @@
                     <td>Bengaluru, Karnataka</td>
                     <td>80000</td>
                     <td>2025-07-05</td>
-                    <td>Innovate Corp</td> </tr>
+                    <td>Innovate Corp</td>
+                </tr>
                 <tr data-job-role="Frontend Developer (React)" data-job-id="JOB-FDR-003">
                     <td>JOB-FDR-003</td>
                     <td>Frontend Developer (React)</td>
@@ -352,7 +355,8 @@
                     <td>Chennai, Tamil Nadu</td>
                     <td>60000</td>
                     <td>2025-06-20</td>
-                    <td>FutureNet Services</td> </tr>
+                    <td>FutureNet Services</td>
+                </tr>
             </tbody>
         </table>
 
@@ -383,7 +387,8 @@
             <label for="salary">Salary (Rs.)</label>
             <input type="number" id="salary" required placeholder="e.g., 30000" min="0" />
 
-            <label for="job-client-id">Client Company</label> <select id="job-client-id" required>
+            <label for="job-client-id">Client Company</label>
+            <select id="job-client-id" required>
                 <option value="">-- Select Client --</option>
                 </select>
 
@@ -969,9 +974,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Payout ID</th> <th>Payee</th>
-                        <th>Work ID</th> <th>Slot Time</th> <th>Company</th> <th>Date</th>
-                        <th>Check-in</th> <th>Check-out</th> <th>Amount (Rs.)</th>
+                        <th>Payout ID</th>
+                        <th>Payee</th>
+                        <th>Work ID</th>
+                        <th>Slot Time</th>
+                        <th>Company</th>
+                        <th>Date</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Amount (Rs.)</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -1017,20 +1028,20 @@
     // --- Sample Data ---
     // Store jobs with their generated IDs
     const postedJobs = {
-        "JOB-QSE-001": { jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, salary: 95000, postedOn: "2025-07-10", status: "Active", applicants: 15, clientId: "CLI-001" }, // Added clientId
-        "JOB-AIML-002": { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22, clientId: "CLI-002" }, // Added clientId
-        "JOB-FDR-003": { jobId: "JOB-FDR-003", jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30, clientId: "CLI-003" }, // Added clientId
+        "JOB-QSE-001": { jobId: "JOB-QSE-001", jobTitle: "Quantum Software Engineer", workArea: "Hitech City", city: "Hyderabad", state: "Telangana", slotTime: "9:00 AM - 5:00 PM", hours: 8, salary: 95000, postedOn: "2025-07-10", status: "Active", applicants: 15, clientId: "CLI-001" },
+        "JOB-AIML-002": { jobId: "JOB-AIML-002", jobTitle: "AI/ML Specialist", workArea: "Electronic City", city: "Bengaluru", state: "Karnataka", slotTime: "10:00 AM - 6:00 PM", hours: 8, salary: 80000, postedOn: "2025-07-05", status: "Active", applicants: 22, clientId: "CLI-002" },
+        "JOB-FDR-003": { jobId: "JOB-FDR-003", jobTitle: "Frontend Developer (React)", workArea: "Guindy", city: "Chennai", state: "Tamil Nadu", slotTime: "9:30 AM - 5:30 PM", hours: 8, salary: 60000, postedOn: "2025-06-20", status: "Closed", applicants: 30, clientId: "CLI-003" },
     };
     const allJobApplicants = {
-        "JOB-QSE-001": [ // Linked to Job ID now
+        "JOB-QSE-001": [
             { name: "Alice Johnson", contact: "alice@example.com", appliedOn: "2025-07-08", status: "Reviewing", resumeLink: "#" },
             { name: "Bob Williams", contact: "bob@example.com", appliedOn: "2025-07-09", status: "Interview Scheduled", resumeLink: "#" },
         ],
-        "JOB-AIML-002": [ // Linked to Job ID now
+        "JOB-AIML-002": [
             { name: "Eve Brown", contact: "eve@example.com", appliedOn: "2025-07-01", status: "Interviewed", resumeLink: "#" },
             { name: "Frank White", contact: "frank@example.com", appliedOn: "2025-07-02", status: "Offer Extended", resumeLink: "#" },
         ],
-        "JOB-FDR-003": [ // Linked to Job ID now
+        "JOB-FDR-003": [
             { name: "Grace Green", contact: "grace@example.com", appliedOn: "2025-06-18", status: "Hired", resumeLink: "#" },
             { name: "Henry Black", contact: "henry@example.com", appliedOn: "2025-06-19", status: "Rejected", resumeLink: "#" },
         ]
@@ -1045,14 +1056,14 @@
         { invoiceId: "INV-CL-002", clientWorker: "Innovate Corp", amount: 25000, date: "2025-07-20", dueDate: "2025-07-31", status: "Pending", type: "Client", relatedId: "CLI-002" },
         { invoiceId: "INV-CL-003", clientWorker: "FutureNet Services", amount: 75000, date: "2025-06-25", dueDate: "2025-06-30", status: "Paid", type: "Client", relatedId: "CLI-003" },
         // Sample worker payout invoices (generated by HR) - these are distinct from direct payroll payouts
-        { invoiceId: "INV-WK-001", clientWorker: "Ramesh Kumar", amount: 1000, date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", type: "Worker Payout", relatedId: "WKID-DE-001" },
-        { invoiceId: "INV-WK-002", clientWorker: "Priya Sharma", amount: 1200, date: "2025-07-22", dueDate: "2025-07-25", status: "Generated", type: "Worker Payout", relatedId: "WKID-CS-002" },
+        // These will be generated dynamically now, but keep as initial data for demonstration if needed.
+        // For accurate demo, it's better to start these empty and generate them through HR.
     ];
 
     const hrAttendanceData = [ // HR's view of all attendance, now includes Candidate ID and Job ID
-        { workerName: "Ramesh Kumar", candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed" },
-        { workerName: "Priya Sharma", candidateId: "CAND-002", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed" },
-        { workerName: "Suresh Gupta", candidateId: "CAND-003", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active" }
+        { workerName: "Ramesh Kumar", candidateId: "CAND-001", jobId: "JOB-DE-001", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", workId: "WKID-DE-001", status: "Completed", invoiced: false }, // Added invoiced flag
+        { workerName: "Priya Sharma", candidateId: "CAND-002", jobId: "JOB-CS-002", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", workId: "WKID-CS-002", status: "Completed", invoiced: false }, // Added invoiced flag
+        { workerName: "Suresh Gupta", candidateId: "CAND-003", jobId: "JOB-DE-003", date: "2025-07-22", checkIn: "09:30", checkOut: "", workId: "WKID-DE-003", status: "Active", invoiced: false } // Added invoiced flag
     ];
     // Candidate - Available Slots data (dynamically updated by HR job postings)
     const candidateAvailableSlotsData = [
@@ -1108,9 +1119,10 @@
     ];
 
     // Finance Payouts Data (Enriched with details for display)
+    // This will be dynamically populated upon invoice generation
     const financePayoutsData = [
-        { payoutId: "PAY-WK-001", payee: "Ramesh Kumar", workId: "WKID-DE-001", slotTime: "09:00 - 17:00", company: "GlobalTech Solutions", date: "2025-07-23", checkIn: "09:00", checkOut: "17:00", amount: 1000, status: "Pending" },
-        { payoutId: "PAY-WK-002", payee: "Priya Sharma", workId: "WKID-CS-002", slotTime: "10:00 - 18:00", company: "Innovate Corp", date: "2025-07-23", checkIn: "10:00", checkOut: "18:00", amount: 1200, status: "Pending" },
+        { payoutId: "PAY-WK-001", payee: "Ramesh Kumar", workId: "WKID-DE-001", slotTime: "09:00 - 17:00", company: "GlobalTech Solutions", date: "2025-07-21", checkIn: "09:00", checkOut: "17:00", amount: 1000, status: "Pending" },
+        { payoutId: "PAY-WK-002", payee: "Priya Sharma", workId: "WKID-CS-002", slotTime: "10:00 - 18:00", company: "Innovate Corp", date: "2025-07-21", checkIn: "10:00", checkOut: "18:00", amount: 1200, status: "Pending" },
     ];
 
     const loggedInCandidate = { id: "CAND-001", name: "Candidate User" }; // Fixed for demo
@@ -1676,7 +1688,7 @@
         }
     }
 
-    // Function to generate Invoice (simplified for HR)
+    // Function to generate Invoice (HR) - MODIFIED FOR PER WORK ID INVOICING
     function generateInvoiceForSelected() {
         const unbilledRecords = hrAttendanceData.filter(record => record.status === "Completed" && !record.invoiced);
         if (unbilledRecords.length === 0) {
@@ -1684,80 +1696,69 @@
             return;
         }
 
-        let invoiceDetails = "Generated Invoice:\n\n";
-        let workersInvoiced = new Map(); // Map workerName to an array of their completed records
+        let generatedInvoiceSummaries = []; // To summarize what was generated
 
         unbilledRecords.forEach(record => {
             const hoursWorked = calculateHours(record.checkIn, record.checkOut);
-            const job = postedJobs[record.jobId] || { salary: 100, hours: 1 }; // Fallback rate per hour if job not found
-            const estimatedRatePerHour = job.salary / (job.hours || 1);
+            const job = postedJobs[record.jobId];
+            
+            // Handle cases where job might not be found or has no client info
+            const clientCompany = job ? (salesClientsData.find(c => c.clientId === job.clientId)?.companyName || "Unknown Client") : "Unknown Client";
+            const estimatedRatePerHour = job ? (job.salary / (job.hours || 1)) : 0; // Handle if job not found
             const amount = hoursWorked * estimatedRatePerHour;
 
-            record.invoiced = true; // Mark as invoiced
-            record.status = "Invoiced"; // Update status
+            // Generate unique Invoice ID for this specific work record
+            const invoiceId = `INV-WK-${String(financeInvoiceIdCounter++).padStart(3, '0')}`;
+            const payoutId = `PAY-WK-${String(payoutIdCounter++).padStart(3, '0')}`;
+            const today = getCurrentDateFormatted(); // Invoice date
+            const dueDate = new Date(today);
+            dueDate.setDate(dueDate.getDate() + 7);
+            const formattedDueDate = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
 
-            if (!workersInvoiced.has(record.workerName)) {
-                workersInvoiced.set(record.workerName, []);
-            }
-            workersInvoiced.get(record.workerName).push({ ...record, amountEarned: amount });
+            // Add to allInvoicesData (Finance view of all invoices)
+            allInvoicesData.push({
+                invoiceId: invoiceId,
+                clientWorker: record.workerName, // Worker is the 'client' for payouts
+                amount: parseFloat(amount.toFixed(2)),
+                date: record.date, // Invoice is for this specific work date
+                dueDate: formattedDueDate,
+                status: "Generated",
+                type: "Worker Payout",
+                relatedId: record.workId // Link to the specific work ID
+            });
 
-            invoiceDetails += `Worker: ${record.workerName}, Job ID: ${record.jobId}, Date: ${record.date}, Hours: ${hoursWorked.toFixed(1)}, Amount: Rs. ${amount.toFixed(2)}\n`;
+            // Add to financePayoutsData (Detailed Finance payroll view)
+            financePayoutsData.push({
+                payoutId: payoutId,
+                payee: record.workerName,
+                workId: record.workId,
+                slotTime: job ? job.slotTime : "N/A",
+                company: clientCompany,
+                date: record.date, // Payout date is work date
+                checkIn: record.checkIn,
+                checkOut: record.checkOut,
+                amount: parseFloat(amount.toFixed(2)),
+                status: "Pending" // Initial status for finance payout
+            });
+
+            // Mark the original attendance record as invoiced
+            record.invoiced = true;
+            record.status = "Invoiced";
+
+            generatedInvoiceSummaries.push(`${record.workerName} for Job ID ${record.jobId} (Work ID: ${record.workId}) - Amount: Rs. ${amount.toFixed(2)} - Invoice ID: ${invoiceId}`);
         });
 
         populateAttendanceTable(); // Refresh HR's attendance table
+        populateFinanceInvoicesTable(); // Refresh Finance's invoices table
+        populateFinancePayrollTable(); // Refresh Finance's payroll table
 
-        // Generate a single payout invoice for all selected workers combined for allInvoicesData
-        const invoiceId = `INV-WK-${String(financeInvoiceIdCounter++).padStart(3, '0')}`;
-        const today = getCurrentDateFormatted();
-        const dueDate = new Date(today);
-        dueDate.setDate(dueDate.getDate() + 7);
-        const formattedDueDate = `${dueDate.getFullYear()}-${String(dueDate.getMonth() + 1).padStart(2, '0')}-${String(dueDate.getDate()).padStart(2, '0')}`;
-
-        const workerNamesForInvoice = Array.from(workersInvoiced.keys()).join(", ");
-        const totalInvoiceAmount = Array.from(workersInvoiced.values()).reduce((sum, records) => sum + records.reduce((recSum, r) => recSum + r.amountEarned, 0), 0);
-
-        const newPayoutInvoice = {
-            invoiceId: invoiceId,
-            clientWorker: workerNamesForInvoice,
-            amount: parseFloat(totalInvoiceAmount.toFixed(2)),
-            date: today,
-            dueDate: formattedDueDate,
-            status: "Generated",
-            type: "Worker Payout",
-            relatedId: "MULTIPLE" // Indicates this invoice covers multiple individual payouts
-        };
-        allInvoicesData.push(newPayoutInvoice);
-
-        // Create separate entries in financePayoutsData for each *completed attendance record*
-        workersInvoiced.forEach((records, workerName) => {
-            records.forEach(record => {
-                const jobDetails = postedJobs[record.jobId];
-                const clientCompany = jobDetails ? (salesClientsData.find(c => c.clientId === jobDetails.clientId)?.companyName || "Unknown Client") : "Unknown Client";
-
-                financePayoutsData.push({
-                    payoutId: `PAY-WK-${String(payoutIdCounter++).padStart(3, '0')}`,
-                    payee: record.workerName,
-                    workId: record.workId, // Explicitly list Work ID here
-                    slotTime: jobDetails ? jobDetails.slotTime : "N/A", // From job details
-                    company: clientCompany, // From client data
-                    date: record.date,
-                    checkIn: record.checkIn,
-                    checkOut: record.checkOut,
-                    amount: parseFloat(record.amountEarned.toFixed(2)),
-                    status: "Pending" // Initial status for finance payout
-                });
-            });
-        });
-
-
-        showInvoicesPayments(); // HR's invoice view
-        alert(`${invoiceDetails}\nTotal Payout Invoice Amount: Rs. ${totalInvoiceAmount.toFixed(2)}\nInvoice ID: ${invoiceId}\nInvoice generated and added to Invoices & Payments (Finance). Status updated in attendance records and new payout records created.`);
+        alert(`Invoices Generated:\n\n${generatedInvoiceSummaries.join('\n')}\n\nAll relevant tables updated.`);
         // Record action in audit log
         adminAuditLogData.push({
             timestamp: getCurrentTimestampFormatted(),
             user: "hr@example.com",
-            action: "Generate Worker Payout Invoice",
-            details: `Invoice ID: ${invoiceId}, Total Amount: Rs. ${totalInvoiceAmount.toFixed(2)}`
+            action: "Generate Worker Payout Invoices",
+            details: `Generated ${generatedInvoiceSummaries.length} individual payout invoices.`
         });
     }
 
@@ -2030,6 +2031,7 @@
         const jobId = document.getElementById('candidate-job-id').value; // Changed to jobId
         const attendanceDate = document.getElementById('candidate-attendance-date').value;
         let checkOutTime = document.getElementById('candidate-check-out-time').value;
+
         if (!checkOutTime) {
             checkOutTime = getCurrentTimeFormatted();
             document.getElementById('candidate-check-out-time').value = checkOutTime;
@@ -2696,7 +2698,7 @@
                         if (confirmPay) {
                             invoice.status = 'Paid';
                             populateFinanceInvoicesTable(); // Refresh table
-                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Mark Invoice Paid", details: `Invoice ID: ${invoice.invoiceId}` });
+                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Mark Invoice Paid", details: `Invoice ID: ${invoice.invoiceId}, Type: Client` });
                             alert(`Invoice ${invoice.invoiceId} marked as Paid.`);
                         }
                     };
@@ -2709,18 +2711,13 @@
                         const confirmPayout = confirm(`Approve Payout for Invoice ${invoice.invoiceId} (to ${invoice.clientWorker})?`);
                         if (confirmPayout) {
                             invoice.status = 'Approved';
-                            // Find corresponding payout records in financePayoutsData and mark them as Paid
-                            financePayoutsData.forEach(payout => {
-                                // This is a simplified linking logic. In a real app, relatedId might map more precisely.
-                                if (payout.payee === invoice.clientWorker || invoice.relatedId === "MULTIPLE") { // If a single worker or a multi-worker invoice
-                                   // If specific matching is needed, ensure relatedId in allInvoicesData maps to specific payoutIds/workIds in financePayoutsData
-                                   const relevantPayouts = financePayoutsData.filter(p => p.status === 'Pending' && invoice.clientWorker.includes(p.payee) && p.date === invoice.date); // Rough match
-                                   relevantPayouts.forEach(p => p.status = 'Paid');
-                                }
-                            });
+                            // Mark corresponding individual payout records as paid/approved
+                            const affectedPayouts = financePayoutsData.filter(payout => payout.workId === invoice.relatedId && payout.status === 'Pending'); // Match by workId
+                            affectedPayouts.forEach(p => p.status = 'Paid');
+
                             populateFinanceInvoicesTable(); // Refresh invoice table
                             populateFinancePayrollTable(); // Refresh payroll table too
-                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Approve Worker Payout Invoice", details: `Invoice ID: ${invoice.invoiceId}` });
+                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Approve Worker Payout Invoice", details: `Invoice ID: ${invoice.invoiceId}, Type: Worker Payout` });
                             alert(`Payout Invoice ${invoice.invoiceId} Approved and related payouts marked Paid.`);
                         }
                     };
@@ -2756,27 +2753,30 @@
                 const row = payrollBody.insertRow();
                 row.insertCell(0).textContent = payout.payoutId;
                 row.insertCell(1).textContent = payout.payee;
-                row.insertCell(2).textContent = payout.workId; // NEW
-                row.insertCell(3).textContent = payout.slotTime; // NEW
-                row.insertCell(4).textContent = payout.company; // NEW
+                row.insertCell(2).textContent = payout.workId; // Work ID
+                row.insertCell(3).textContent = payout.slotTime; // Slot Time
+                row.insertCell(4).textContent = payout.company; // Company
                 row.insertCell(5).textContent = payout.date;
-                row.insertCell(6).textContent = payout.checkIn; // NEW
-                row.insertCell(7).textContent = payout.checkOut; // NEW
+                row.insertCell(6).textContent = payout.checkIn; // Check-in
+                row.insertCell(7).textContent = payout.checkOut; // Check-out
                 row.insertCell(8).textContent = `Rs. ${payout.amount.toLocaleString()}`;
                 row.insertCell(9).textContent = payout.status;
-                const actionCell = row.insertCell(10); // Updated index
+                const actionCell = row.insertCell(10);
 
                 if (payout.status === "Pending") {
                     const processPaymentBtn = document.createElement('button');
                     processPaymentBtn.textContent = 'Process Payment';
                     processPaymentBtn.className = 'action-btn-finance green';
                     processPaymentBtn.onclick = () => {
-                        const confirmProcess = confirm(`Process payment for ${payout.payee} (Rs. ${payout.amount})?`);
+                        const confirmProcess = confirm(`Process payment for ${payout.payee} (Work ID: ${payout.workId}, Rs. ${payout.amount})?`);
                         if (confirmProcess) {
                             payout.status = 'Paid';
+                            // Also mark the corresponding invoice in allInvoicesData as Paid if it exists and is not already.
+                            // This depends on how individual payouts relate to aggregated invoices.
+                            // For simplicity, we assume approving the payout here means the individual record is settled.
                             populateFinancePayrollTable(); // Refresh table
-                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Process Payout", details: `Payout ID: ${payout.payoutId}, Payee: ${payout.payee}` });
-                            alert(`Payment for ${payout.payee} processed.`);
+                            adminAuditLogData.push({ timestamp: getCurrentTimestampFormatted(), user: "finance@example.com", action: "Process Payout", details: `Payout ID: ${payout.payoutId}, Payee: ${payout.payee}, Work ID: ${payout.workId}` });
+                            alert(`Payment for ${payout.payee} (Work ID: ${payout.workId}) processed.`);
                         }
                     };
                     actionCell.appendChild(processPaymentBtn);
